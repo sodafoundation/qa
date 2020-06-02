@@ -1,8 +1,9 @@
-# Multi cloud API Automation
+# API Testing Automation Framework
 
 **Introduction**
 
 This framework has developed in [JUNIT](https://junit.org/) using [Gradle](https://gradle.org/) Build tool.
+Currently added for multicloud project of soda foundation. Later it could be reused for other projects.
 Junit framework details [Link](https://www.tutorialspoint.com/junit/index.htm)
 
 **Why this?**
@@ -13,11 +14,10 @@ Junit is widely used testing framework along with Java Programming Language. You
 
  Download Intellij idea community edition tool and install in your pc.
  [link](https://www.jetbrains.com/idea/download/#section=windows)
-
-**How to import existing code in intellij idea community edition or create new project?**
  
- Click on File > Open
- or  You Can create new Project click on File > Project
+ Click on File > Open or  You Can create new Project click on File > Project
+ 
+ Get a project from version control [Link](https://www.jetbrains.com/help/idea/import-project-or-module-wizard.html)
  
 **How to add tests?**
 
