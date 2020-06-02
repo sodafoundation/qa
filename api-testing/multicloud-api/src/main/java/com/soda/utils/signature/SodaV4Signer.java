@@ -1,4 +1,4 @@
-package com.opensds.utils.signature;
+package com.soda.utils.signature;
 
 import uk.co.lucasweb.aws.v4.signer.Header;
 import uk.co.lucasweb.aws.v4.signer.HttpRequest;

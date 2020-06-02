@@ -1,4 +1,4 @@
-package com.opensds.utils;
+package com.soda.utils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -69,7 +69,7 @@ public class Utils {
      * @param bucketFile file path
      * @return bucket name
      */
-    public static String getBucketName(File bucketFile){
+    public static String getFileNameFromDelim(File bucketFile){
         return bucketFile.getName().substring(bucketFile.getName().indexOf("_") + 1,
                 bucketFile.getName().indexOf("."));
     }
