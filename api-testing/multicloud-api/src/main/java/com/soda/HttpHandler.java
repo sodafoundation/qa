@@ -1,6 +1,6 @@
-package com.opensds;
+package com.soda;
 
-import com.opensds.utils.okhttputils.OkHttpRequests;
+import com.soda.utils.okhttputils.OkHttpRequests;
 
 /**
  *  In this class handled http request.

@@ -1,4 +1,4 @@
-package com.opensds.utils;
+package com.soda.utils;
 
 /**
  *  In this class set URL

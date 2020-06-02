@@ -1,6 +1,6 @@
-package com.opensds.utils.okhttputils;
+package com.soda.utils.okhttputils;
 
-import com.opensds.utils.Logger;
+import com.soda.utils.Logger;
 import okhttp3.*;
 
 import java.io.IOException;

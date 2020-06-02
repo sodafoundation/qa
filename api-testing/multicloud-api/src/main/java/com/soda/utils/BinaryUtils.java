@@ -1,4 +1,4 @@
-package com.opensds.utils;
+package com.soda.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -72,6 +72,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html
      * Computes the SHA-256 tree hash for the given file
      *
      * @param inputFile
@@ -89,6 +90,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html
      * Computes a SHA256 checksum for each 1 MB chunk of the input file. This
      * includes the checksum for the last chunk even if it is smaller than 1 MB.
      *
@@ -145,6 +147,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html
      * Computes the SHA-256 tree hash for the passed array of 1 MB chunk
      * checksums.
      *

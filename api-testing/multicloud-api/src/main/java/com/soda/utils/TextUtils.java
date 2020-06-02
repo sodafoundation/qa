@@ -1,4 +1,4 @@
-package com.opensds.utils;
+package com.soda.utils;
 
 /**
  *In This class text related common util
