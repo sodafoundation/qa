@@ -1,3 +1,18 @@
+/*
+  Copyright 2020 The SODA Authors.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ */
 package com.soda.utils;
 
 import java.io.File;
@@ -14,6 +29,7 @@ public class BinaryUtils {
     static final int ONE_MB = 1024 * 1024;
 
     /**
+     * LINK: https://docs.aws.amazon.com/AmazonS3/latest/API/samples/AWSS3SigV4JavaSamples.zip.
      * Converts byte data to a Hex-encoded string.
      *
      * @param data
@@ -38,6 +54,7 @@ public class BinaryUtils {
     }
 
     /**
+     * LINK: https://docs.aws.amazon.com/AmazonS3/latest/API/samples/AWSS3SigV4JavaSamples.zip.
      * Converts a Hex-encoded data string to the original byte data.
      *
      * @param hexData
@@ -58,6 +75,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/AmazonS3/latest/API/samples/AWSS3SigV4JavaSamples.zip.
      * Hashes the string contents (assumed to be UTF-8) using the SHA-256
      * algorithm.
      */
