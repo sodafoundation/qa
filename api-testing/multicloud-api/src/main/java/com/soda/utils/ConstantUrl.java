@@ -21,12 +21,12 @@ package com.soda.utils;
 public class ConstantUrl {
     private static ConstantUrl mConstantUrl;
     private static  String URL = null;
-    private static  String PORT_TENANT_ID = null;
-    private static  String PORT = null;
+    private static  String API_SERVER_PORT = null;
+    private static  String S3_API_PORT = null;
 
     private ConstantUrl() {
-        PORT_TENANT_ID = getPortTenantId();
-        PORT = getPort();
+        API_SERVER_PORT = getAPIServerPort();
+        S3_API_PORT = getS3APIPort();
         URL = getHostIp();
     }
 
@@ -39,17 +39,17 @@ public class ConstantUrl {
     }
 
     /**
-     * Get port: This port used in there is used tenant id url
+     * Get API server port.
      */
-    public String getPortTenantId() {
-        return System.getenv("PORT_TENANT_ID");
+    public String getAPIServerPort() {
+        return System.getenv("API_SERVER_PORT");
     }
 
     /**
-     * Get Port: This port used in S3 services url except login or auth related url.
+     * Get s3 API server port.
      */
-    public String getPort() {
-        return System.getenv("PORT");
+    public String getS3APIPort() {
+        return System.getenv("S3_API_PORT");
     }
 
     /**
