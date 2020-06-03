@@ -41,24 +41,13 @@ public class Utils {
      * @param path folder path e.g: resource/inputs
      * @return list of files
      */
-    public static List<File> listFilesMatchingBeginsWithPatternInPath(final String beginPattern, String path) {
+    public static List<File> listFilesBeginsWithPattern(final String beginPattern, String path) {
         List<File> retFileList = new ArrayList<>();
-        try {
-            File dir = new File(path);
-            assert dir.isDirectory() : "Invalid directory path: "+path;
-            File[] files = dir.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.matches("^" + beginPattern + "+[a-z_1-9-]*.json");
-                }
-            });
-
-            for (File xmlfile : files) {
-                retFileList.add(xmlfile);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        File dir = new File(path);
+        assert dir.isDirectory() : "Invalid directory path: " + path;
+        File[] files = dir.listFiles((dir1, name) -> name.matches("^" + beginPattern + "+[a-z_1-9-]*.json"));
+        assert files != null;
+        Collections.addAll(retFileList, files);
         return retFileList;
     }
 
@@ -107,7 +96,7 @@ public class Utils {
      * @param url url e.g: http://192.168.34.45:6566
      * @return host e.g: 192.168.34.45:6566
      */
-    public static String getHost(String url){
+    public static String getHostAndPort(String url){
         String host = null;
         try {
             host = new URI(url).getHost()+":"+new URI(url).getPort();
