@@ -39,7 +39,7 @@ public abstract class OkHttpRequests {
                 .put(requestBody)
                 .headers(headers)
                 .build();
-        Logger.logString("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
+        Logger.log("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
                 + request.url());
         return client.newCall(request).execute();
     }
@@ -61,7 +61,7 @@ public abstract class OkHttpRequests {
                 .post(requestBody)
                 .headers(headers)
                 .build();
-        Logger.logString("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
+        Logger.log("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
                 + request.url());
         return client.newCall(request).execute();
     }
@@ -82,7 +82,7 @@ public abstract class OkHttpRequests {
                 .get()
                 .headers(headers)
                 .build();
-        Logger.logString("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
+        Logger.log("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
                 + request.url());
         return client.newCall(request).execute();
     }
@@ -103,7 +103,7 @@ public abstract class OkHttpRequests {
                 .delete()
                 .headers(headers)
                 .build();
-        Logger.logString("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
+        Logger.log("Request Details: " + request.headers() + " " + request.body() + " " + request.method() + ""
                 + request.url());
         return client.newCall(request).execute();
     }

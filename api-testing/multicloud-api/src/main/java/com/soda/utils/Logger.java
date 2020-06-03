@@ -17,43 +17,15 @@ package com.soda.utils;
 
 /**
  * This class used for logs print.
- * TODO: Need to create generic method.
  */
 public class Logger {
-
     /**
-     * Print log in string.
+     * Print log
      *
-     * @param message Message
+     * @param message log message
+     * @param <T>     data type
      */
-    public static void logString(String message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Print log in int.
-     *
-     * @param message Message
-     */
-    public static void logInt(Integer message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Print log in double.
-     *
-     * @param message Message
-     */
-    public static void logDouble(Double message) {
-        System.out.println(message);
-    }
-
-    /**
-     * Print log in object.
-     *
-     * @param message Message
-     */
-    public static void logObject(Object message) {
+    public static <T>  void log(T message) {
         System.out.println(message);
     }
 }

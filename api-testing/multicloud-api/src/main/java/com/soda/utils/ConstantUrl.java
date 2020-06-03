@@ -31,7 +31,7 @@ public class ConstantUrl {
     }
 
     public static ConstantUrl getInstance() {
-        Logger.logString("**********************************************************************");
+        Logger.log("**********************************************************************");
         if (mConstantUrl == null) {
             mConstantUrl = new ConstantUrl();
         }
