@@ -22,6 +22,6 @@ Junit is widely used testing framework along with Java Programming Language. You
 **How to add tests?**
 
  In Project structure `src\test\java` write your own test case and 
- `src\main\java` write here your business logic now Run.
+ `src\main\java` write here your business logic now Run. [Link](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html)
  
  
