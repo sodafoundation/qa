@@ -1,7 +1,18 @@
+/*
+  Copyright 2020 The SODA Authors.
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ */
 package com.soda.utils;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -26,24 +37,13 @@ public class Utils {
      * @param path folder path e.g: resource/inputs
      * @return list of files
      */
-    public static List<File> listFilesMatchingBeginsWithPatternInPath(final String beginPattern, String path) {
+    public static List<File> listFilesBeginsWithPattern(final String beginPattern, String path) {
         List<File> retFileList = new ArrayList<>();
-        try {
-            File dir = new File(path);
-            assert dir.isDirectory() : "Invalid directory path: "+path;
-            File[] files = dir.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.matches("^" + beginPattern + "+[a-z_1-9-]*.json");
-                }
-            });
-
-            for (File xmlfile : files) {
-                retFileList.add(xmlfile);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        File dir = new File(path);
+        assert dir.isDirectory() : "Invalid directory path: " + path;
+        File[] files = dir.listFiles((dir1, name) -> name.matches("^" + beginPattern + "+[a-z_1-9-]*.json"));
+        assert files != null;
+        Collections.addAll(retFileList, files);
         return retFileList;
     }
 
@@ -92,7 +92,7 @@ public class Utils {
      * @param url url e.g: http://192.168.34.45:6566
      * @return host e.g: 192.168.34.45:6566
      */
-    public static String getHost(String url){
+    public static String getHostAndPort(String url){
         String host = null;
         try {
             host = new URI(url).getHost()+":"+new URI(url).getPort();

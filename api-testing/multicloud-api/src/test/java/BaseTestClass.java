@@ -24,6 +24,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.soda.utils.Constant.*;
 
 public class BaseTestClass {
     public static AuthTokenHolder getAuthTokenHolder() {
@@ -50,18 +51,11 @@ public class BaseTestClass {
                 getAuthTokenHolder().getToken().getProject().getId());
     }
 
-    /**
-     * Create bucket and backend.
-     *
-     * @param  path   input path
-     * @throws JSONException json exception
-     * @throws IOException   io exception
-     */
     public void testCreateBucketAndBackend(String path) throws IOException, JSONException {
         // load input files for each type and create the backend
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(), path);
+                    Utils.listFilesBeginsWithPattern(t.getName(), path);
             Gson gson = new Gson();
             // add the backend specified in each file
             for (File file : listOfIInputsForType) {
@@ -72,26 +66,23 @@ public class BaseTestClass {
                 int code = getHttpHandler().addBackend(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId(),
                         inputHolder);
-                assertEquals(code, 200);
+                assertEquals(200, code);
 
                 // backend added, now create buckets
                 List<File> listOfIBucketInputs =
-                        Utils.listFilesMatchingBeginsWithPatternInPath("bucket", path);
+                        Utils.listFilesBeginsWithPattern("bucket", path);
                 SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
                 // create the bucket specified in each file
                 for (File bucketFile : listOfIBucketInputs) {
                     String bucketContent = Utils.readFileContentsAsString(bucketFile);
                     Assertions.assertNotNull(bucketContent);
-
                     CreateBucketFileInput bfi = gson.fromJson(bucketContent, CreateBucketFileInput.class);
-
                     // filename format is "bucket_<bucketname>.json", get the bucket name here
-                    String bName = Utils.getBucketName(bucketFile);
-
+                    String bName = Utils.getFileNameFromDelim(bucketFile);
                     // now create buckets
                     int cbCode = getHttpHandler().createBucket(bfi, bName, signatureKey);
-                    assertEquals(cbCode, 200);
+                    assertEquals(200, cbCode);
                     boolean isBucketExist = testGetListBuckets(bName, signatureKey);
                     assertTrue(isBucketExist, "Bucket is not exist: ");
                 }
@@ -99,20 +90,13 @@ public class BaseTestClass {
         }
     }
 
-    /**
-     * Download object in bucket
-     *
-     * @param  objectName object name
-     * @param  path   input path
-     * @throws IOException   io exception
-     */
     public void testDownloadObject(String path, String objectName) throws IOException {
         List<File> listOfIBucketInputs =
-                Utils.listFilesMatchingBeginsWithPatternInPath("bucket", path);
+                Utils.listFilesBeginsWithPattern("bucket", path);
         for (File bucketFile : listOfIBucketInputs) {
             String bucketContent = Utils.readFileContentsAsString(bucketFile);
             assertNotNull(bucketContent);
-            String bucketName = Utils.getBucketName(bucketFile);
+            String bucketName = Utils.getFileNameFromDelim(bucketFile);
             // Get object for upload.
             File fileRawData = new File(RAW_DATA_PATH);
             File[] files = fileRawData.listFiles();
@@ -141,26 +125,19 @@ public class BaseTestClass {
             String body = response.body().string();
             Logger.logString("Response Code: " + code);
             Logger.logString("Response: " + body);
-            assertEquals("Downloading failed", code, 200);
+            assertEquals("Downloading failed",200, code);
             assertTrue(downloadedFile.isFile(), "Downloaded Image is not available");
         }
     }
 
-    /**
-     * Upload object in bucket
-     *
-     * @param  path   input path
-     * @throws JSONException json exception
-     * @throws IOException   io exception
-     */
     public void testUploadObject(String path) throws IOException, JSONException {
         List<File> listOfIBucketInputs =
-                Utils.listFilesMatchingBeginsWithPatternInPath("bucket", path);
+                Utils.listFilesBeginsWithPattern("bucket", path);
         // Get bucket name.
         for (File bucketFile : listOfIBucketInputs) {
             String bucketContent = Utils.readFileContentsAsString(bucketFile);
             assertNotNull(bucketContent);
-            String bucketName = Utils.getBucketName(bucketFile);
+            String bucketName = Utils.getFileNameFromDelim(bucketFile);
             // Get object for upload.
             File fileRawData = new File(Constant.RAW_DATA_PATH);
             File[] files = fileRawData.listFiles();
@@ -173,11 +150,32 @@ public class BaseTestClass {
                         getAuthTokenHolder().getToken().getProject().getId());
                 int cbCode = getHttpHandler().uploadObject(signatureKey,
                         bucketName, mFileName, mFilePath);
-                assertEquals("Uploaded object failed", cbCode, 200);
+                assertEquals("Uploaded object failed", 200, cbCode);
                 //Verifying object is uploaded in bucket.
                 boolean isUploaded = testGetListOfObjectFromBucket(bucketName, mFileName, signatureKey);
                 assertTrue(isUploaded,"Object is not uploaded");
             }
+        }
+    }
+
+    public void testGetPlansListAndDelete() throws IOException, JSONException {
+        Response  response = getHttpHandler().getPlansList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
+                getAuthTokenHolder().getToken().getProject().getId());
+        String jsonRes = response.body().string();
+        int code = response.code();
+        Logger.logString("Response: "+jsonRes);
+        Logger.logString("Response Code: "+code);
+        assertEquals("Get plans list failed: Response code not matched: ",200, code);
+        JSONArray jsonArray = new JSONObject(jsonRes).getJSONArray("plans");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            String id = jsonArray.getJSONObject(i).get("id").toString();
+            Response responseDeletePlan = getHttpHandler().deletePlan(getAuthTokenHolder()
+                    .getResponseHeaderSubjectToken(), getAuthTokenHolder().getToken().getProject().getId(), id);
+            String deletePlanResponse = responseDeletePlan.body().string();
+            int deletePlanResponseCode = responseDeletePlan.code();
+            Logger.logString("Response: "+deletePlanResponse);
+            Logger.logString("Response Code: "+deletePlanResponseCode);
+            assertEquals("Get plans list failed: Response code not matched: ",200, deletePlanResponseCode);
         }
     }
 
@@ -230,7 +228,7 @@ public class BaseTestClass {
         String resBody = listObjectResponse.body().string();
         Logger.logString("Response Code: " + resCode);
         Logger.logString("Response: " + resBody);
-        assertEquals("Get list of object failed", resCode, 200);
+        assertEquals("Get list of object failed",200, resCode);
         JSONObject jsonObject = XML.toJSONObject(resBody);
         JSONObject jsonObjectListBucket = jsonObject.getJSONObject("ListBucketResult");
         boolean isUploaded = false;

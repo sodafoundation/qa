@@ -5,7 +5,6 @@ import com.soda.jsonmodels.inputs.addbackend.Backends;
 import com.soda.jsonmodels.inputs.addbackend.BackendsInputHolder;
 import com.soda.jsonmodels.inputs.createbucket.CreateBucketFileInput;
 import com.soda.jsonmodels.typesresponse.Type;
-import com.soda.utils.Constant;
 import com.soda.utils.Logger;
 import com.soda.utils.TextUtils;
 import com.soda.utils.Utils;
@@ -17,9 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static com.soda.utils.Constant.*;
 
 // how to get POJO from any response JSON, use this site
 // http://pojo.sodhanalibrary.com/
@@ -37,21 +36,20 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Test
     @Order(2)
     @DisplayName("Test creating bucket using Invalid name")
-    public void testCreateBucketUsingCapsName() {
-        // load input files for each type and create the backend
+    public void testCreateBucketUsingInvalidName() {
+        // load input files for each type.
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
             Gson gson = new Gson();
             // add the backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
-
-                // backend added, now create buckets
+                //now create buckets
                 List<File> listOfIBucketInputs =
-                        Utils.listFilesMatchingBeginsWithPatternInPath("bucket",
+                        Utils.listFilesBeginsWithPattern("bucket",
                                 CREATE_BUCKET_PATH);
                 SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
@@ -59,13 +57,11 @@ class CreateBucketBackendTest extends BaseTestClass {
                 for (File bucketFile : listOfIBucketInputs) {
                     String bucketContent = Utils.readFileContentsAsString(bucketFile);
                     assertNotNull(bucketContent);
-
                     // filename format is "bucket_<bucketname>.json", get the bucket name here
                     CreateBucketFileInput bfi = gson.fromJson(bucketContent, CreateBucketFileInput.class);
-
                     // now create buckets
                     int cbCode = getHttpHandler().createBucket(bfi, "RATR_@#", signatureKey);
-                    assertEquals(cbCode, 400);
+                    assertEquals(400, cbCode);
                 }
             }
         }
@@ -78,19 +74,18 @@ class CreateBucketBackendTest extends BaseTestClass {
         // load input files for each type and create the backend
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
             Gson gson = new Gson();
             // Re-create backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
-
                 AddBackendInputHolder inputHolder = gson.fromJson(content, AddBackendInputHolder.class);
                 int code = getHttpHandler().addBackend(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId(),
                         inputHolder);
-                assertEquals("Re-create backend with same name:Response code not matched:",code, 409);
+                assertEquals("Re-create backend with same name:Response code not matched:",409, code);
             }
         }
     }
@@ -99,18 +94,17 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(4)
     @DisplayName("Test re-creating bucket with same name on OPENSDS")
     public void testReCreateBucket() {
-        // load input files for each type and create the backend
+        // load input files for each type
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
             Gson gson = new Gson();
-            // Re-create backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
                 List<File> listOfIBucketInputs =
-                        Utils.listFilesMatchingBeginsWithPatternInPath("bucket",
+                        Utils.listFilesBeginsWithPattern("bucket",
                                 CREATE_BUCKET_PATH);
                 SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
@@ -118,16 +112,13 @@ class CreateBucketBackendTest extends BaseTestClass {
                 for (File bucketFile : listOfIBucketInputs) {
                     String bucketContent = Utils.readFileContentsAsString(bucketFile);
                     assertNotNull(bucketContent);
-
                     CreateBucketFileInput bfi = gson.fromJson(bucketContent, CreateBucketFileInput.class);
-
                     // filename format is "bucket_<bucketname>.json", get the bucket name here
-                    String bName = Utils.getBucketName(bucketFile);
-
+                    String bName = Utils.getFileNameFromDelim(bucketFile);
                     // now create buckets
                     int cbCode = getHttpHandler().createBucket(bfi, bName, signatureKey);
                     assertEquals("Re-create bucket with same name failed:Response code not matched: "
-                            , cbCode, 409);
+                            ,409, cbCode);
                 }
             }
         }
@@ -137,7 +128,7 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(5)
     @DisplayName("Test create bucket with empty name")
     public void testCreateBucketWithEmptyName() throws IOException, JSONException {
-        System.out.println("Verifying response code: Input (Backend name) with empty value in payload and bucket" +
+        Logger.logString("Verifying response code: Input (Backend name) with empty value in payload and bucket" +
                 " name is empty");
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
@@ -148,7 +139,7 @@ class CreateBucketBackendTest extends BaseTestClass {
         CreateBucketFileInput bfi = gson.fromJson(bucketContent, CreateBucketFileInput.class);
         int cbCode = getHttpHandler().createBucket(bfi, "", signatureKey);
         assertEquals("Bucket name and backend name is empty in payload :Response code not matched: "
-                , cbCode, 405);
+                ,405, cbCode);
         boolean isBucketExist = testGetListBuckets("", signatureKey);
         assertFalse(isBucketExist);
 
@@ -160,9 +151,8 @@ class CreateBucketBackendTest extends BaseTestClass {
 
         CreateBucketFileInput input = gson.fromJson(content, CreateBucketFileInput.class);
         int code = getHttpHandler().createBucket(input, bName, signatureKey);
-        System.out.println("Verifying response code: In input (Backend name) with not valid value but bucket name is valid");
-        assertEquals("Backend does not exist:Response code not matched: "
-                , code, 404);
+        Logger.logString("Verifying response code: In input (Backend name) with not valid value but bucket name is valid");
+        assertEquals("Backend does not exist:Response code not matched: ",404, code);
     }
 
     @Test
@@ -170,15 +160,15 @@ class CreateBucketBackendTest extends BaseTestClass {
     @DisplayName("Test request body with empty value,try to create backend")
     public void testRequestBodyWithEmptyFieldBackend() {
         Gson gson = new Gson();
-        File file = new File(Constant.EMPTY_FIELD_PATH+"ibm-cos_b1321.json");
+        File file = new File(EMPTY_FIELD_PATH+"ibm-cos_b1321.json");
         String content = Utils.readFileContentsAsString(file);
         assertNotNull(content);
         AddBackendInputHolder inputHolder = gson.fromJson(content, AddBackendInputHolder.class);
         int code = getHttpHandler().addBackend(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId(),
                 inputHolder);
-        Logger.logObject("Backend Input: "+content);
-        assertEquals("Request body with empty value:Response code not matched:",code, 400);
+        Logger.logString("Backend Input: "+content);
+        assertEquals("Request body with empty value:Response code not matched:",400, code);
     }
 
     @Test
@@ -192,7 +182,7 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(8)
     @DisplayName("Test uploading object failed scenario")
     public void testUploadObjectFailed(){
-        File fileRawData = new File(Constant.RAW_DATA_PATH);
+        File fileRawData = new File(RAW_DATA_PATH);
         File[] files = fileRawData.listFiles();
         String mFileName = null;
         File mFilePath = null;
@@ -202,22 +192,20 @@ class CreateBucketBackendTest extends BaseTestClass {
         }
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
-        int cbCode = getHttpHandler().uploadObject(signatureKey,
-                "bucketName", mFileName, mFilePath);
-        System.out.println("Verifying Upload object with non existing bucket");
-        assertEquals("Upload object with non existing bucket: Response code not matched", cbCode, 404);
+        int cbCode = getHttpHandler().uploadObject(signatureKey, "bucketName", mFileName, mFilePath);
+        Logger.logString("Verifying Upload object with non existing bucket");
+        assertEquals("Upload object with non existing bucket: Response code not matched", 404, cbCode);
 
         List<File> listOfIBucketInputs =
-                Utils.listFilesMatchingBeginsWithPatternInPath("bucket",
+                Utils.listFilesBeginsWithPattern("bucket",
                         CREATE_BUCKET_PATH);
-        // Get bucket name.
         for (File bucketFile : listOfIBucketInputs) {
-            String bucketName = Utils.getBucketName(bucketFile);
+            String bucketName = Utils.getFileNameFromDelim(bucketFile);
             int code = getHttpHandler().uploadObject(signatureKey,
                     bucketName, "", mFilePath);
-            System.out.println("Verifying upload object in existing bucket with file name is empty");
+            Logger.logString("Verifying upload object in existing bucket with file name is empty");
             assertEquals("Upload object with existing bucket with file name empty: Response code not matched"
-                    , code, 400);
+                    , 400, code);
         }
     }
 
@@ -226,7 +214,7 @@ class CreateBucketBackendTest extends BaseTestClass {
     @DisplayName("Test verifying download non exist file")
     public void testDownloadNonExistFile() throws IOException {
         List<File> listOfIBucketInputs =
-                Utils.listFilesMatchingBeginsWithPatternInPath("bucket",
+                Utils.listFilesBeginsWithPattern("bucket",
                         CREATE_BUCKET_PATH);
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
@@ -234,14 +222,14 @@ class CreateBucketBackendTest extends BaseTestClass {
             String bucketContent = Utils.readFileContentsAsString(bucketFile);
             assertNotNull(bucketContent);
             String fileName = "download_image.jpg";
-            String bucketName = Utils.getBucketName(bucketFile);
+            String bucketName = Utils.getFileNameFromDelim(bucketFile);
             Response response = getHttpHandler().downloadObject(signatureKey,
                     bucketName, "23455", fileName);
             int code = response.code();
             String body = response.body().string();
             Logger.logString("Response Code: " + code);
             Logger.logString("Response: " + body);
-            assertEquals("Downloading non exist file: ", code, 404);
+            assertEquals("Downloading non exist file: ",404, code);
         }
     }
 
@@ -250,7 +238,7 @@ class CreateBucketBackendTest extends BaseTestClass {
     @DisplayName("Test verifying download file from non exist bucket")
     public void testDownloadFileFromNonExistBucket() throws IOException {
         String dFileName = "download_image.jpg";
-        File fileRawData = new File(Constant.RAW_DATA_PATH);
+        File fileRawData = new File(RAW_DATA_PATH);
         File[] files = fileRawData.listFiles();
         String mFileName = null;
         for (File fileName : files) {
@@ -264,7 +252,7 @@ class CreateBucketBackendTest extends BaseTestClass {
         String body = response.body().string();
         Logger.logString("Response Code: " + code);
         Logger.logString("Response: " + body);
-        assertEquals("Downloading file from non exist bucket: ", code, 404);
+        assertEquals("Downloading file from non exist bucket: ", 404, code);
     }
 
     @Test
@@ -272,16 +260,16 @@ class CreateBucketBackendTest extends BaseTestClass {
     @DisplayName("Test verifying download file from non exist bucket and file name")
     public void testDownloadNonExistBucketAndFile() throws IOException {
         String fileName = "download_image.jpg";
-        System.out.println("Verifying download file from non exist bucket and file name");
+        Logger.logString("Verifying download file from non exist bucket and file name");
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
-        Response response = getHttpHandler().downloadObject(signatureKey,
-                "ghjhb", "yuyiyh", fileName);
+        Response response = getHttpHandler().downloadObject(signatureKey, "ghjhb", "yuyiyh",
+                fileName);
         int code = response.code();
         String body = response.body().string();
         Logger.logString("Response Code: " + code);
         Logger.logString("Response: " + body);
-        assertEquals("Downloading file from non exist bucket and file name: ", code, 404);
+        assertEquals("Downloading file from non exist bucket and file name: ",404, code);
         assertEquals("Response message is not valid, bucket and filename not exist: ", body);
     }
 
@@ -296,24 +284,21 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(13)
     @DisplayName("Test verifying backends list and single backend")
     public void testAddBackendGetBackends() throws IOException {
-        // load input files for each type.
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
             Gson gson = new Gson();
-            // add the backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
                 AddBackendInputHolder inputHolder = gson.fromJson(content, AddBackendInputHolder.class);
-                // Get backend list
                 Response response = getHttpHandler().getBackends(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
                 int code = response.code();
                 String responseBody = response.body().string();
                 Logger.logString("Response Code: " + code);
-                assertEquals("Get Backends List Failed: ",code, 200);
+                assertEquals("Get Backends List Failed: ",200, code);
                 assertNotNull(responseBody);
                 BackendsInputHolder backendsInputHolder = gson.fromJson(responseBody,
                         BackendsInputHolder.class);
@@ -336,11 +321,11 @@ class CreateBucketBackendTest extends BaseTestClass {
                     int resCode = response.code();
                     String responseBackendBody = responseBackend.body().string();
                     Logger.logString("Response Code: " + resCode);
-                    assertEquals(resCode, 200);
+                    assertEquals(200, resCode);
                     assertNotNull(responseBackendBody);
                     Backends backends = gson.fromJson(responseBackendBody, Backends.class);
                     assertNotNull(backends);
-                    assertEquals("Backend name not matched: ", backends.getName(), inputHolder.getName());
+                    assertEquals("Backend name not matched: ",inputHolder.getName(), backends.getName());
                 }
             }
         }
@@ -354,31 +339,28 @@ class CreateBucketBackendTest extends BaseTestClass {
                 getAuthTokenHolder().getToken().getProject().getId(), "reuiu5475");
         int code = responseBackend.code();
         Logger.logString("Response Code: " + code);
-        assertEquals("Get backend failed:Response code not matched: ", code, 400);
+        assertEquals("Get backend failed:Response code not matched: ", 400, code);
     }
 
     @Test
     @Order(15)
     @DisplayName("Test verifying delete non empty backend")
     public void testDeleteNonEmptyBackend() throws IOException {
-        // load input files for each type.
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
             Gson gson = new Gson();
-            // add the backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
                 AddBackendInputHolder inputHolder = gson.fromJson(content, AddBackendInputHolder.class);
-
                 // Get backend list
                 Response response = getHttpHandler().getBackends(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
                 int code = response.code();
                 Logger.logString("Response Code: " + code);
-                assertEquals(code, 200);
+                assertEquals(200, code);
                 String responseBody = response.body().string();
                 assertNotNull(responseBody);
                 BackendsInputHolder backendsInputHolder = gson.fromJson(responseBody,
@@ -401,7 +383,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                     int resCode = response.code();
                     String responseBackendBody = responseBackend.body().string();
                     Logger.logString("Response Code: " + resCode);
-                    assertEquals(responseBackend.code(), 200);
+                    assertEquals(200, responseBackend.code());
                     assertNotNull(responseBackendBody);
                     Backends backends = gson.fromJson(responseBackendBody, Backends.class);
                     assertNotNull(backends);
@@ -413,8 +395,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                     String resp = responseDeleteBackend.body().string();
                     Logger.logString("Response Code: " + responseCode);
                     Logger.logString("Response: " + resp);
-                    assertEquals("Deleting Non empty backend:Response code not matched: "
-                            ,responseCode, 409);
+                    assertEquals("Deleting Non empty backend:Response code not matched: ",
+                            409, responseCode);
                 }
             }
         }
@@ -424,34 +406,30 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(16)
     @DisplayName("Test deleting non empty bucket")
     public void testDeleteNonEmptyBucket() throws IOException {
-        // load input files for each type.
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
-            // add the backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
                 SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
                 List<File> listOfIBucketInputs =
-                        Utils.listFilesMatchingBeginsWithPatternInPath("bucket",
+                        Utils.listFilesBeginsWithPattern("bucket",
                                 CREATE_BUCKET_PATH);
-                // create the bucket specified in each file
                 for (File bucketFile : listOfIBucketInputs) {
                     String bucketContent = Utils.readFileContentsAsString(bucketFile);
                     assertNotNull(bucketContent);
-
                     // filename format is "bucket_<bucketname>.json", get the bucket name here
-                    String bName = Utils.getBucketName(bucketFile);
+                    String bName = Utils.getFileNameFromDelim(bucketFile);
                     // Verifying Bucket not empty
                     Response response = getHttpHandler().deleteBucketNotEmpty(signatureKey, bName);
                     int responseCode = response.code();
                     String responseBody = response.body().string();
                     Logger.logString("Response Code: "+responseCode);
                     Logger.logString("Response: "+responseBody);
-                    assertEquals("Verifying Bucket not empty: ", responseCode, 409);
+                    assertEquals("Verifying Bucket not empty: ",409, responseCode);
                 }
             }
         }
@@ -461,29 +439,24 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(17)
     @DisplayName("Test deleting non exist object")
     public void testDeleteNonExistObject() throws IOException, JSONException {
-        // load input files for each type.
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
-            // add the backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
-
                 List<File> listOfIBucketInputs =
-                        Utils.listFilesMatchingBeginsWithPatternInPath("bucket",
+                        Utils.listFilesBeginsWithPattern("bucket",
                                 CREATE_BUCKET_PATH);
                 SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder()
                                 .getResponseHeaderSubjectToken(), getAuthTokenHolder().getToken()
                                 .getProject().getId());
-                // create the bucket specified in each file
                 for (File bucketFile : listOfIBucketInputs) {
                     String bucketContent = Utils.readFileContentsAsString(bucketFile);
                     assertNotNull(bucketContent);
-
                     // filename format is "bucket_<bucketname>.json", get the bucket name here
-                    String bName = Utils.getBucketName(bucketFile);
+                    String bName = Utils.getFileNameFromDelim(bucketFile);
                     String fileName = "hjdhj";
                     // now delete the object
                     Response response = getHttpHandler().deleteObject(signatureKey, bName, fileName);
@@ -491,7 +464,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                     String resBody = response.body().string();
                     Logger.logString("Response Code: " + resCode);
                     Logger.logString("Response: " + resBody);
-                    assertEquals("Delete non exist object: Response code not matched: ",resCode, 404);
+                    assertEquals("Delete non exist object: Response code not matched: ",404, resCode);
                     boolean isUploaded = testGetListOfObjectFromBucket(bName, fileName, signatureKey);
                     assertFalse(isUploaded,"Object is exist");
                 }
@@ -506,47 +479,42 @@ class CreateBucketBackendTest extends BaseTestClass {
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
         String bName = "fhy5657";
-        // now delete the object
         Response response = getHttpHandler().deleteObject(signatureKey, bName, "hjdhj");
         int code = response.code();
         String body = response.body().string();
         Logger.logString("Response Code: " + code);
         Logger.logString("Response: " + body);
-        assertEquals("Delete non exist object: Response code not matched: ",code, 404);
+        assertEquals("Delete non exist object: Response code not matched: ", 404, code);
         Response listObjectResponse = getHttpHandler().getBucketObjects(bName,signatureKey);
         int resCode = listObjectResponse.code();
         String resBody = listObjectResponse.body().string();
         Logger.logString("Response Code: " + resCode);
         Logger.logString("Response: " + resBody);
-        assertEquals("Bucket name not exist: Response code not matched: ", resCode,404);
+        assertEquals("Bucket name not exist: Response code not matched: ",404, resCode);
     }
 
     @Test
     @Order(19)
     @DisplayName("Test deleting bucket and object")
     public void testDeleteBucketAndObject() throws IOException, JSONException {
-        // load input files for each type
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
-            // add the backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
 
                 List<File> listOfIBucketInputs =
-                        Utils.listFilesMatchingBeginsWithPatternInPath("bucket",
+                        Utils.listFilesBeginsWithPattern("bucket",
                                 CREATE_BUCKET_PATH);
                 SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
-                // create the bucket specified in each file
                 for (File bucketFile : listOfIBucketInputs) {
                     String bucketContent = Utils.readFileContentsAsString(bucketFile);
                     assertNotNull(bucketContent);
-
                     // filename format is "bucket_<bucketname>.json", get the bucket name here
-                    String bName = Utils.getBucketName(bucketFile);
+                    String bName = Utils.getFileNameFromDelim(bucketFile);
                     String fileName = "Screenshot_1.jpg";
                     // now delete the object
                     Response response = getHttpHandler().deleteObject(signatureKey, bName, fileName);
@@ -555,7 +523,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                     Logger.logString("Response Code: " + code);
                     Logger.logString("Response: " + body);
                     assertFalse(TextUtils.isEmpty(body),"Response message is empty: ");
-                    assertEquals("Verifying object is deleted: Response code not matched: ",code, 204);
+                    assertEquals("Verifying object is deleted: Response code not matched: ",204, code);
                     boolean isUploaded = testGetListOfObjectFromBucket(bName, fileName, signatureKey);
                     assertFalse(isUploaded,"Object is not Deleted");
 
@@ -567,7 +535,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                     Logger.logString("Response: " + bodyRes);
                     assertFalse(TextUtils.isEmpty(bodyRes),"Response message is empty: ");
                     assertNotNull(bodyRes);
-                    assertEquals("Delete bucket may be does not exist: ",codeRes,204);
+                    assertEquals("Delete bucket may be does not exist: ",204, codeRes);
 
                     boolean isBucketExist = testGetListBuckets(bName, signatureKey);
                     assertFalse(isBucketExist, "Bucket is exist: ");
@@ -580,24 +548,21 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(20)
     @DisplayName("Test deleting backend")
     public void testDeleteBackend() throws IOException {
-        // load input files for each type.
         for (Type t : getTypesHolder().getTypes()) {
             List<File> listOfIInputsForType =
-                    Utils.listFilesMatchingBeginsWithPatternInPath(t.getName(),
+                    Utils.listFilesBeginsWithPattern(t.getName(),
                             CREATE_BUCKET_PATH);
             Gson gson = new Gson();
-            // add the backend specified in each file
             for (File file : listOfIInputsForType) {
                 String content = Utils.readFileContentsAsString(file);
                 assertNotNull(content);
                 AddBackendInputHolder inputHolder = gson.fromJson(content, AddBackendInputHolder.class);
-
                 // Get backend list
                 Response response = getHttpHandler().getBackends(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
                 int code = response.code();
                 Logger.logString("Response Code: " + code);
-                assertEquals(code, 200);
+                assertEquals(200, code);
                 String responseBody = response.body().string();
                 assertFalse(TextUtils.isEmpty(responseBody),"Response message is empty: ");
                 BackendsInputHolder backendsInputHolder = gson.fromJson(responseBody,
@@ -621,12 +586,10 @@ class CreateBucketBackendTest extends BaseTestClass {
                     String resp = responseDeleteBackend.body().string();
                     Logger.logString("Response Code: " + responseCode);
                     Logger.logString("Response: " + resp);
-                    assertEquals(responseCode, 200);
+                    assertEquals(200, responseCode);
                     assertFalse(TextUtils.isEmpty(resp),"Response message is empty: ");
                 }
             }
         }
     }
 }
-
-

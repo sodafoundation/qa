@@ -1,3 +1,16 @@
+/*
+   Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+   Portions copyright 2006-2009 James Murty. Please see LICENSE.txt
+   for applicable license terms and NOTICE.txt for applicable notices.
+   Licensed under the Apache License, Version 2.0 (the "License").
+   You may not use this file except in compliance with the License.
+   A copy of the License is located at
+    http://aws.amazon.com/apache2.0
+   or in the "license" file accompanying this file. This file is distributed
+   on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+   express or implied. See the License for the specific language governing
+   permissions and limitations under the License.
+ */
 package com.soda.utils;
 
 import java.io.File;
@@ -14,6 +27,7 @@ public class BinaryUtils {
     static final int ONE_MB = 1024 * 1024;
 
     /**
+     * LINK: https://docs.aws.amazon.com/AmazonS3/latest/API/samples/AWSS3SigV4JavaSamples.zip.
      * Converts byte data to a Hex-encoded string.
      *
      * @param data
@@ -38,6 +52,7 @@ public class BinaryUtils {
     }
 
     /**
+     * LINK: https://docs.aws.amazon.com/AmazonS3/latest/API/samples/AWSS3SigV4JavaSamples.zip.
      * Converts a Hex-encoded data string to the original byte data.
      *
      * @param hexData
@@ -58,6 +73,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/AmazonS3/latest/API/samples/AWSS3SigV4JavaSamples.zip.
      * Hashes the string contents (assumed to be UTF-8) using the SHA-256
      * algorithm.
      */
@@ -72,6 +88,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html
      * Computes the SHA-256 tree hash for the given file
      *
      * @param inputFile
@@ -89,6 +106,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html
      * Computes a SHA256 checksum for each 1 MB chunk of the input file. This
      * includes the checksum for the last chunk even if it is smaller than 1 MB.
      *
@@ -145,6 +163,7 @@ public class BinaryUtils {
     }
 
     /**
+     * Link: https://docs.aws.amazon.com/amazonglacier/latest/dev/checksum-calculations.html
      * Computes the SHA-256 tree hash for the passed array of 1 MB chunk
      * checksums.
      *
