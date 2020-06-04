@@ -10,8 +10,8 @@ Junit framework details [Link](https://www.tutorialspoint.com/junit/index.htm)
 
 Junit is widely used testing framework along with Java Programming Language. You can use this automation framework for both unit testing and UI testing.
 
-**How to install and use?**
-
+**How to install and use?**<br/>
+ Java 8 is required to run [IntelliJ IDEA](https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-Selecting-the-JDK-version-the-IDE-will-run-under) <br/>
  Download Intellij idea community edition tool and install in your pc.
  [link](https://www.jetbrains.com/idea/download/#section=windows)
  
