@@ -19,9 +19,12 @@ Junit is widely used testing framework along with Java Programming Language. You
  
  Get a project from version control [Link](https://www.jetbrains.com/help/idea/import-project-or-module-wizard.html)
  
+ Build Project:<br/>
+ From the main menu, select Build | Rebuild Project for the entire project. [Link]( https://www.jetbrains.com/help/idea/compiling-applications.html)
+
 **How to add tests?**
 
- In Project structure `src\test\java` write your own test case and 
- `src\main\java` write here your business logic now Run. [Link](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html)
+ In [Project structure](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html) `src\test\java` write your own test case and 
+ `src\main\java` write here your business logic now [Run](https://www.jetbrains.com/help/idea/running-applications.html).
  
  
