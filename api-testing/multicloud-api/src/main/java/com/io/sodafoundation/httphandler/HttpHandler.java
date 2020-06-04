@@ -13,18 +13,12 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-package com.soda.utils;
+package com.io.sodafoundation.httphandler;
+
+import com.io.sodafoundation.utils.okhttputils.OkHttpRequests;
 
 /**
- *In This class text related common util
+ *  In this class handled http request.
  */
-public class TextUtils {
-    /**
-     * Returns true if the string is null or 0-length.
-     * @param str the string to be examined
-     * @return true if str is null or zero length
-     */
-    public static boolean isEmpty(CharSequence str) {
-        return str == null || str.length() == 0;
-    }
+public class HttpHandler extends OkHttpRequests {
 }

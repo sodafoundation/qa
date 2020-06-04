@@ -13,12 +13,10 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-package com.soda;
-
-import com.soda.utils.okhttputils.OkHttpRequests;
+package com.io.sodafoundation.utils;
 
 /**
- *  In this class handled http request.
+ * This class use for HTTP Headers Name.
  */
-public class HttpHandler extends OkHttpRequests {
+public class HeadersName {
 }

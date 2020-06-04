@@ -13,11 +13,18 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-package com.soda.utils;
+package com.io.sodafoundation.utils;
 
 /**
- * In this class set Inputs path.
+ *In This class text related common util
  */
-public class Constant {
-    public static final  String PATH = System.getenv("INPUT_PATH")+"/src/main/resources/inputs/";
+public class TextUtils {
+    /**
+     * Returns true if the string is null or 0-length.
+     * @param str the string to be examined
+     * @return true if str is null or zero length
+     */
+    public static boolean isEmpty(CharSequence str) {
+        return str == null || str.length() == 0;
+    }
 }

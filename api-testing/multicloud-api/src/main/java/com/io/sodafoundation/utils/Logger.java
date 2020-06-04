@@ -13,10 +13,19 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-package com.soda.utils;
+package com.io.sodafoundation.utils;
 
 /**
- * This class use for HTTP Headers Name.
+ * This class used for logs print.
  */
-public class HeadersName {
+public class Logger {
+    /**
+     * Print log
+     *
+     * @param message log message
+     * @param <T>     data type
+     */
+    public static <T>  void log(T message) {
+        System.out.println(message);
+    }
 }

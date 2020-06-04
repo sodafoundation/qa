@@ -13,9 +13,9 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-package com.soda.utils.okhttputils;
+package com.io.sodafoundation.utils.okhttputils;
 
-import com.soda.utils.Logger;
+import com.io.sodafoundation.utils.Logger;
 import okhttp3.*;
 
 import java.io.IOException;

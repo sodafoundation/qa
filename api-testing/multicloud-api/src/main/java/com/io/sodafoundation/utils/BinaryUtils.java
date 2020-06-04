@@ -15,7 +15,7 @@
    express or implied. See the License for the specific language governing
    permissions and limitations under the License.
  */
-package com.soda.utils;
+package com.io.sodafoundation.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

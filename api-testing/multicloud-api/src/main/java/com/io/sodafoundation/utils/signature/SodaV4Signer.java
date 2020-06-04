@@ -13,7 +13,7 @@
   See the License for the specific language governing permissions and
   limitations under the License.
  */
-package com.soda.utils.signature;
+package com.io.sodafoundation.utils.signature;
 
 import uk.co.lucasweb.aws.v4.signer.Header;
 import uk.co.lucasweb.aws.v4.signer.HttpRequest;
