@@ -29,7 +29,7 @@ public class SodaV4Signer {
      * Generate v4 Signature.
      *
      * @param method     Method name e.g GET
-     * @param url        URL e.g https://www.opensds.io/
+     * @param url        URL e.g https://sodafoundation.io
      * @param accessKey  Access key get from AKSK API
      * @param secretKey  Secret key get from  AKSK API
      * @param payload    Request body converted in to SHA265
