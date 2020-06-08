@@ -1,12 +1,19 @@
 plugins {
+     //Gradle can only run on Java version 8 or higher
+    //still supports compiling, testing, generating Javadoc and executing applications for Java 6 and Java 7.
+    //Java 5 is not supported.
     id 'java'
 }
 
-group 'www.opensds.io'
-version '1.0.0'
+group 'sodafoundation.io'
+version '0.1.0'
 
 repositories {
     mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
