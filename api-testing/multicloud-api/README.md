@@ -27,4 +27,12 @@ Junit is widely used testing framework along with Java Programming Language. You
  In [Project structure](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html) `src\test\java` write your own test case and 
  `src\main\java` write here your business logic now [Run](https://www.jetbrains.com/help/idea/running-applications.html).
  
- 
+ **How to set environment variable in intellij?**
+   
+   Before test execute setup this environment variables select [Run | Edit Configuration](https://www.jetbrains.com/help/idea/creating-run-debug-configuration-for-tests.html) from the main menu and set variables.
+   
+   For CreateBucketBackendTest and LifecycleTests set following variable <br/>
+  `HOST_IP=***.***.*.***;INPUT_PATH=D:/SODA-Test (Your Project Folder Path);API_SERVER_PORT=:****;S3_API_PORT=:****`
+   
+   For MigrationTests set following variable <br/>
+  `HOST_IP=***.***.*.***;INPUT_PATH=D:/SODA-Test (Your Project Folder Path);API_SERVER_PORT=:****;S3_API_PORT=:****;SCHEDULE_TIME=00 00 07 29 5 5` 
