@@ -1,16 +1,32 @@
+/*
+  Copyright 2020 The SODA Authors.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ */
+
 import com.google.gson.Gson;
-import com.soda.HttpHandler;
-import com.soda.jsonmodels.akskresponses.SignatureKey;
-import com.soda.jsonmodels.authtokensresponses.AuthTokenHolder;
-import com.soda.jsonmodels.inputs.addbackend.AddBackendInputHolder;
-import com.soda.jsonmodels.inputs.createbucket.CreateBucketFileInput;
-import com.soda.jsonmodels.tokensresponses.TokenHolder;
-import com.soda.jsonmodels.typesresponse.Type;
-import com.soda.jsonmodels.typesresponse.TypesHolder;
-import com.soda.utils.Constant;
-import com.soda.utils.Logger;
-import com.soda.utils.TextUtils;
-import com.soda.utils.Utils;
+import com.io.sodafoundation.httphandler.HttpHandler;
+import com.io.sodafoundation.jsonmodels.akskresponses.SignatureKey;
+import com.io.sodafoundation.jsonmodels.authtokensresponses.AuthTokenHolder;
+import com.io.sodafoundation.jsonmodels.inputs.addbackend.AddBackendInputHolder;
+import com.io.sodafoundation.jsonmodels.inputs.createbucket.CreateBucketFileInput;
+import com.io.sodafoundation.jsonmodels.tokensresponses.TokenHolder;
+import com.io.sodafoundation.jsonmodels.typesresponse.Type;
+import com.io.sodafoundation.jsonmodels.typesresponse.TypesHolder;
+import com.io.sodafoundation.utils.Constant;
+import com.io.sodafoundation.utils.Logger;
+import com.io.sodafoundation.utils.TextUtils;
+import com.io.sodafoundation.utils.Utils;
 import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,7 +40,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
-import static com.soda.utils.Constant.*;
+import static com.io.sodafoundation.utils.Constant.*;
 
 public class BaseTestClass {
     public static AuthTokenHolder getAuthTokenHolder() {
@@ -123,8 +139,8 @@ public class BaseTestClass {
                     bucketName, mFileName, fileName);
             int code = response.code();
             String body = response.body().string();
-            Logger.logString("Response Code: " + code);
-            Logger.logString("Response: " + body);
+            Logger.log("Response Code: " + code);
+            Logger.log("Response: " + body);
             assertEquals("Downloading failed",200, code);
             assertTrue(downloadedFile.isFile(), "Downloaded Image is not available");
         }
@@ -163,8 +179,8 @@ public class BaseTestClass {
                 getAuthTokenHolder().getToken().getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response Code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response Code: "+code);
         assertEquals("Get plans list failed: Response code not matched: ",200, code);
         JSONArray jsonArray = new JSONObject(jsonRes).getJSONArray("plans");
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -173,8 +189,8 @@ public class BaseTestClass {
                     .getResponseHeaderSubjectToken(), getAuthTokenHolder().getToken().getProject().getId(), id);
             String deletePlanResponse = responseDeletePlan.body().string();
             int deletePlanResponseCode = responseDeletePlan.code();
-            Logger.logString("Response: "+deletePlanResponse);
-            Logger.logString("Response Code: "+deletePlanResponseCode);
+            Logger.log("Response: "+deletePlanResponse);
+            Logger.log("Response Code: "+deletePlanResponseCode);
             assertEquals("Get plans list failed: Response code not matched: ",200, deletePlanResponseCode);
         }
     }
@@ -193,8 +209,8 @@ public class BaseTestClass {
         Response listBucketResponse = getHttpHandler().getBuckets(signatureKey);
         int resCode = listBucketResponse.code();
         String responseBody = listBucketResponse.body().string();
-        Logger.logString("Response Code: " + resCode);
-        Logger.logString("Response: " + responseBody);
+        Logger.log("Response Code: " + resCode);
+        Logger.log("Response: " + responseBody);
         JSONObject jsonObject = XML.toJSONObject(responseBody);
         JSONArray jsonObjectBucketList = jsonObject.getJSONObject("ListAllMyBucketsResult")
                 .getJSONObject("Buckets").getJSONArray("Bucket");
@@ -226,8 +242,8 @@ public class BaseTestClass {
         Response listObjectResponse = getHttpHandler().getBucketObjects(bucketName, signatureKey);
         int resCode = listObjectResponse.code();
         String resBody = listObjectResponse.body().string();
-        Logger.logString("Response Code: " + resCode);
-        Logger.logString("Response: " + resBody);
+        Logger.log("Response Code: " + resCode);
+        Logger.log("Response: " + resBody);
         assertEquals("Get list of object failed",200, resCode);
         JSONObject jsonObject = XML.toJSONObject(resBody);
         JSONObject jsonObjectListBucket = jsonObject.getJSONObject("ListBucketResult");

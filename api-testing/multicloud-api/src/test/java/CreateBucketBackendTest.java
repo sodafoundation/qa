@@ -1,13 +1,29 @@
+/*
+  Copyright 2020 The SODA Authors.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ */
+
 import com.google.gson.Gson;
-import com.soda.jsonmodels.akskresponses.SignatureKey;
-import com.soda.jsonmodels.inputs.addbackend.AddBackendInputHolder;
-import com.soda.jsonmodels.inputs.addbackend.Backends;
-import com.soda.jsonmodels.inputs.addbackend.BackendsInputHolder;
-import com.soda.jsonmodels.inputs.createbucket.CreateBucketFileInput;
-import com.soda.jsonmodels.typesresponse.Type;
-import com.soda.utils.Logger;
-import com.soda.utils.TextUtils;
-import com.soda.utils.Utils;
+import com.io.sodafoundation.jsonmodels.akskresponses.SignatureKey;
+import com.io.sodafoundation.jsonmodels.inputs.addbackend.AddBackendInputHolder;
+import com.io.sodafoundation.jsonmodels.inputs.addbackend.Backends;
+import com.io.sodafoundation.jsonmodels.inputs.addbackend.BackendsInputHolder;
+import com.io.sodafoundation.jsonmodels.inputs.createbucket.CreateBucketFileInput;
+import com.io.sodafoundation.jsonmodels.typesresponse.Type;
+import com.io.sodafoundation.utils.Logger;
+import com.io.sodafoundation.utils.TextUtils;
+import com.io.sodafoundation.utils.Utils;
 import okhttp3.Response;
 import org.json.JSONException;
 import org.junit.jupiter.api.*;
@@ -18,7 +34,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
-import static com.soda.utils.Constant.*;
+import static com.io.sodafoundation.utils.Constant.*;
 
 // how to get POJO from any response JSON, use this site
 // http://pojo.sodhanalibrary.com/
@@ -128,7 +144,7 @@ class CreateBucketBackendTest extends BaseTestClass {
     @Order(5)
     @DisplayName("Test create bucket with empty name")
     public void testCreateBucketWithEmptyName() throws IOException, JSONException {
-        Logger.logString("Verifying response code: Input (Backend name) with empty value in payload and bucket" +
+        Logger.log("Verifying response code: Input (Backend name) with empty value in payload and bucket" +
                 " name is empty");
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
@@ -151,7 +167,7 @@ class CreateBucketBackendTest extends BaseTestClass {
 
         CreateBucketFileInput input = gson.fromJson(content, CreateBucketFileInput.class);
         int code = getHttpHandler().createBucket(input, bName, signatureKey);
-        Logger.logString("Verifying response code: In input (Backend name) with not valid value but bucket name is valid");
+        Logger.log("Verifying response code: In input (Backend name) with not valid value but bucket name is valid");
         assertEquals("Backend does not exist:Response code not matched: ",404, code);
     }
 
@@ -167,7 +183,7 @@ class CreateBucketBackendTest extends BaseTestClass {
         int code = getHttpHandler().addBackend(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId(),
                 inputHolder);
-        Logger.logString("Backend Input: "+content);
+        Logger.log("Backend Input: "+content);
         assertEquals("Request body with empty value:Response code not matched:",400, code);
     }
 
@@ -193,7 +209,7 @@ class CreateBucketBackendTest extends BaseTestClass {
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
         int cbCode = getHttpHandler().uploadObject(signatureKey, "bucketName", mFileName, mFilePath);
-        Logger.logString("Verifying Upload object with non existing bucket");
+        Logger.log("Verifying Upload object with non existing bucket");
         assertEquals("Upload object with non existing bucket: Response code not matched", 404, cbCode);
 
         List<File> listOfIBucketInputs =
@@ -203,7 +219,7 @@ class CreateBucketBackendTest extends BaseTestClass {
             String bucketName = Utils.getFileNameFromDelim(bucketFile);
             int code = getHttpHandler().uploadObject(signatureKey,
                     bucketName, "", mFilePath);
-            Logger.logString("Verifying upload object in existing bucket with file name is empty");
+            Logger.log("Verifying upload object in existing bucket with file name is empty");
             assertEquals("Upload object with existing bucket with file name empty: Response code not matched"
                     , 400, code);
         }
@@ -227,8 +243,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                     bucketName, "23455", fileName);
             int code = response.code();
             String body = response.body().string();
-            Logger.logString("Response Code: " + code);
-            Logger.logString("Response: " + body);
+            Logger.log("Response Code: " + code);
+            Logger.log("Response: " + body);
             assertEquals("Downloading non exist file: ",404, code);
         }
     }
@@ -250,8 +266,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                 "hfhfhd", mFileName, dFileName);
         int code = response.code();
         String body = response.body().string();
-        Logger.logString("Response Code: " + code);
-        Logger.logString("Response: " + body);
+        Logger.log("Response Code: " + code);
+        Logger.log("Response: " + body);
         assertEquals("Downloading file from non exist bucket: ", 404, code);
     }
 
@@ -260,15 +276,15 @@ class CreateBucketBackendTest extends BaseTestClass {
     @DisplayName("Test verifying download file from non exist bucket and file name")
     public void testDownloadNonExistBucketAndFile() throws IOException {
         String fileName = "download_image.jpg";
-        Logger.logString("Verifying download file from non exist bucket and file name");
+        Logger.log("Verifying download file from non exist bucket and file name");
         SignatureKey signatureKey = getHttpHandler().getAkSkList(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId());
         Response response = getHttpHandler().downloadObject(signatureKey, "ghjhb", "yuyiyh",
                 fileName);
         int code = response.code();
         String body = response.body().string();
-        Logger.logString("Response Code: " + code);
-        Logger.logString("Response: " + body);
+        Logger.log("Response Code: " + code);
+        Logger.log("Response: " + body);
         assertEquals("Downloading file from non exist bucket and file name: ",404, code);
         assertEquals("Response message is not valid, bucket and filename not exist: ", body);
     }
@@ -297,7 +313,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                         getAuthTokenHolder().getToken().getProject().getId());
                 int code = response.code();
                 String responseBody = response.body().string();
-                Logger.logString("Response Code: " + code);
+                Logger.log("Response Code: " + code);
                 assertEquals("Get Backends List Failed: ",200, code);
                 assertNotNull(responseBody);
                 BackendsInputHolder backendsInputHolder = gson.fromJson(responseBody,
@@ -320,7 +336,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                             .getProject().getId(), backend.get(i).getId());
                     int resCode = response.code();
                     String responseBackendBody = responseBackend.body().string();
-                    Logger.logString("Response Code: " + resCode);
+                    Logger.log("Response Code: " + resCode);
                     assertEquals(200, resCode);
                     assertNotNull(responseBackendBody);
                     Backends backends = gson.fromJson(responseBackendBody, Backends.class);
@@ -338,7 +354,7 @@ class CreateBucketBackendTest extends BaseTestClass {
         Response responseBackend = getHttpHandler().getBackend(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                 getAuthTokenHolder().getToken().getProject().getId(), "reuiu5475");
         int code = responseBackend.code();
-        Logger.logString("Response Code: " + code);
+        Logger.log("Response Code: " + code);
         assertEquals("Get backend failed:Response code not matched: ", 400, code);
     }
 
@@ -359,7 +375,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                 Response response = getHttpHandler().getBackends(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
                 int code = response.code();
-                Logger.logString("Response Code: " + code);
+                Logger.log("Response Code: " + code);
                 assertEquals(200, code);
                 String responseBody = response.body().string();
                 assertNotNull(responseBody);
@@ -382,7 +398,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                             .getProject().getId(), backend.get(i).getId());
                     int resCode = response.code();
                     String responseBackendBody = responseBackend.body().string();
-                    Logger.logString("Response Code: " + resCode);
+                    Logger.log("Response Code: " + resCode);
                     assertEquals(200, responseBackend.code());
                     assertNotNull(responseBackendBody);
                     Backends backends = gson.fromJson(responseBackendBody, Backends.class);
@@ -393,8 +409,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                             .getProject().getId(), backend.get(i).getId());
                     int responseCode = responseDeleteBackend.code();
                     String resp = responseDeleteBackend.body().string();
-                    Logger.logString("Response Code: " + responseCode);
-                    Logger.logString("Response: " + resp);
+                    Logger.log("Response Code: " + responseCode);
+                    Logger.log("Response: " + resp);
                     assertEquals("Deleting Non empty backend:Response code not matched: ",
                             409, responseCode);
                 }
@@ -427,8 +443,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                     Response response = getHttpHandler().deleteBucketNotEmpty(signatureKey, bName);
                     int responseCode = response.code();
                     String responseBody = response.body().string();
-                    Logger.logString("Response Code: "+responseCode);
-                    Logger.logString("Response: "+responseBody);
+                    Logger.log("Response Code: "+responseCode);
+                    Logger.log("Response: "+responseBody);
                     assertEquals("Verifying Bucket not empty: ",409, responseCode);
                 }
             }
@@ -462,8 +478,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                     Response response = getHttpHandler().deleteObject(signatureKey, bName, fileName);
                     int resCode = response.code();
                     String resBody = response.body().string();
-                    Logger.logString("Response Code: " + resCode);
-                    Logger.logString("Response: " + resBody);
+                    Logger.log("Response Code: " + resCode);
+                    Logger.log("Response: " + resBody);
                     assertEquals("Delete non exist object: Response code not matched: ",404, resCode);
                     boolean isUploaded = testGetListOfObjectFromBucket(bName, fileName, signatureKey);
                     assertFalse(isUploaded,"Object is exist");
@@ -482,14 +498,14 @@ class CreateBucketBackendTest extends BaseTestClass {
         Response response = getHttpHandler().deleteObject(signatureKey, bName, "hjdhj");
         int code = response.code();
         String body = response.body().string();
-        Logger.logString("Response Code: " + code);
-        Logger.logString("Response: " + body);
+        Logger.log("Response Code: " + code);
+        Logger.log("Response: " + body);
         assertEquals("Delete non exist object: Response code not matched: ", 404, code);
         Response listObjectResponse = getHttpHandler().getBucketObjects(bName,signatureKey);
         int resCode = listObjectResponse.code();
         String resBody = listObjectResponse.body().string();
-        Logger.logString("Response Code: " + resCode);
-        Logger.logString("Response: " + resBody);
+        Logger.log("Response Code: " + resCode);
+        Logger.log("Response: " + resBody);
         assertEquals("Bucket name not exist: Response code not matched: ",404, resCode);
     }
 
@@ -520,8 +536,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                     Response response = getHttpHandler().deleteObject(signatureKey, bName, fileName);
                     int code = response.code();
                     String body = response.body().string();
-                    Logger.logString("Response Code: " + code);
-                    Logger.logString("Response: " + body);
+                    Logger.log("Response Code: " + code);
+                    Logger.log("Response: " + body);
                     assertFalse(TextUtils.isEmpty(body),"Response message is empty: ");
                     assertEquals("Verifying object is deleted: Response code not matched: ",204, code);
                     boolean isUploaded = testGetListOfObjectFromBucket(bName, fileName, signatureKey);
@@ -531,8 +547,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                     Response responseDeleteBucket = getHttpHandler().deleteBucket(signatureKey, bName);
                     int codeRes = responseDeleteBucket.code();
                     String bodyRes = responseDeleteBucket.body().string();
-                    Logger.logString("Response Code: " + codeRes);
-                    Logger.logString("Response: " + bodyRes);
+                    Logger.log("Response Code: " + codeRes);
+                    Logger.log("Response: " + bodyRes);
                     assertFalse(TextUtils.isEmpty(bodyRes),"Response message is empty: ");
                     assertNotNull(bodyRes);
                     assertEquals("Delete bucket may be does not exist: ",204, codeRes);
@@ -561,7 +577,7 @@ class CreateBucketBackendTest extends BaseTestClass {
                 Response response = getHttpHandler().getBackends(getAuthTokenHolder().getResponseHeaderSubjectToken(),
                         getAuthTokenHolder().getToken().getProject().getId());
                 int code = response.code();
-                Logger.logString("Response Code: " + code);
+                Logger.log("Response Code: " + code);
                 assertEquals(200, code);
                 String responseBody = response.body().string();
                 assertFalse(TextUtils.isEmpty(responseBody),"Response message is empty: ");
@@ -584,8 +600,8 @@ class CreateBucketBackendTest extends BaseTestClass {
                             .getProject().getId(), backend.get(i).getId());
                     int responseCode = responseDeleteBackend.code();
                     String resp = responseDeleteBackend.body().string();
-                    Logger.logString("Response Code: " + responseCode);
-                    Logger.logString("Response: " + resp);
+                    Logger.log("Response Code: " + responseCode);
+                    Logger.log("Response: " + resp);
                     assertEquals(200, responseCode);
                     assertFalse(TextUtils.isEmpty(resp),"Response message is empty: ");
                 }

@@ -1,8 +1,24 @@
+/*
+  Copyright 2020 The SODA Authors.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+ */
+
 import com.google.gson.Gson;
-import com.soda.jsonmodels.akskresponses.SignatureKey;
-import com.soda.jsonmodels.inputs.createmigration.*;
-import com.soda.utils.Logger;
-import com.soda.utils.Utils;
+import com.io.sodafoundation.jsonmodels.akskresponses.SignatureKey;
+import com.io.sodafoundation.jsonmodels.inputs.createmigration.*;
+import com.io.sodafoundation.utils.Logger;
+import com.io.sodafoundation.utils.Utils;
 import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,9 +29,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import static com.soda.utils.Constant.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
+import static com.io.sodafoundation.utils.Constant.*;
 
 //how to get POJO from any response JSON, use this site
 //http://pojo.sodhanalibrary.com/
@@ -37,7 +53,7 @@ public class MigrationTests extends BaseTestClass {
                         CREATE_MIGRATION_PATH);
         assertNotNull(listOfIBucketInputs);
         File bucketFile = listOfIBucketInputs.get(0);
-        Logger.logObject(bucketFile);
+        Logger.log(bucketFile);
         // Get bucket name.
         String bucketContent = Utils.readFileContentsAsString(bucketFile);
         assertNotNull(bucketContent);
@@ -88,15 +104,15 @@ public class MigrationTests extends BaseTestClass {
         planeRequestInput.setFilter(filter);
         planeRequestInput.setRemainSource(true);
         String json = gson.toJson(planeRequestInput);
-        Logger.logString("Request Json: "+json);
+        Logger.log("Request Json: "+json);
 
         Response response = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan creation failed: Response code not matched: ",200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -108,8 +124,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResRun = responseRun.body().string();
         int codeRun = responseRun.code();
-        Logger.logString("Response: "+jsonResRun);
-        Logger.logString("Response code: "+codeRun);
+        Logger.log("Response: "+jsonResRun);
+        Logger.log("Response code: "+codeRun);
         assertEquals("Run plan creation failed: Response code not matched: ",200, codeRun);
         String jobId = new JSONObject(jsonResRun).get("jobId").toString();
 
@@ -118,11 +134,11 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResGetJob = responseGetJob.body().string();
         int codeGetJob = responseGetJob.code();
-        Logger.logString("Response: "+jsonResGetJob);
-        Logger.logString("Response code: "+codeGetJob);
+        Logger.log("Response: "+jsonResGetJob);
+        Logger.log("Response code: "+codeGetJob);
         assertEquals("Get job id failed: Response code not matched: ",200, codeGetJob);
         String status = new JSONObject(jsonResGetJob).getJSONObject("job").get("status").toString();
-        Logger.logString("Status: "+ status);
+        Logger.log("Status: "+ status);
     }
 
     @Test
@@ -149,15 +165,15 @@ public class MigrationTests extends BaseTestClass {
         planeRequestInput.setFilter(filter);
         planeRequestInput.setRemainSource(true);
         String json = gson.toJson(planeRequestInput);
-        Logger.logString("Request Json: "+json);
+        Logger.log("Request Json: "+json);
 
         Response response = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan creation failed request body empty: Response code not matched: ",400, code);
     }
 
@@ -199,8 +215,8 @@ public class MigrationTests extends BaseTestClass {
         String jsonRes = response.body().string();
         int code = response.code();
         testGetPlansListAndDelete();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan already created: Response code not matched: ",409, code);
     }
 
@@ -234,8 +250,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan creation failed: Response code not matched: ", 200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -249,8 +265,8 @@ public class MigrationTests extends BaseTestClass {
         String jsonResRun = responseRun.body().string();
         int codeRun = responseRun.code();
         testGetPlansListAndDelete();
-        Logger.logString("Response: "+jsonResRun);
-        Logger.logString("Response code: "+codeRun);
+        Logger.log("Response: "+jsonResRun);
+        Logger.log("Response code: "+codeRun);
         assertEquals("Run plan creation failed with invalid id: Response code not matched: ", 403, codeRun);
     }
 
@@ -284,8 +300,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan creation failed: Response code not matched: ",200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -297,8 +313,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResRun = responseRun.body().string();
         int codeRun = responseRun.code();
-        Logger.logString("Response: "+jsonResRun);
-        Logger.logString("Response code: "+codeRun);
+        Logger.log("Response: "+jsonResRun);
+        Logger.log("Response code: "+codeRun);
         assertEquals("Run plan creation failed: Response code not matched: ",200, codeRun);
         String jobId = new JSONObject(jsonResRun).get("jobId").toString();
         assertNotNull(jobId,"Job id is null: ");
@@ -310,8 +326,8 @@ public class MigrationTests extends BaseTestClass {
         String jsonResGetJob = responseGetJob.body().string();
         int codeGetJob = responseGetJob.code();
         testGetPlansListAndDelete();
-        Logger.logString("Response: "+jsonResGetJob);
-        Logger.logString("Response code: "+codeGetJob);
+        Logger.log("Response: "+jsonResGetJob);
+        Logger.log("Response code: "+codeGetJob);
         assertEquals("Job id may be valid: Response code not matched: ",403, codeGetJob);
     }
 
@@ -339,16 +355,16 @@ public class MigrationTests extends BaseTestClass {
         planeRequestInput.setFilter(filter);
         planeRequestInput.setRemainSource(false);
         String json = gson.toJson(planeRequestInput);
-        Logger.logString("Source bucket: "+Utils.getFileNameFromDelim(listOfIBucketInputs.get(0)));
-        Logger.logString("Destination bucket: "+Utils.getFileNameFromDelim(listOfIBucketInputs.get(1)));
+        Logger.log("Source bucket: "+Utils.getFileNameFromDelim(listOfIBucketInputs.get(0)));
+        Logger.log("Destination bucket: "+Utils.getFileNameFromDelim(listOfIBucketInputs.get(1)));
 
         Response response = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan creation failed: Response code not matched: ",200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -360,8 +376,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResRun = responseRun.body().string();
         int codeRun = responseRun.code();
-        Logger.logString("Response: "+jsonResRun);
-        Logger.logString("Response code: "+codeRun);
+        Logger.log("Response: "+jsonResRun);
+        Logger.log("Response code: "+codeRun);
         assertEquals("Run plan creation failed: Response code not matched: ",200, codeRun);
         String jobId = new JSONObject(jsonResRun).get("jobId").toString();
 
@@ -370,11 +386,11 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResGetJob = responseGetJob.body().string();
         int codeGetJob = responseGetJob.code();
-        Logger.logString("Response: "+jsonResGetJob);
-        Logger.logString("Response code: "+codeGetJob);
+        Logger.log("Response: "+jsonResGetJob);
+        Logger.log("Response code: "+codeGetJob);
         assertEquals("Get job id failed: Response code not matched: ",200, codeGetJob);
         String status = new JSONObject(jsonResGetJob).getJSONObject("job").get("status").toString();
-        Logger.logString("Status: "+ status);
+        Logger.log("Status: "+ status);
     }
 
     @Test
@@ -400,7 +416,7 @@ public class MigrationTests extends BaseTestClass {
             File downloadedFile = new File(DOWNLOAD_FILES_PATH, fileName);
             if (filePath.exists()) {
                 if (downloadedFile.exists()) {
-                    Logger.logString(" Download Image Path: "+downloadedFile);
+                    Logger.log(" Download Image Path: "+downloadedFile);
                     boolean isDownloadedFileDeleted = downloadedFile.delete();
                     assertTrue(isDownloadedFileDeleted, "Image deleting is failed");
                 } else {
@@ -414,10 +430,10 @@ public class MigrationTests extends BaseTestClass {
             Response response = getHttpHandler().downloadObject(signatureKey, bucketName, mFileName, fileName);
             int code = response.code();
             String body = response.body().string();
-            Logger.logString("Response Code: " + code);
-            Logger.logString("Response: " + body);
+            Logger.log("Response Code: " + code);
+            Logger.log("Response: " + body);
             assertTrue(code == 200 || code == 404, "Downloading failed: ");
-            Logger.logString("Bucket Name: "+bucketName+" Response Code: "+code);
+            Logger.log("Bucket Name: "+bucketName+" Response Code: "+code);
             if (code == 200) {
                 assertTrue(downloadedFile.isFile(), "Downloaded Image is not available");
             }
@@ -451,15 +467,15 @@ public class MigrationTests extends BaseTestClass {
         planeRequestInput.setFilter(filter);
         planeRequestInput.setRemainSource(true);
         String json = gson.toJson(planeRequestInput);
-        Logger.logString("Request Json: "+json);
+        Logger.log("Request Json: "+json);
 
         Response response = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan creation failed: Response code not matched: ",200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -471,8 +487,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResRun = responseRun.body().string();
         int codeRun = responseRun.code();
-        Logger.logString("Response: "+jsonResRun);
-        Logger.logString("Response code: "+codeRun);
+        Logger.log("Response: "+jsonResRun);
+        Logger.log("Response code: "+codeRun);
         assertEquals("Run plan creation failed: Response code not matched: ",200, codeRun);
         String jobId = new JSONObject(jsonResRun).get("jobId").toString();
 
@@ -481,8 +497,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResJobList = responseJobList.body().string();
         int codeJobList = responseJobList.code();
-        Logger.logString("Response: "+jsonResJobList);
-        Logger.logString("Response code: "+codeJobList);
+        Logger.log("Response: "+jsonResJobList);
+        Logger.log("Response code: "+codeJobList);
         assertEquals("Get Jobs List failed: Response code not matched: ",200, codeJobList);
         JSONArray jsonArray = new JSONObject(jsonResJobList).getJSONArray("jobs");
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -497,11 +513,11 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId());
         String jsonResGetJob = responseGetJob.body().string();
         int codeGetJob = responseGetJob.code();
-        Logger.logString("Response: "+jsonResGetJob);
-        Logger.logString("Response code: "+codeGetJob);
+        Logger.log("Response: "+jsonResGetJob);
+        Logger.log("Response code: "+codeGetJob);
         assertEquals("Get job id failed: Response code not matched: ", 200, codeGetJob);
         String status = new JSONObject(jsonResGetJob).getJSONObject("job").get("status").toString();
-        Logger.logString("Status: "+ status);
+        Logger.log("Status: "+ status);
     }
 
     @Test
@@ -519,8 +535,8 @@ public class MigrationTests extends BaseTestClass {
                 .getResponseHeaderSubjectToken(), getAuthTokenHolder().getToken().getProject().getId(), "1236456");
         String deletePlanResponse = responseDeletePlan.body().string();
         int deletePlanResponseCode = responseDeletePlan.code();
-        Logger.logString("Response: "+deletePlanResponse);
-        Logger.logString("Response Code: "+deletePlanResponseCode);
+        Logger.log("Response: "+deletePlanResponse);
+        Logger.log("Response Code: "+deletePlanResponseCode);
         assertEquals("Plan id may be valid: Response code not matched: ",403, deletePlanResponseCode);
     }
 
@@ -544,14 +560,14 @@ public class MigrationTests extends BaseTestClass {
         policiesRequestInput.setSchedule(schedule);
 
         String jsonPolicies = gson.toJson(policiesRequestInput);
-        Logger.logString("Policies Json Req: "+jsonPolicies);
+        Logger.log("Policies Json Req: "+jsonPolicies);
 
         Response  response = getHttpHandler().createPlanPolicies(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), jsonPolicies, getAuthTokenHolder().getToken().getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan policies failed: Response code not matched: ",200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -576,15 +592,15 @@ public class MigrationTests extends BaseTestClass {
         planeScheduleRequestInput.setPolicyId(id);
         planeScheduleRequestInput.setPolicyEnabled(true);
         String json = gson.toJson(planeScheduleRequestInput);
-        Logger.logString("Plan Json Req: "+json);
+        Logger.log("Plan Json Req: "+json);
 
         Response responsePlan = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String resPlan = responsePlan.body().string();
         int resCode = responsePlan.code();
-        Logger.logString("Response: "+resPlan);
-        Logger.logString("Response code: "+resCode);
+        Logger.log("Response: "+resPlan);
+        Logger.log("Response code: "+resCode);
         assertEquals("Plan creation failed: Response code not matched: ",200, resCode);
         String planName = new JSONObject(resPlan).getJSONObject("plan").get("name").toString();
 
@@ -593,8 +609,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId(), planName);
         int codeGetJob = responseSchedule.code();
         String resGetJob = responseSchedule.body().string();
-        Logger.logString("Response: "+resGetJob);
-        Logger.logString("Response code: "+codeGetJob);
+        Logger.log("Response: "+resGetJob);
+        Logger.log("Response code: "+codeGetJob);
         assertEquals("Schedule Mig Status failed: Response code not matched: ",200, codeGetJob);
     }
 
@@ -618,14 +634,14 @@ public class MigrationTests extends BaseTestClass {
         policiesRequestInput.setSchedule(schedule);
 
         String jsonPolicies = gson.toJson(policiesRequestInput);
-        Logger.logString("Policies Json Req: "+jsonPolicies);
+        Logger.log("Policies Json Req: "+jsonPolicies);
 
         Response  response = getHttpHandler().createPlanPolicies(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), jsonPolicies, getAuthTokenHolder().getToken().getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan policies failed: Response code not matched: ",200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -650,15 +666,15 @@ public class MigrationTests extends BaseTestClass {
         planeScheduleRequestInput.setPolicyId(id);
         planeScheduleRequestInput.setPolicyEnabled(true);
         String json = gson.toJson(planeScheduleRequestInput);
-        Logger.logString("Plan Json Req: "+json);
+        Logger.log("Plan Json Req: "+json);
 
         Response responsePlan = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String resPlan = responsePlan.body().string();
         int resCode = responsePlan.code();
-        Logger.logString("Response: "+resPlan);
-        Logger.logString("Response code: "+resCode);
+        Logger.log("Response: "+resPlan);
+        Logger.log("Response code: "+resCode);
         assertEquals("Plan creation failed using same name: Response code not matched: ",409, resCode);
     }
 
@@ -682,14 +698,14 @@ public class MigrationTests extends BaseTestClass {
         policiesRequestInput.setTenant("all");
         policiesRequestInput.setSchedule(schedule);
         String jsonPolicies = gson.toJson(policiesRequestInput);
-        Logger.logString("Policies Json Req: "+jsonPolicies);
+        Logger.log("Policies Json Req: "+jsonPolicies);
 
         Response  response = getHttpHandler().createPlanPolicies(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), jsonPolicies, getAuthTokenHolder().getToken().getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan policies failed using yesterday date time: Response code not matched: ",
                 403, code);
     }
@@ -715,14 +731,14 @@ public class MigrationTests extends BaseTestClass {
         policiesRequestInput.setSchedule(schedule);
 
         String jsonPolicies = gson.toJson(policiesRequestInput);
-        Logger.logString("Policies Json Req: "+jsonPolicies);
+        Logger.log("Policies Json Req: "+jsonPolicies);
 
         Response  response = getHttpHandler().createPlanPolicies(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), jsonPolicies, getAuthTokenHolder().getToken().getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan policies failed:delete the source objects: Response code not matched: ", 200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -747,15 +763,15 @@ public class MigrationTests extends BaseTestClass {
         planeScheduleRequestInput.setPolicyId(id);
         planeScheduleRequestInput.setPolicyEnabled(true);
         String json = gson.toJson(planeScheduleRequestInput);
-        Logger.logString("Plan Json Req: "+json);
+        Logger.log("Plan Json Req: "+json);
 
         Response responsePlan = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String resPlan = responsePlan.body().string();
         int codePlan = responsePlan.code();
-        Logger.logString("Response: "+resPlan);
-        Logger.logString("Response code: "+codePlan);
+        Logger.log("Response: "+resPlan);
+        Logger.log("Response code: "+codePlan);
         assertEquals("Plan creation failed: delete the source objects: Response code not matched: ",
                 200, codePlan);
         String planName = new JSONObject(resPlan).getJSONObject("plan").get("name").toString();
@@ -765,8 +781,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId(), planName);
         int codeGetJob = responseSchedule.code();
         String resGetJob = responseSchedule.body().string();
-        Logger.logString("Response: "+resGetJob);
-        Logger.logString("Response code: "+codeGetJob);
+        Logger.log("Response: "+resGetJob);
+        Logger.log("Response code: "+codeGetJob);
         assertEquals("Schedule Mig Status failed:delete the source objects: Response code not matched: ",
                 200, codeGetJob);
     }
@@ -809,10 +825,10 @@ public class MigrationTests extends BaseTestClass {
             Response response = getHttpHandler().downloadObject(signatureKey, bucketName, mFileName, fileName);
             int code = response.code();
             String body = response.body().string();
-            Logger.logString("Response Code: " + code);
-            Logger.logString("Response: " + body);
+            Logger.log("Response Code: " + code);
+            Logger.log("Response: " + body);
             assertTrue(code == 200 || code == 404, "Downloading failed: ");
-            Logger.logString("Bucket Name: "+bucketName+" Response Code: "+code);
+            Logger.log("Bucket Name: "+bucketName+" Response Code: "+code);
             if (code == 200) {
                 assertTrue(downloadedFile.isFile(), "Downloaded Image is not available");
             }
@@ -843,14 +859,14 @@ public class MigrationTests extends BaseTestClass {
         policiesRequestInput.setSchedule(schedule);
 
         String jsonPolicies = gson.toJson(policiesRequestInput);
-        Logger.logString("Policies Json Req: "+jsonPolicies);
+        Logger.log("Policies Json Req: "+jsonPolicies);
 
         Response  response = getHttpHandler().createPlanPolicies(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), jsonPolicies, getAuthTokenHolder().getToken().getProject().getId());
         String jsonRes = response.body().string();
         int code = response.code();
-        Logger.logString("Response: "+jsonRes);
-        Logger.logString("Response code: "+code);
+        Logger.log("Response: "+jsonRes);
+        Logger.log("Response code: "+code);
         assertEquals("Plan policies failed: Response code not matched: ",200, code);
         JSONObject jsonObject = new JSONObject(jsonRes);
 
@@ -876,15 +892,15 @@ public class MigrationTests extends BaseTestClass {
         planeScheduleRequestInput.setPolicyId(id);
         planeScheduleRequestInput.setPolicyEnabled(true);
         String json = gson.toJson(planeScheduleRequestInput);
-        Logger.logString("Plan Json Req: "+json);
+        Logger.log("Plan Json Req: "+json);
 
         Response responsePlan = getHttpHandler().createPlans(getAuthTokenHolder()
                 .getResponseHeaderSubjectToken(), json, getAuthTokenHolder().getToken()
                 .getProject().getId());
         String resPlan = responsePlan.body().string();
         int codePlan = responsePlan.code();
-        Logger.logString("Response: "+resPlan);
-        Logger.logString("Response code: "+codePlan);
+        Logger.log("Response: "+resPlan);
+        Logger.log("Response code: "+codePlan);
         assertEquals("Plan creation failed:Invalid policy id: Response code not matched: ",
                 403, codePlan);
     }
@@ -898,8 +914,8 @@ public class MigrationTests extends BaseTestClass {
                 .getProject().getId(), "hufsfh387646634567565567");
         int codeGetJob = responseSchedule.code();
         String resGetJob = responseSchedule.body().string();
-        Logger.logString("Response: "+resGetJob);
-        Logger.logString("Response code: "+codeGetJob);
+        Logger.log("Response: "+resGetJob);
+        Logger.log("Response code: "+codeGetJob);
         assertEquals("Schedule Mig Status failed:non exist plan name: Response code not matched: ",
                 404, codeGetJob);
     }
