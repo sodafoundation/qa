@@ -9,8 +9,10 @@ Junit framework details [Link](https://www.tutorialspoint.com/junit/index.htm)
 **Why this?**
 
 Junit is widely used testing framework along with Java Programming Language. You can use this automation framework for both unit testing and UI testing.
+You will get test report in html format which will help developer to test their code and to identify bugs.
 
 **How to install and use?**<br/>
+    For testing purposes you can deploy OpenSDS refering to [OpenSDS Cluster Installation through Ansible](https://github.com/sodafoundation/api/wiki/SODA-Projects-Cluster-Installation-through-Ansible). <br/>
  Java 8 is required to run [IntelliJ IDEA](https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-Selecting-the-JDK-version-the-IDE-will-run-under) <br/>
  Download Intellij idea community edition tool and install in your pc.
  [link](https://www.jetbrains.com/idea/download/#section=windows)
@@ -36,3 +38,4 @@ Junit is widely used testing framework along with Java Programming Language. You
    
    For MigrationTests set following variable <br/>
   `HOST_IP=***.***.*.***;INPUT_PATH=D:/SODA-Test (Your Project Folder Path);API_SERVER_PORT=:****;S3_API_PORT=:****;SCHEDULE_TIME=00 00 07 29 5 5` 
+
