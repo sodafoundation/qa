@@ -9,17 +9,28 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 
 
 [Valid Inputs]",Create New BucketLife Cycle configuration with Transition Rule,"1. Application is  Installed & running
+
 2. Dashboard is deployed and running
+
 3. User logged into dashboard
+
 4. Bucket is created
+
 5. Object is uploaded(optional)
 ","1. Click on Lifecyle Menu
+
 2. Enter Rule ID 
+
 3. Select Transition Rule 
+
 4. Provide Transition rule with days and select backend
+
 5. Click Submit Button","1. Lifecycle Configuration is added into MongoDB wth Transition Rule
+
 2. Browser response: 200OK
-3. Dashboard Lists the newly created Configuration showing transition rule"
+
+3. Dashboard Lists the newly created Configuration showing transition rule
+"
 ,Create New BucketLife Cycle configuration with Expiration Rule,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
