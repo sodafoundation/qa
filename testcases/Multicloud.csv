@@ -1,0 +1,212 @@
+Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+"[Valid Scenario] inputs: name, type, endpoint, region, bucket_name, access_key, secret_key, The inputs should be valid from cloud credentials. Example : ""type"": ""aws-s3"", 
+    ""endpoint"": ""s3.amazonaws.com"", 
+    ""name"": ""awss3"", 
+    ""region"": ""ap-northeast-1"", 
+    ""bucketName"": ""wbtestbuckt"", 
+    ""access"": ""access"", 
+    ""security"": ""security"" ",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
+2. Dashboard should be up and running","1. Login in OpenSDS dashboard. 
+2. On the home page click (+) to register new storage backend.
+3. After populating all details, click OK
+","New storage backend should be registered
+
+
+"
+"[Valid Scenario] inputs: name, type, endpoint, region, bucket_name, access_key, secret_key, The inputs should be valid from cloud credentials. Example : ""type"": ""aws-s3"", 
+    ""endpoint"": ""s3.amazonaws.com"", 
+    ""name"": ""awss3"", 
+    ""region"": ""ap-northeast-1"", 
+    ""bucketName"": ""wbtestbuckt"", 
+    ""access"": ""access"", 
+    ""security"": ""security"" 
+
+
+",,"1. Multi-cloud server must be installed and all process must be running
+2. If postman is used to send API, then postman should be installed.
+
+","#Request
+curl -H ""Content-type: application/json"" -X POST -d '
+{
+    ""type"": ""aws-s3"", 
+    ""endpoint"": ""s3.amazonaws.com"", 
+    ""name"": ""awss3"", 
+    ""region"": ""ap-northeast-1"", 
+    ""bucketName"": ""wbtestbuckt"", 
+    ""access"": ""access"", 
+    ""security"": ""security""
+}'  http://<host_ip>:8089/v1/<tenant_ID>/backends
+
+
+","New storage backend should be registered .
+Response: 
+# Response 200OK
+
+{
+ ""id"": ""5bd94a83d84b8000014a1309"",
+ ""name"": ""awss3"",
+ ""type"": ""aws-s3"",
+ ""region"": ""ap-northeast-1"",
+ ""endpoint"": ""s3.amazonaws.com"",
+ ""bucketName"": ""wbtestbuckt"",
+ ""access"": ""access"",
+ ""security"": ""security""
+}"
+"[Valid Scenario] inputs: name [bucket_name], type [AWS/GCP/Azure/YIG etc], backend[backend which you have created using create backend as a first step]
+
+
+",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
+2. Dashboard should be up and running
+
+","1. Login in OpenSDS dashboard. 
+2. On the home page click (+) to register new storage backend.
+3. After populating all details, click OK
+4. After creating backend, go to Resource and in Bucket tab click create
+5. Populate all the details properly
+6. Click OK to create bucket
+
+","New bucket should be created using storage backend created above
+
+
+
+"
+"[Valid Scenario] inputs: host_ip, bucket_name, request_body
+Request body format : XML
+Request body attributes : LocationConstraint (Backend)
+
+
+",,"1. Multi-cloud server must be installed and all process must be running
+2. If postman is used to send API, then postman should be installed.
+
+
+
+
+","## Request
+curl -H ""Content-type: application/xml"" -X PUT -d '
+<CreateBucketConfiguration>
+    <LocationConstraint>awss3</LocationConstraint>
+</CreateBucketConfiguration>
+' http://<host_ip>:8089/v1/s3/<bucket_name>
+
+
+
+
+","New bucket should be created(AWS in this example) .
+Response: 
+# Response 200OK
+## Response
+<?xml version=""1.0"" encoding=""UTF-8""?>
+ <BaseResponse>
+  <ErrorCode></ErrorCode>
+  <Msg>Create bucket successfully.</Msg>
+  <XXX_NoUnkeyedLiteral></XXX_NoUnkeyedLiteral>
+  <XXX_unrecognized></XXX_unrecognized>
+  <XXX_sizecache>0</XXX_sizecache>
+ </BaseResponse>
+
+"
+"[Valid Scenario] inputs: Object to be uploaded
+
+
+",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
+2. Dashboard should be up and running
+
+","1. Login in OpenSDS dashboard. 
+2. On the home page click (+) to register new storage backend.
+3. After populating all details, click OK
+4. After creating backend, go to Resource and in Bucket tab click create
+5. Populate all the details properly
+6. Click OK to create bucket
+7. After bucket creation please click on the bucket which was created
+8. Go to Object tab
+9. Click upload, select the object to upload
+10. Click OK
+","New object should be uploaded in the bucket
+
+
+"
+"[Valid Scenario] inputs: object to be uploaded
+Prerequisite : Object should be there which is to be uploaded
+
+",,"1. Multi-cloud server must be installed and all process must be running
+2. If postman is used to send API, then postman should be installed.
+
+
+
+
+","
+
+## Request
+curl -H ""Content-type: application/xml"" -X PUT -T ""test.txt""<host_ip>:8089/v1/s3/<bucket_name>/<object_ID>
+
+
+
+
+
+","New object should be uploaded in the bucket .
+Response: 
+# Response 200OK
+## Response
+<?xml version=""1.0"" encoding=""UTF-8""?>
+ <BaseResponse>
+  <ErrorCode></ErrorCode>
+  <Msg>Create object successfully.</Msg>
+  <XXX_NoUnkeyedLiteral></XXX_NoUnkeyedLiteral>
+  <XXX_unrecognized></XXX_unrecognized>
+  <XXX_sizecache>0</XXX_sizecache>
+ </BaseResponse>
+"
+"[Valid Scenario] inputs: object should be available for download in Dashboard
+
+
+",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
+2. Dashboard should be up and running
+
+","1. Login in OpenSDS dashboard. 
+2. On the home page click (+) to register new storage backend.
+3. After populating all details, click OK
+4. After creating backend, go to Resource and in Bucket tab click create
+5. Populate all the details properly
+6. Click OK to create bucket
+7. After bucket creation please click on the bucket which was created
+8. Go to Object tab
+9. Click upload, select the object to upload
+10. Click OK
+11. After successful upload of object, click on the object
+12. Click on Download button on the right side of the UI window
+13. Click OK to verify.","Object should be downloaded successfully. And you can click on the object downloaded to see the content of the object and access it.
+
+
+
+
+
+
+
+"
+"[Valid Scenario] inputs: object should be available for download
+
+
+",,"1. Multi-cloud server must be installed and all process must be running
+2. If postman is used to send API, then postman should be installed.
+
+
+
+
+","
+
+## Request
+curl -H ""Content-type: application/xml"" -X GET -o ""text.txt""  http://<host_ip>:8089/v1/s3/<bucket_name>/<object_ID>
+
+
+
+
+
+","## Response
+## <object_ID> will be downloaded successfully.
+
+
+
+
+
+
+"
