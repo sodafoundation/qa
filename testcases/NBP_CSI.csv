@@ -1,0 +1,320 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+K8S CSI block plugin installation,CSI-BLOCK-PLUGIN-INSTALL,NBP_CSI_001,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Verify that CSI block plugin is installed and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin uninstallation,CSI-BLOCK-PLUGIN-UNINSTALL,NBP_CSI_002,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3.Uninstall csi block plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)","1. Verify that CSI block plugin uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin reinstallation,CSI-BLOCK-PLUGIN-REINSTALL,NBP_CSI_003,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1) Uninstall csi block plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)
+2) Reinstall csi block plugin
+ (kubectl create -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)","1. Verify that CSI block plugin uninstalled and below pods are terminated after step 1
+21. Verify that CSI block plugin is re-installed and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI file plugin installation,CSI-FILE-PLUGIN-INSTALL,NBP_CSI_004,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Verify that CSI file plugin is installed and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin uninstallation,CSI-FILE-PLUGIN-UNINSTALL,NBP_CSI_005,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3.Uninstall csi block plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)","1. Verify that CSI file plugin uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin reinstallation,CSI-FILE-PLUGIN-REINSTALL,NBP_CSI_006,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1) Uninstall csi file plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)
+2) Reinstall csi file plugin
+ (kubectl create -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)","1. Verify that CSI file plugin uninstalled and below pods are terminated after step 1
+21. Verify that CSI file plugin is re-installed and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+"K8S workload creation with CSI 
+Block plugin",POD-CREATION-BLOCK-VOLUME,NBP_CSI_007,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload deletion with CSI 
+Block plugin",POD-DELETION-BLOCK-VOLUME,NBP_CSI_008,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that volume is deleted at opensds side (osdsctl volume list)"
+"K8S workload restart with CSI 
+Block plugin",POD-RESTART-BLOCK-VOLUME,NBP_CSI_009,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-block)
+5. Create the pod again
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated after step 4
+2. Verify that volume is still present at opensds side after step 4
+(osdsctl volume list)
+3. Verify that nginx pod is up and running after step 5
+(Kubectl get pods )
+4. Verify that volume present at opensds side after step 4 is
+ reused after step 5
+(osdsctl volume list)"
+"K8S workload persistency check with CSI 
+Block plugin",POD-PERSISTENCY-BLOCK-VOLUME,NBP_CSI_010,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, Write some data/file to the volume
+5. delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-block)
+6. Create the pod again
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","Verify that data written in step 4 is peristed when the pod is
+ Recreated in step 6"
+"K8S workload creation with CSI 
+file plugin",POD-CREATION-FILESHARE,NBP_CSI_011,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+"K8S workload deletion with CSI 
+file plugin",POD-DELETION-FILESHARE,NBP_CSI_012,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload restart with CSI 
+file plugin",POD-RESTART-FILESHARE,NBP_CSI_013,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-file)
+5. Create the pod again
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated after step 4
+2. Verify that fileshare is still present at opensds side after step 4
+(osdsctl fileshare list)
+3. Verify that nginx pod is up and running after step 5
+(Kubectl get pods )
+4. Verify that fileshare present at opensds side after step 4 is
+ Reused after step 5
+(osdsctl fileshare list)"
+"K8S workload persistency check with CSI 
+file plugin",POD-PERSISTENCY-FILESHARE,NBP_CSI_014,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, Write some data/file to the volume
+5. delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-file)
+6. Create the pod again
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","Verify that data written in step 4 is peristed when the pod is
+ Recreated in step 6"
+K8S CSI block plugin installation when host does not exist,CSI-BLOCK-PLUGIN-INSTALL-HOST-NOT-FOUND,NBP_CSI_015,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi block plugin and host will be added if not found. Bring down csi plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)
+4. Through dashboard, Delete a host with hostname of current node
+5. Bring up csi block plugin again","1. Verify that CSI block plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin installation when host already exist,CSI-BLOCK-PLUGIN-INSTALL-HOST-ALREADY-EXISTS,NBP_CSI_016,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi block plugin and host will be added if not found. Bring down csi plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)
+4. Bring up csi block plugin again","1. Verify that CSI block plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI file plugin installation when host does not exist,CSI-FILE-PLUGIN-INSTALL-HOST-NOT-FOUND,NBP_CSI_017,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi file plugin and host will be added if not found. Bring down csi file plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)
+4. Through dashboard, Delete a host with hostname of current node
+5. Bring up csi file plugin again","1. Verify that CSI file plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin installation when host already exist,CSI-FILE-PLUGIN-INSTALL-HOST-ALREADY-EXISTS,NBP_CSI_018,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi file plugin and host will be added if not found. Bring down csi file plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)
+4. Bring up csi file plugin again","1. Verify that CSI file plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI block plugin installation through helm chart,CSI-BLOCK-PLUGIN-INSTALL-HELM-CHARTS,NBP_CSI_019,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with K8S through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md","1. Verify that CSI block plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin uninstallation through helm chart,CSI-BLOCK-PLUGIN-UNINSTALL-HELM-CHARTS,NBP_CSI_020,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with K8S through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md
+
+3. Uninstall csi block plugin through charts","1. Verify that CSI block plugin is uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI file plugin installation through helm chart,CSI-FILE-PLUGIN-INSTALL-HELM-CHARTS,NBP_CSI_021,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with csi block plugin through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md","1. Verify that CSI file plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin uninstallation through helm chart,CSI-FILE-PLUGIN-UNINSTALL-HELM-CHARTS,NBP_CSI_022,1. LVM is used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with K8S through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md
+
+3. Uninstall csi file plugin through charts","1. Verify that CSI file plugin is uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
