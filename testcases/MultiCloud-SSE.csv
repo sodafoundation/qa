@@ -15,3 +15,238 @@ To test SSE on GCP,SSE GCP,SSE_GCP,"SSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_D
 To test SSE on Azure,SSE Azure,SSE_Azure,"SSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc","Repeat SSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc on Azure","Each test case ofSSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc has same behavior on Azure"
 To test SSE on CEPH,SSE CEPH,SSE_CEPH,"SSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc","Repeat SSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc on CEPH","Each test case ofSSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc has same behavior on CEPH"
 To test SSE on AWS,SSE AWS,SSE_AWS,"SSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc","Repeat SSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc on AWS","Each test case ofSSE_CreateBucket_Enc,SSE_UploadObj_Enc,SSE_DownloadObj_Enc,SSE_UploadObj_NoEnc has same behavior on AWS"
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+",
+SSE-CREATE BUCKET_DASHBOARD,SSE_CreateEncryptedBucket_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+",
+SSE-LIST BUCKET,SSE_ListBucket_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false",
+SSE-PUT OBJECT,SSE_PutObject_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-PUT OBJECT,SSE_PutObject_Image_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console",
+SSE-GET OBJECT,SSE_GetObject_ascii_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-MULTIPART GET,SSE_GetObject_Large_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-GET OBJECT,SSE_GetObject_Image_AWS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted",
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+",
+SSE-LIST BUCKET,SSE_ListBucket_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false",
+SSE-PUT OBJECT,SSE_PutObject_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-PUT OBJECT,SSE_PutObject_Image_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console",
+SSE-GET OBJECT,SSE_GetObject_ascii_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-MULTIPART GET,SSE_GetObject_Large_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-GET OBJECT,SSE_GetObject_Image_HOBS,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted",
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+",
+SSE-LIST BUCKET,SSE_ListBucket_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false",
+SSE-PUT OBJECT,SSE_PutObject_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-PUT OBJECT,SSE_PutObject_Image_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console",
+SSE-GET OBJECT,SSE_GetObject_ascii_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-MULTIPART GET,SSE_GetObject_Large_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-GET OBJECT,SSE_GetObject_Image_GCP,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted",
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+",
+SSE-LIST BUCKET,SSE_ListBucket_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false",
+SSE-PUT OBJECT,SSE_PutObject_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-PUT OBJECT,SSE_PutObject_Image_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console",
+SSE-GET OBJECT,SSE_GetObject_ascii_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-MULTIPART GET,SSE_GetObject_Large_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-GET OBJECT,SSE_GetObject_Image_Azure,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted",
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+",
+SSE-LIST BUCKET,SSE_ListBucket_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false",
+SSE-PUT OBJECT,SSE_PutObject_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable",
+SSE-PUT OBJECT,SSE_PutObject_Image_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console",
+SSE-GET OBJECT,SSE_GetObject_ascii_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-MULTIPART GET,SSE_GetObject_Large_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted",
+SSE-GET OBJECT,SSE_GetObject_Image_YIG-CEPH,OSDS build is installed,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted",

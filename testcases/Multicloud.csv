@@ -1,212 +1,394 @@
 Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
-"[Valid Scenario] inputs: name, type, endpoint, region, bucket_name, access_key, secret_key, The inputs should be valid from cloud credentials. Example : ""type"": ""aws-s3"", 
-    ""endpoint"": ""s3.amazonaws.com"", 
-    ""name"": ""awss3"", 
-    ""region"": ""ap-northeast-1"", 
-    ""bucketName"": ""wbtestbuckt"", 
-    ""access"": ""access"", 
-    ""security"": ""security"" ",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
-2. Dashboard should be up and running","1. Login in OpenSDS dashboard. 
-2. On the home page click (+) to register new storage backend.
-3. After populating all details, click OK
-","New storage backend should be registered
-
-
+"ADD BACKEND
+",ADD_BACKEND_AWS,OSDS build is installed,"1. Add a AWS backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",ADD_BACKEND (negative),OSDS build is installed,"1. Add a AWS backend, giving valid inputs for endpoint, bucket, AK-SK, invalid input for region","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",ADD_BACKEND (negative),OSDS build is installed,"1. Add a AWS backend, giving valid inputs for region, bucket, AK-SK, invalid input for endpoint","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",ADD_BACKEND (negative),OSDS build is installed,"1. Add a AWS backend, giving valid inputs for region, endpoint, AK-SK, invalid input for bucket","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",ADD_BACKEND (negative),OSDS build is installed,"1. Add a AWS backend, giving valid inputs for endpoint, bucket, invalid input for AK-SK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",ADD_BACKEND_GCP,OSDS build is installed,"1. Add a GCP backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",ADD_BACKEND_Azure,OSDS build is installed,"1. Add a Azure backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",ADD_BACKEND_HOBS,OSDS build is installed,"1. Add a Huawei OBS backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",ADD_BACKEND_YIG-CEPH,OSDS build is installed,"1. Add a YIG-CEPH backend, giving valid inputs for region","1. Backend is added in OpenSDS, is returned in the call to list backends"
+LIST BACKEND,LIST_BACKEND,OSDS build is installed,"1. Add 2 AWS backends, one GCP backend
+2. Call list backends","1. Return value includes 3 backend details, 2 AWS and one GCP
 "
-"[Valid Scenario] inputs: name, type, endpoint, region, bucket_name, access_key, secret_key, The inputs should be valid from cloud credentials. Example : ""type"": ""aws-s3"", 
-    ""endpoint"": ""s3.amazonaws.com"", 
-    ""name"": ""awss3"", 
-    ""region"": ""ap-northeast-1"", 
-    ""bucketName"": ""wbtestbuckt"", 
-    ""access"": ""access"", 
-    ""security"": ""security"" 
-
-
-",,"1. Multi-cloud server must be installed and all process must be running
-2. If postman is used to send API, then postman should be installed.
-
-","#Request
-curl -H ""Content-type: application/json"" -X POST -d '
-{
-    ""type"": ""aws-s3"", 
-    ""endpoint"": ""s3.amazonaws.com"", 
-    ""name"": ""awss3"", 
-    ""region"": ""ap-northeast-1"", 
-    ""bucketName"": ""wbtestbuckt"", 
-    ""access"": ""access"", 
-    ""security"": ""security""
-}'  http://<host_ip>:8089/v1/<tenant_ID>/backends
-
-
-","New storage backend should be registered .
-Response: 
-# Response 200OK
-
-{
- ""id"": ""5bd94a83d84b8000014a1309"",
- ""name"": ""awss3"",
- ""type"": ""aws-s3"",
- ""region"": ""ap-northeast-1"",
- ""endpoint"": ""s3.amazonaws.com"",
- ""bucketName"": ""wbtestbuckt"",
- ""access"": ""access"",
- ""security"": ""security""
-}"
-"[Valid Scenario] inputs: name [bucket_name], type [AWS/GCP/Azure/YIG etc], backend[backend which you have created using create backend as a first step]
-
-
-",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
-2. Dashboard should be up and running
-
-","1. Login in OpenSDS dashboard. 
-2. On the home page click (+) to register new storage backend.
-3. After populating all details, click OK
-4. After creating backend, go to Resource and in Bucket tab click create
-5. Populate all the details properly
-6. Click OK to create bucket
-
-","New bucket should be created using storage backend created above
-
-
-
-"
-"[Valid Scenario] inputs: host_ip, bucket_name, request_body
-Request body format : XML
-Request body attributes : LocationConstraint (Backend)
-
-
-",,"1. Multi-cloud server must be installed and all process must be running
-2. If postman is used to send API, then postman should be installed.
-
-
-
-
-","## Request
-curl -H ""Content-type: application/xml"" -X PUT -d '
-<CreateBucketConfiguration>
-    <LocationConstraint>awss3</LocationConstraint>
-</CreateBucketConfiguration>
-' http://<host_ip>:8089/v1/s3/<bucket_name>
-
-
-
-
-","New bucket should be created(AWS in this example) .
-Response: 
-# Response 200OK
-## Response
-<?xml version=""1.0"" encoding=""UTF-8""?>
- <BaseResponse>
-  <ErrorCode></ErrorCode>
-  <Msg>Create bucket successfully.</Msg>
-  <XXX_NoUnkeyedLiteral></XXX_NoUnkeyedLiteral>
-  <XXX_unrecognized></XXX_unrecognized>
-  <XXX_sizecache>0</XXX_sizecache>
- </BaseResponse>
-
-"
-"[Valid Scenario] inputs: Object to be uploaded
-
-
-",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
-2. Dashboard should be up and running
-
-","1. Login in OpenSDS dashboard. 
-2. On the home page click (+) to register new storage backend.
-3. After populating all details, click OK
-4. After creating backend, go to Resource and in Bucket tab click create
-5. Populate all the details properly
-6. Click OK to create bucket
-7. After bucket creation please click on the bucket which was created
-8. Go to Object tab
-9. Click upload, select the object to upload
-10. Click OK
-","New object should be uploaded in the bucket
-
-
-"
-"[Valid Scenario] inputs: object to be uploaded
-Prerequisite : Object should be there which is to be uploaded
-
-",,"1. Multi-cloud server must be installed and all process must be running
-2. If postman is used to send API, then postman should be installed.
-
-
-
-
-","
-
-## Request
-curl -H ""Content-type: application/xml"" -X PUT -T ""test.txt""<host_ip>:8089/v1/s3/<bucket_name>/<object_ID>
-
-
-
-
-
-","New object should be uploaded in the bucket .
-Response: 
-# Response 200OK
-## Response
-<?xml version=""1.0"" encoding=""UTF-8""?>
- <BaseResponse>
-  <ErrorCode></ErrorCode>
-  <Msg>Create object successfully.</Msg>
-  <XXX_NoUnkeyedLiteral></XXX_NoUnkeyedLiteral>
-  <XXX_unrecognized></XXX_unrecognized>
-  <XXX_sizecache>0</XXX_sizecache>
- </BaseResponse>
-"
-"[Valid Scenario] inputs: object should be available for download in Dashboard
-
-
-",,"1. Opensds Multi-cloud(Gelato) must be Installed and all processes running 
-2. Dashboard should be up and running
-
-","1. Login in OpenSDS dashboard. 
-2. On the home page click (+) to register new storage backend.
-3. After populating all details, click OK
-4. After creating backend, go to Resource and in Bucket tab click create
-5. Populate all the details properly
-6. Click OK to create bucket
-7. After bucket creation please click on the bucket which was created
-8. Go to Object tab
-9. Click upload, select the object to upload
-10. Click OK
-11. After successful upload of object, click on the object
-12. Click on Download button on the right side of the UI window
-13. Click OK to verify.","Object should be downloaded successfully. And you can click on the object downloaded to see the content of the object and access it.
-
-
-
-
-
-
-
-"
-"[Valid Scenario] inputs: object should be available for download
-
-
-",,"1. Multi-cloud server must be installed and all process must be running
-2. If postman is used to send API, then postman should be installed.
-
-
-
-
-","
-
-## Request
-curl -H ""Content-type: application/xml"" -X GET -o ""text.txt""  http://<host_ip>:8089/v1/s3/<bucket_name>/<object_ID>
-
-
-
-
-
-","## Response
-## <object_ID> will be downloaded successfully.
-
-
-
-
-
-
-"
+DELETE BACKEND,DELETE_BACKEND,OSDS build is installed,"1. Add 2 AWS backends, one GCP backend
+2. Call DELETE backends, with one of the AWS backend ID
+3. Call list backends","1. Delete backend call should return 200 OK
+2. Response of list backend includes 2 backends, one AWS and one GCP"
+CREATE BUCKET,CREATE_BUCKET_AWS,OSDS build is installed,"1. Add a AWS backend, giving valid inputs for region, endpoint, bucket (""b""), AK-SK
+2. Now, call Create bucket, with bucket name b1, no encryption, no versioning, on the AWS backend
+3. Call List buckets for the AWS backend","1. Create bucket should return 200 OK
+2. Login to the cloud backend console (using the backend cloud credentials), in the bucket ""b"", there should be a folder ""b1""
+3. call to List buckets, must return the bucket b1"
+CREATE BUCKET,CREATE_BUCKET_GCP,OSDS build is installed,"1. Add a GCP backend, giving valid inputs for region, endpoint, bucket (""b""), AK-SK
+2. Now, call Create bucket, with bucket name b1, no encryption, no versioning, on the GCP backend
+3. Call List buckets for the GCP backend","1. Create bucket should return 200 OK
+2. Login to the cloud backend console (using the backend cloud credentials), in the bucket ""b"", there should be a folder ""b1""
+3. call to List buckets, must return the bucket b1"
+CREATE BUCKET,CREATE_BUCKET_Azure,OSDS build is installed,"1. Add a Azure backend, giving valid inputs for region, endpoint, bucket (""b""), AK-SK
+2. Now, call Create bucket, with bucket name b1, no encryption, no versioning, on the Azure backend
+3. Call List buckets for the Azure backend","1. Create bucket should return 200 OK
+2. Login to the cloud backend console (using the backend cloud credentials), in the bucket ""b"", there should be a folder ""b1""
+3. call to List buckets, must return the bucket b1"
+CREATE BUCKET,CREATE_BUCKET_HOBS,OSDS build is installed,"1. Add a HOBS backend, giving valid inputs for region, endpoint, bucket (""b""), AK-SK
+2. Now, call Create bucket, with bucket name b1, no encryption, no versioning, on the HOBS backend
+3. Call List buckets for the HOBS backend","1. Create bucket should return 200 OK
+2. Login to the cloud backend console (using the backend cloud credentials), in the bucket ""b"", there should be a folder ""b1""
+3. call to List buckets, must return the bucket b1"
+CREATE BUCKET,CREATE_BUCKET_YIGCEPH,OSDS build is installed,"1. Add a YIGCEPH backend, giving valid inputs for region, endpoint, bucket (""b""), AK-SK
+2. Now, call Create bucket, with bucket name b1, no encryption, no versioning, on the YIGCEPH backend
+3. Call List buckets for the YIGCEPH backend","1. Create bucket should return 200 OK
+2. Login to the cloud backend console (using the backend cloud credentials), in the bucket ""b"", there should be a folder ""b1""
+3. call to List buckets, must return the bucket b1"
+DELETE BUCKET,DELETE_BUCKET_AWS,OSDS build is installed,"1. Add the backend (with existing bucket)
+2. create a bucket b1 from OSDS
+3. upload an object o1, to b1
+4. check the object o1 in the cloud backend
+5. delete the object o1
+6. check the list of buckets in OSDS
+7. check contents of existing bucket in cloud backend
+8. delete bucket b1 from OSDS
+9. check the list of buckets in OSDS
+","1. the folder b1 is created in the existing bucket on the cloud backend, when the object o1 is uploaded
+2. the folder b1 is deleted in the existing bucket on the cloud backend, when the object o1 is deleted
+3. the OSDS bucket b1 remains and is shown (only in OSDS) till it is deleted"
+DELETE BUCKET,DELETE_BUCKET_GCP,OSDS build is installed,"1. Add the backend (with existing bucket)
+2. create a bucket b1 from OSDS
+3. upload an object o1, to b1
+4. check the object o1 in the cloud backend
+5. delete the object o1
+6. check the list of buckets in OSDS
+7. check contents of existing bucket in cloud backend
+8. delete bucket b1 from OSDS
+9. check the list of buckets in OSDS
+","1. the folder b1 is created in the existing bucket on the cloud backend, when the object o1 is uploaded
+2. the folder b1 is deleted in the existing bucket on the cloud backend, when the object o1 is deleted
+3. the OSDS bucket b1 remains and is shown (only in OSDS) till it is deleted"
+DELETE BUCKET,DELETE_BUCKET_AZURE,OSDS build is installed,"1. Add the backend (with existing bucket)
+2. create a bucket b1 from OSDS
+3. upload an object o1, to b1
+4. check the object o1 in the cloud backend
+5. delete the object o1
+6. check the list of buckets in OSDS
+7. check contents of existing bucket in cloud backend
+8. delete bucket b1 from OSDS
+9. check the list of buckets in OSDS
+","1. the folder b1 is created in the existing bucket on the cloud backend, when the object o1 is uploaded
+2. the folder b1 is deleted in the existing bucket on the cloud backend, when the object o1 is deleted
+3. the OSDS bucket b1 remains and is shown (only in OSDS) till it is deleted"
+DELETE BUCKET,DELETE_BUCKET_HOBS,OSDS build is installed,"1. Add the backend (with existing bucket)
+2. create a bucket b1 from OSDS
+3. upload an object o1, to b1
+4. check the object o1 in the cloud backend
+5. delete the object o1
+6. check the list of buckets in OSDS
+7. check contents of existing bucket in cloud backend
+8. delete bucket b1 from OSDS
+9. check the list of buckets in OSDS
+","1. the folder b1 is created in the existing bucket on the cloud backend, when the object o1 is uploaded
+2. the folder b1 is deleted in the existing bucket on the cloud backend, when the object o1 is deleted
+3. the OSDS bucket b1 remains and is shown (only in OSDS) till it is deleted"
+DELETE BUCKET,DELETE_BUCKET_YIGCEPH,OSDS build is installed,"1. Add the backend (with existing bucket)
+2. create a bucket b1 from OSDS
+3. upload an object o1, to b1
+4. check the object o1 in the cloud backend
+5. delete the object o1
+6. check the list of buckets in OSDS
+7. check contents of existing bucket in cloud backend
+8. delete bucket b1 from OSDS
+9. check the list of buckets in OSDS
+","1. the folder b1 is created in the existing bucket on the cloud backend, when the object o1 is uploaded
+2. the folder b1 is deleted in the existing bucket on the cloud backend, when the object o1 is deleted
+3. the OSDS bucket b1 remains and is shown (only in OSDS) till it is deleted"
+LIFECYCLE_TRANSITION,LIFECYCLE_TRANSITION_SMALL_OBJ_AWS_INCLOUD,"1. OSDS build is installed
+2. A bucket using AWS S3 as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket with tier as tier_1.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to GLACIER after 30 days, but without backend selected.
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_999
+4. Check on AWS console, storage class of the object should be GLACIER."
+LIFECYCLE_TRANSITION,LIFECYCLE_TRANSITION_BIG_OBJ_AWS_INCLOUD,"1. OSDS build is installed
+2. A bucket using AWS S3 as it's default backend is created.
+3. An object > 5MB is uploaded to the bucket with tier as tier_1.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to STANDARD_IA after 30 days, but without backend selected.
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_99
+4. Check on AWS console, storage class of the object should be STANDARD_IA."
+LIFECYCLE_TRANSITION,LIFECYCLE_TRANSITION_SMALL_OBJ_AZURE_INCLOUD,"1. OSDS build is installed
+2. A bucket using Azure Blob as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket with tier as tier_1.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to GLACIER after 30 days, but without backend selected.
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_999
+4. Check on Azure console, storage class of the object should be Archive."
+LIFECYCLE_TRANSITION,LIFECYCLE_TRANSITION_BIG_OBJ_AZURE_INCLOUD,"1. OSDS build is installed
+2. A bucket using Azure Blob as it's default backend is created.
+3. An object > 5MB is uploaded to the bucket with tier as tier_1.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to STANDARD_IA after 30 days, but without backend selected.
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_99
+4. Check on AWS console, storage class of the object should be Cool."
+LIFECYCLE_TRANSITION,LIFECYCLE_TRANSITION_SMALL_OBJ_OBS_INCLOUD,"1. OSDS build is installed
+2. A bucket using Huawei OBS as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket with tier as tier_1.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to GLACIER after 30 days, but without backend selected.
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_999
+4. Check on Azure console, storage class of the object should be Archive."
+LIFECYCLE_TRANSITION,LIFECYCLE_TRANSITION_BIG_OBJ_OBS_INCLOUD,"1. OSDS build is installed
+2. A bucket using Huawei OBS as it's default backend is created.
+3. An object > 5MB is uploaded to the bucket with tier as tier_1.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to STANDARD_IA after 30 days, but without backend selected.
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_99
+4. Check on AWS console, storage class of the object should be Cool."
+LIFECYCLE_TRANSITION,"CREATE_BUCKET_LIFECYCLE_TRANSITION_AWS
+_CROSSCLOUD","1. OSDS build is installed
+2. A bucket using YIG CEPH as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket with tier as tier_1.
+4. An AWS S3 backend is registered.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to STANDARD_IA after 30 days to an AWS backend
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_99, and location should be changed from YIG CEPH backend to AWS S3 backend
+4. Check on AWS console, the object exist and it's storage class should be Standard_IA."
+LIFECYCLE_TRANSITION,"CREATE_BUCKET_LIFECYCLE_TRANSITION_OBS
+_CROSSCLOUD","1. OSDS build is installed
+2. A bucket using AWS S3 as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket with tier as tier_99.
+4. An OBS backend is registered.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to GLACIER after 30 days to an OBS backend
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_999, and location should be changed from YIG CEPH backend to AWS S3 backend
+4. Check on AWS console, the object exist and it's storage class should be GLACIER."
+LIFECYCLE_TRANSITION,CREATE_BUCKET_LIFECYCLE_TRANSITION_AZURE_CROSSCLOUD,"1. OSDS build is installed
+2. A bucket using CEPH as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket with tier as tier_1.
+4. An AZURE backend is registered.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to STANDARD_IA after 30 days to an AZURE backend
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_99, and location should be changed from CEPH backend to Azure backend
+4. Check on Azure console, the object exist and it's storage class should be Cool."
+LIFECYCLE_TRANSITION,CREATE_BUCKET_LIFECYCLE_TRANSITION_AWS_CROSSCLOUD_MULTIPART,"1. OSDS build is installed
+2. A bucket using YIG CEPH as it's default backend is created.
+3. An object > 5MB is uploaded to the bucket with tier as tier_1.
+4. An AWS backend is registered.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to STANDARD_IA after 30 days to an AWS backend
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_99, and location should be changed from YIG CEPH backend to AWS backend
+4. Check on AWS console, the object exist and it's storage class should be Standard_IA."
+LIFECYCLE_TRANSITION,CREATE_BUCKET_LIFECYCLE_TRANSITION_OBS_CROSSCLOUD_MULTIPART,"1. OSDS build is installed
+2. A bucket using CEPH as it's default backend is created.
+3. An object > 5MB is uploaded to the bucket with tier as tier_99.
+4. An OBS backend is registered.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to GLACIER after 30 days to an OBS backend
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_999, and location should be changed from CEPH backend to AWS backend
+4. Check on AWS console, the object exist and it's storage class should be GLACIER."
+LIFECYCLE_TRANSITION,CREATE_BUCKET_LIFECYCLE_TRANSITION_AZURE_CROSSCLOUD_MULTIPART,"1. OSDS build is installed
+2. A bucket using CEPH as it's default backend is created.
+3. An object > 5MB is uploaded to the bucket with tier as tier_1.
+4. An AZURE backend is registered.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose transition to STANDARD_IA after 30 days to an AZURE backend
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, tier of the object should be Tier_99, and location should be changed from CEPH backend to Azure backend
+4. Check on Azure console, the object exist and it's storage class should be Cool."
+LIFECYCLE_EXPIRATION,CREATE_BUCKET_LIFECYCLE_EXPIRATION_AWS,"1. OSDS build is installed
+2. A bucket using AWS S3 as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose expiration after 30 days
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, object is disapeared.
+4. Check on AWS console, the object is disapeared too."
+LIFECYCLE_EXPIRATION,CREATE_BUCKET_LIFECYCLE_EXPIRATION_AZURE,"1. OSDS build is installed
+2. A bucket using Azure Blob as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose expiration after 30 days
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, object is disapeared.
+4. Check on Azure console, the object is disapeared too."
+LIFECYCLE_EXPIRATION,CREATE_BUCKET_LIFECYCLE_EXPIRATION_OBS,"1. OSDS build is installed
+2. A bucket using OBS as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose expiration after 30 days
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, object is disapeared.
+4. Check on Huawei Cloud console, the object is disapeared too."
+LIFECYCLE_EXPIRATION,CREATE_BUCKET_LIFECYCLE_EXPIRATION_GCP,"1. OSDS build is installed
+2. A bucket using GCP as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose expiration after 30 days
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, object is disapeared.
+4. Check on GCP console, the object is disapeared too."
+LIFECYCLE_EXPIRATION,CREATE_BUCKET_LIFECYCLE_EXPIRATION_IBM,"1. OSDS build is installed
+2. A bucket using IBM as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose expiration after 30 days
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, object is disapeared.
+4. Check on IBM Cloud console, the object is disapeared too."
+LIFECYCLE_EXPIRATION,CREATE_BUCKET_LIFECYCLE_EXPIRATION_CEPH,"1. OSDS build is installed
+2. A bucket using CEPH as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose expiration after 30 days
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, object is disapeared."
+LIFECYCLE_EXPIRATION,CREATE_BUCKET_LIFECYCLE_EXPIRATION_YIG,"1. OSDS build is installed
+2. A bucket using YIG CEPH as it's default backend is created.
+3. An object <= 5MB is uploaded to the bucket.","""1. Choose the bucket and click on Lifecyle Menu
+2. Enter Rule Name 
+3. Select Transition Rule 
+4. Choose expiration after 30 days
+5. Click OK Button.
+6. Update lastmodifiedtime of the object to be 30 or more days back
+7. Update docker-compose.yml to set LIFECYCLE_CRON_CONFIG to be 0 2/* * * * ?, and restart dataflow.
+8. Wait at least 2 minutes and check.""","1. After step 5, browser response: 200OK
+2. Dashboard Lists the newly created Configuration showing transition rule
+3. After step 8, check on OSDS dashboard, object is disapeared."
+DISABLE BUCKET LIFECYCLE,UPDATE_BUCKET_LIFECYCLE_AWS,OSDS build is installed,"1. Click on Bucket
+ 2. Click on Lifecycle Menu
+ 3. Check the lifecycle configuration existing on that bucket
+ 4. Check on the right side options of the rule, click on Disable
+ 5. There will be a pop up showing that configuration will be disabled, click OK","1. Lifecycle configuration will be updated in DB with updated status
+ 2. Browse response: 200OK
+ 3. Dashboard shows status of lifecycle configuration as Disabled"
+DISABLE BUCKET LIFECYCLE,UPDATE_BUCKET_LIFECYCLE,"1. OSDS build is installed
+2. A bucket is created and some lifecycle configuration exist for it.","1. Click on Bucket
+ 2. Click on Lifecycle Menu
+ 3. Check the lifecycle configuration existing on that bucket
+ 4. Check on the right side options of the rule, click on Disable
+ 5. There will be a pop up showing that configuration will be disabled, click OK","1. Lifecycle configuration will be updated in DB with updated status
+ 2. Browse response: 200OK
+ 3. Dashboard shows status of lifecycle configuration as Disabled"
+UPLOAD OBJECT,UPLOAD_OBJECT_AWS,"1. OSDS build is installed
+2. A bucket is created using AWS S3 as it's default backend.","1. Click on Bucket
+2. Click on Upload object
+3. Upload an object <= 5BM","1. Folder Should be Created in Cloud Backend
+2. Object should appear in the Bucket/Folder"
+UPLOAD OBJECT,UPLOAD_OBJECT_AZURE,"1. OSDS build is installed
+2. A bucket is created using Azure Blob as it's default backend.","1. Click on Bucket
+2. Click on Upload object
+3. Upload an object <= 5BM","1. Folder Should be Created in Cloud Backend
+2. Object should appear in the Bucket/Folder"
+UPLOAD OBJECT,UPLOAD_OBJECT_AWS_MULTIPART,"1. OSDS build is installed
+2. A bucket is created using AWS S3 as it's default backend.","1. Click on Bucket
+2. Click on Upload object
+3. Upload an object > 5BM","1. Folder Should be Created in Cloud Backend
+2. Object should appear in the Bucket/Folder"
