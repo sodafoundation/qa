@@ -1,3 +1,8 @@
-All the testcases and related files can go here. Please create subfolders for separate project level test artifacts under this.
+All the testcases are here. Please use these to run the manual tests and raise issue in the respective repository. 
 
-like qa/testcases/<project-name>/ - can have all the test cases for that project. You are free to organize(create subfolders) the test cases sheets or files under this as needed
+To edit any of the testcase files in this repository, follow the steps
+	- Fork the repository.
+	- Make the changes in the csv file, with any appropriate editor which renders csv as a table (eg. ms excel, google sheets etc.)
+	- Check-in the file in csv format and check the format is as desired. 
+	- Raise Pull Request for the branch. 
+	
