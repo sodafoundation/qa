@@ -1,0 +1,34 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+Archive object in AWS S3 bucket,Archival through Dashboard,Archival_TC_01,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created 
+
+","1. from SODA Dashboard goto
+Resource Manager -> Buckets
+2. Select the Bucket in which you want to
+Archive the object
+3. Click on Upload/Archive button
+4. Now select the file to upload and choose the Storage Class
+Ex: GLACIER
+5. Submit the form ","Once the object upload is complete, the Dashboard should show the 
+object with Storage Class as Glacier/Tier999
+Go to the AWS Console and check the respective bucket.
+The object should have the storage class as GLACIER"
+Archive object in AWS S3 bucket,Archival through API,Archival_TC_02,"1. multi-cloud is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created 
+
+","1. From Postman execute API http://<Host_IP>:8090/<BucketName>/<ObjectNameToBeUploaded>
+2. This is PUT call
+3. Set the X-Amz-Storage-Class Header value as GLACIER
+4. In the Autorization set the AK/SL , AWS Region as <the region to which the AWS Bucket belongs> and 
+Service name as 's3'
+5. Request Body should be binary and the <ObjectNameToBeUploaded> should be selected
+for ""Select File""
+","Once the object upload is complete, the Dashboard should show the 
+object with Storage Class as Glacier/Tier999
+Go to the AWS Console and check the respective bucket.
+The object should have the storage class as GLACIER
+
+
+Return Status: 200"
