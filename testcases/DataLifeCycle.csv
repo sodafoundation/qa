@@ -1,4 +1,4 @@
-Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Result
+Feature Scenario,Testcase Title,Testcase Id,Testcase Precondition,Testcase steps,Expected Result
 "User can create new  bucket Life Cycle configuration
 
 
@@ -8,7 +8,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 
 
 
-[Valid Inputs]",Create New BucketLife Cycle configuration with Transition Rule,"1. Application is  Installed & running
+[Valid Inputs]",Create New BucketLife Cycle configuration with Transition Rule,LC_001,"1. Application is  Installed & running
 
 2. Dashboard is deployed and running
 
@@ -31,7 +31,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 
 3. Dashboard Lists the newly created Configuration showing transition rule
 "
-,Create New BucketLife Cycle configuration with Expiration Rule,"1. Application is  Installed & running
+,Create New BucketLife Cycle configuration with Expiration Rule,LC_002,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -42,7 +42,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 5. Click Submit Button","1. Lifecycle Configuration is added into MongoDB wth Transition Rule
 2. Browser response: 200OK
 3. Dashboard Lists the newly created Configuration showing expiration rule"
-,Create New BucketLife Cycle configuration with Transition Rule & Expiration Rule,"1. Application is  Installed & running
+,Create New BucketLife Cycle configuration with Transition Rule & Expiration Rule,LC_003,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -66,7 +66,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 
 
 
-[Invalid Inputs]",please add test cases with different invalid inputs for lifecycle configuration,,,
+[Invalid Inputs]",please add test cases with different invalid inputs for lifecycle configuration,LC_004,,,
 "View and Update Bucket Lifecycle Configuration
 
 
@@ -80,7 +80,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 
 
 
-",View existing Bucket Lifecycle Configuration,"1. Application is  Installed & running
+",View existing Bucket Lifecycle Configuration,LC_005,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -94,7 +94,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 3. Dashboard shows the existing lifecycle configuration on specified bucket
 
 "
-,Disable  existing Bucket lifecycle Configuration,"1. Application is  Installed & running
+,Disable  existing Bucket lifecycle Configuration,LC_006,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -109,7 +109,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 
 
 "
-,Enable disabled Bucket lifecycle Configuration,"1. Application is  Installed & running
+,Enable disabled Bucket lifecycle Configuration,LC_007,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -124,7 +124,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 
 
 "
-,Edit existing Bucket lifecycle Configuration,"1. Application is  Installed & running
+,Edit existing Bucket lifecycle Configuration,LC_008,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -139,7 +139,7 @@ Feature Scenario,Testcase Title,Testcase Precondition,Testcase steps,Expected Re
 3. Dashboard shows new updated lifecycle configuration 
 
 "
-Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configuration,"1. Application is  Installed & running
+Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configuration,LC_009,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -152,7 +152,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 6. Click OK Button","1. Lifecycle rule will be deleted from MongoDB
 2. Browse response: 200OK
 3. Dashboard will delete the lifecycle rule"
-,Deleting multiple lifecycle Configuration,"1. Application is  Installed & running
+,Deleting multiple lifecycle Configuration,LC_010,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created
@@ -175,7 +175,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD to STANDARD_IA within huawei backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD to STANDARD_IA within huawei backend,LC_011,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using HUAWEI backend
@@ -191,7 +191,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD to GLACIER  within huawei backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD to GLACIER  within huawei backend,LC_012,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using HUAWEI backend
@@ -207,7 +207,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA to GLACIER  within huawei backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA to GLACIER  within huawei backend,LC_013,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using HUAWEI backend
@@ -234,7 +234,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD_IA to STANDARD within huawei backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD_IA to STANDARD within huawei backend,LC_014,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using HUAWEI backend
@@ -249,7 +249,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD_IA within huawei backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD_IA within huawei backend,LC_015,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using HUAWEI backend
@@ -264,7 +264,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD within huawei backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD within huawei backend,LC_016,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using HUAWEI backend
@@ -289,7 +289,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD to STANDARD_IA within AWS backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD to STANDARD_IA within AWS backend,LC_017,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -305,7 +305,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD to GLACIER  within AWS backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD to GLACIER  within AWS backend,LC_018,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -321,7 +321,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA to GLACIER  within AWS backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA to GLACIER  within AWS backend,LC_019,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -348,7 +348,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD_IA to STANDARD within AWS backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD_IA to STANDARD within AWS backend,LC_020,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -362,7 +362,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD_IA within AWS backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD_IA within AWS backend,LC_021,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -377,7 +377,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD within AWS backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD within AWS backend,LC_022,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -402,7 +402,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD to STANDARD_IA within Azure backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD to STANDARD_IA within Azure backend,LC_023,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -421,7 +421,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD to GLACIER  within Azure  backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD to GLACIER  within Azure  backend,LC_024,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -437,7 +437,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA to GLACIER  within Azure backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA to GLACIER  within Azure backend,LC_025,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -464,7 +464,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD_IA to STANDARD within Azure backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD_IA to STANDARD within Azure backend,LC_026,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -478,7 +478,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD_IA within Azure backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD_IA within Azure backend,LC_027,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -493,7 +493,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD within Azure backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD within Azure backend,LC_028,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -518,7 +518,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD to STANDARD_IA within GCP backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD to STANDARD_IA within GCP backend,LC_029,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -537,7 +537,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD to GLACIER  within GCP  backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD to GLACIER  within GCP  backend,LC_030,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -553,7 +553,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA to GLACIER  within GCP backend,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA to GLACIER  within GCP backend,LC_031,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -580,7 +580,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD_IA to STANDARD within GCP backend,"1. Application is  Installed & running
+",Transitioning object from STANDARD_IA to STANDARD within GCP backend,LC_032,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -594,7 +594,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD_IA within GCP backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD_IA within GCP backend,LC_033,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -609,7 +609,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER to STANDARD within GCP backend,"1. Application is  Installed & running
+,Transitioning object from GLACIER to STANDARD within GCP backend,LC_034,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -642,7 +642,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD OBS to STANDARD_IA AWS,"1. Application is  Installed & running
+",Transitioning object from STANDARD OBS to STANDARD_IA AWS,LC_035,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -662,7 +662,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD OBS to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from STANDARD OBS to GLACIER AWS,LC_036,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -682,7 +682,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA OBS  to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA OBS  to GLACIER AWS,LC_037,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -702,7 +702,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER OBS  to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from GLACIER OBS  to GLACIER AWS,LC_038,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -750,7 +750,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD OBS to STANDARD_IA Azure,"1. Application is  Installed & running
+",Transitioning object from STANDARD OBS to STANDARD_IA Azure,LC_039,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -770,7 +770,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD OBS to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from STANDARD OBS to GLACIER Azure,LC_040,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -790,7 +790,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA OBS  to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA OBS  to GLACIER Azure,LC_041,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -810,7 +810,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER OBS  to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from GLACIER OBS  to GLACIER Azure,LC_042,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -858,7 +858,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD OBS to STANDARD_IA GCP,"1. Application is  Installed & running
+",Transitioning object from STANDARD OBS to STANDARD_IA GCP,LC_043,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -878,7 +878,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD OBS to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from STANDARD OBS to GLACIER GCP,LC_044,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -898,7 +898,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA OBS  to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA OBS  to GLACIER GCP,LC_045,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -918,7 +918,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER OBS  to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from GLACIER OBS  to GLACIER GCP,LC_046,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using OBS backend
@@ -966,7 +966,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD AWS to STANDARD_IA OBS,"1. Application is  Installed & running
+",Transitioning object from STANDARD AWS to STANDARD_IA OBS,LC_047,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -986,7 +986,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD AWS to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from STANDARD AWS to GLACIER OBS,LC_048,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1006,7 +1006,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA AWS  to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA AWS  to GLACIER OBS,LC_049,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1026,7 +1026,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER AWS  to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from GLACIER AWS  to GLACIER OBS,LC_050,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1074,7 +1074,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD AWS to STANDARD_IA Azure,"1. Application is  Installed & running
+",Transitioning object from STANDARD AWS to STANDARD_IA Azure,LC_051,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1094,7 +1094,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD AWS to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from STANDARD AWS to GLACIER Azure,LC_052,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1114,7 +1114,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA AWS  to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA AWS  to GLACIER Azure,LC_053,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1134,7 +1134,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER AWS  to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from GLACIER AWS  to GLACIER Azure,LC_054,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1182,7 +1182,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD AWS to STANDARD_IA GCP,"1. Application is  Installed & running
+",Transitioning object from STANDARD AWS to STANDARD_IA GCP,LC_055,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1202,7 +1202,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD AWS to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from STANDARD AWS to GLACIER GCP,LC_056,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1222,7 +1222,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA AWS  to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA AWS  to GLACIER GCP,LC_057,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1242,7 +1242,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER AWS  to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from GLACIER AWS  to GLACIER GCP,LC_058,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using AWS backend
@@ -1290,7 +1290,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD Azure to STANDARD_IA OBS,"1. Application is  Installed & running
+",Transitioning object from STANDARD Azure to STANDARD_IA OBS,LC_059,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1310,7 +1310,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD Azure to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from STANDARD Azure to GLACIER OBS,LC_060,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1330,7 +1330,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA Azure  to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA Azure  to GLACIER OBS,LC_061,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1350,7 +1350,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER Azure  to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from GLACIER Azure  to GLACIER OBS,LC_062,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1398,7 +1398,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD Azure to STANDARD_IA AWS,"1. Application is  Installed & running
+",Transitioning object from STANDARD Azure to STANDARD_IA AWS,LC_063,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1418,7 +1418,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD Azure to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from STANDARD Azure to GLACIER AWS,LC_064,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1438,7 +1438,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA Azure  to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA Azure  to GLACIER AWS,LC_065,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1458,7 +1458,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER Azure  to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from GLACIER Azure  to GLACIER AWS,LC_066,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1506,7 +1506,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD Azure to STANDARD_IA GCP,"1. Application is  Installed & running
+",Transitioning object from STANDARD Azure to STANDARD_IA GCP,LC_067,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1526,7 +1526,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD Azure to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from STANDARD Azure to GLACIER GCP,LC_068,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1546,7 +1546,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA Azure  to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA Azure  to GLACIER GCP,LC_069,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1566,7 +1566,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER Azure  to GLACIER GCP,"1. Application is  Installed & running
+,Transitioning object from GLACIER Azure  to GLACIER GCP,LC_070,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using Azure backend
@@ -1614,7 +1614,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD GCP to STANDARD_IA OBS,"1. Application is  Installed & running
+",Transitioning object from STANDARD GCP to STANDARD_IA OBS,LC_071,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1634,7 +1634,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD GCP to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from STANDARD GCP to GLACIER OBS,LC_072,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1654,7 +1654,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA GCP  to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA GCP  to GLACIER OBS,LC_073,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1674,7 +1674,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER GCP  to GLACIER OBS,"1. Application is  Installed & running
+,Transitioning object from GLACIER GCP  to GLACIER OBS,LC_074,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1722,7 +1722,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD GCP to STANDARD_IA AWS,"1. Application is  Installed & running
+",Transitioning object from STANDARD GCP to STANDARD_IA AWS,LC_075,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1742,7 +1742,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD GCP to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from STANDARD GCP to GLACIER AWS,LC_076,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1762,7 +1762,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA GCP  to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA GCP  to GLACIER AWS,LC_077,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1782,7 +1782,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER GCP  to GLACIER AWS,"1. Application is  Installed & running
+,Transitioning object from GLACIER GCP  to GLACIER AWS,LC_078,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1830,7 +1830,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 
-",Transitioning object from STANDARD GCP to STANDARD_IA Azure,"1. Application is  Installed & running
+",Transitioning object from STANDARD GCP to STANDARD_IA Azure,LC_079,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1850,7 +1850,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD GCP to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from STANDARD GCP to GLACIER Azure,LC_080,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1870,7 +1870,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from STANDARD_IA GCP  to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from STANDARD_IA GCP  to GLACIER Azure,LC_081,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
@@ -1890,7 +1890,7 @@ Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configurat
 
 
 "
-,Transitioning object from GLACIER GCP  to GLACIER Azure,"1. Application is  Installed & running
+,Transitioning object from GLACIER GCP  to GLACIER Azure,LC_082,"1. Application is  Installed & running
 2. Dashboard is deployed and running
 3. User logged into dashboard
 4. Bucket is created using GCP backend
