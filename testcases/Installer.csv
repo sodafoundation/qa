@@ -1,24 +1,119 @@
 Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
-Install OpenSDS,Default Install OpenSDS Components,Installer_TC_01,"1. Ubuntu 16.04 VM
-2. Installed all dependencies mentioned in docs.sodafoundation
-3. Update host_ip, install_from, etc.","1. Clean up VM
-2. Installer Ansible
+"Install OpenSDS (default configs, except changes in Testcase Precondition)",Default Install OpenSDS Components,Installer_TC_01,"1. Ubuntu 16.04 VM, Ansible 2.4
+2. Installed all dependencies mentioned in wiki
+3. Update ansible variables below
+host_ip=<IPAddr>, deploy_project: hotpot ","1. Clone opensds-installer
+2. Install Ansible 2.4
 3. $ sudo -E ansible-playbook site.yml -i local.hosts ","1. Finish the installation without unknown/ignored failure
 2. Processes, Services and Docker instances started and running
 3. Dashboard is accessable and usable
 4. CLI is accessable and usable 
 5. Rest APIs accessable and responsive "
-Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_02,"1. Ubuntu 16.04 VM
-2. Installed all dependencies mentioned in wiki
-3. Update host_ip, install_from, etc.",$ sudo -E ansible-playbook clean.yml -i local.hosts,1. All container insances must be stopped
-Install OpenSDS with Sushi,Install with sushi_plugin_type: csi,Installer_TC_03,"1. Ubuntu 16.04 VM
-2. Installed all dependencies mentioned in wiki
-3. modify to sushi_plugin_type: csi",$ sudo -E ansible-playbook site.yml -i local.hosts,1. CLI must be accessable and usable
-,,,,,
-,,,,,
-Install OpenSDS with Orchestration,Install with enable_telemetry_tools=false & enable_orchestration = true,Installer_TC_06,"1. Ubuntu 16.04 VM
-2. Installed all dependencies mentioned in wiki
-3. modify to enable_telemetry_tools=false & enable_orchestration = true",$ sudo -E ansible-playbook site.yml -i local.hosts,1. CLI must be accessable and usable
-Install OpenSDS,Install with install_keystone_with_docker=false,Installer_TC_07,"1. Ubuntu 16.04 VM
-2. Installed all dependencies mentioned in wiki
-3. modify to install_keystone_with_docker=false",$ sudo -E ansible-playbook site.yml -i local.hosts,1. CLI must be accessable and usable
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_02,"Same as, Installer_TC_01",$ sudo -E ansible-playbook clean.yml -i local.hosts,1. All process and container instances must be stopped
+Install OpenSDS (gelato install),Default Install OpenSDS Components,Installer_TC_03,"Update ansible variables as in Installer_TC_01 and,
+deploy_project: gelato","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_04,"Same as, Installer_TC_03","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS (hotpot+gelato install),Default Install OpenSDS Components,Installer_TC_05,"Update ansible variables as in Installer_TC_01 and,
+deploy_project: all","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_06,"Same as, Installer_TC_05","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS (hotpot+telemetry install),Default Install OpenSDS Components,Installer_TC_07,"Update ansible variables as in Installer_TC_01 and,
+enable_telemetry_tools: true","Same as, Installer_TC_01","Same as, Installer_TC_01, and
+And Telemetry services started,  Telemetry GUI accessble and usable"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_08,"Same as, Installer_TC_07","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS (hotpot+orchestration install),Default Install OpenSDS Components,Installer_TC_09,"Update ansible variables as in Installer_TC_01 and,
+enable_orchestration: true","Same as, Installer_TC_01","Same as, Installer_TC_01, and
+And Orchestrtion services started,  Orchestration GUI accessble and usable"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_10,"Same as, Installer_TC_09","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS hotpot+telemetry+orch install),Default Install OpenSDS Components,Installer_TC_11,"Update ansible variables as in Installer_TC_01 and,
+enable_orchestration: true
+enable_telemetry_tools: true","Same as, Installer_TC_01","Same as, Installer_TC_01, and
+And Telemetry & Orchestration working"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_12,"Same as, Installer_TC_11","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from repository,Default Install OpenSDS Components,Installer_TC_13,"Update ansible variables as in Installer_TC_01 and,
+install_from: repository","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_14,"Same as, Installer_TC_13","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from repository,Default Install OpenSDS Components,Installer_TC_15,"Update ansible variables as in Installer_TC_03 and,
+install_from: repository","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_16,"Same as, Installer_TC_15","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from repository,Default Install OpenSDS Components,Installer_TC_17,"Update ansible variables as in Installer_TC_05 and,
+install_from: repository","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_18,"Same as, Installer_TC_17","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from repository,Default Install OpenSDS Components,Installer_TC_19,"Update ansible variables as in Installer_TC_11 and,
+install_from: repository","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_20,"Same as, Installer_TC_19","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from repository,Default Install OpenSDS Components,Installer_TC_21,"Update ansible variables as in Installer_TC_19 and,
+deploy_project: all","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_22,"Same as, Installer_TC_21","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from docker,Default Install OpenSDS Components,Installer_TC_23,"Update ansible variables as in Installer_TC_01 and,
+install_from: container","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_24,"Same as, Installer_TC_23","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from docker,Default Install OpenSDS Components,Installer_TC_25,"Update ansible variables as in Installer_TC_03 and,
+install_from: container","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_26,"Same as, Installer_TC_25","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from docker,Default Install OpenSDS Components,Installer_TC_27,"Update ansible variables as in Installer_TC_05 and,
+install_from: container","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_28,"Same as, Installer_TC_27","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from docker,Default Install OpenSDS Components,Installer_TC_29,"Update ansible variables as in Installer_TC_21 and,
+install_from: container","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_30,"Same as, Installer_TC_29","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from docker,Default Install OpenSDS Components,Installer_TC_31,"Update ansible variables as in Installer_TC_01 and,
+sushi_plugin_type: csi","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_32,"Same as, Installer_TC_31","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS from docker,Default Install OpenSDS Components,Installer_TC_33,"Update ansible variables as in Installer_TC_01 and,
+install_keystone_with_docker=false","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_34,"Same as, Installer_TC_33","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS with CSI & Kubernetes,Default Install OpenSDS Components,Installer_TC_35,"Update ansible variables as in Installer_TC_02 and,
+install_keystone_with_docker=false","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_36,"Same as, Installer_TC_35","Same as, Installer_TC_02","Same as, Installer_TC_02"
+Install OpenSDS with Multi host docks,Default Install OpenSDS Components,Installer_TC_37,"Update ansible variables as in Installer_TC_02 and,
+install_keystone_with_docker=false","Same as, Installer_TC_01","Same as, Installer_TC_01"
+Uninstall OpenSDS,Default Uninstall OpenSDS Components,Installer_TC_38,"Same as, Installer_TC_37","Same as, Installer_TC_02","Same as, Installer_TC_02"
+common role,Install common role,Installer_TC_101,Update ansible variables as in Installer_TC_01,"Same as, Installer_TC_01,
+sudo -E ansible-playbook site.yml -i local.hosts --tags=common",Components in common role to be installed
+,Uninstall common role,Installer_TC_102,"Same as, Installer_TC_101","Same as, Installer_TC_02",Components in common role to be uninstalled
+auth-installer Role,Install auth role,Installer_TC_103,"Update ansible variables as in Installer_TC_01 and,
+install_keystone_with_docker=true
+opensds_auth_strategy=keystone","Same as, Installer_TC_101, tags=auth",Keystone should be installed
+,Uninstall auth role,Installer_TC_104,"Same as, Installer_TC_101","Same as, Installer_TC_02",Keystone should be uninstalled
+dashboard installer Role,Install dashboard role,Installer_TC_105,Update ansible variables as in Installer_TC_01,"Same as, Installer_TC_101, tags=dashboard",Dashboard should be installed 
+,Uninstall dashboard role,Installer_TC_106,"Same as, Installer_TC_101","Same as, Installer_TC_02",Dashboard should be uninstalled 
+gelato-installer role,Install gelato role,Installer_TC_107,"Update ansible variables as in Installer_TC_01, 
+deploy_project=all","Same as, Installer_TC_101, tags=gelato",Multicloud should be installed
+,Uninstall gelato role,Installer_TC_108,"Same as, Installer_TC_107","Same as, Installer_TC_02",Multicould should be uninstalled
+hotpot-installer role,Install hotpot role,Installer_TC_109,Update ansible variables as in Installer_TC_01,"Same as, Installer_TC_101, tags=hotpot",hotpot should be installed
+,Uninstall hotpot role,Installer_TC_110,"Same as, Installer_TC_108","Same as, Installer_TC_02",hotpot should be uninstalled
+orchestration installer role,Install orchestration role,Installer_TC_111,"Update ansible variables as in Installer_TC_01 and,
+enable_orchestration: true","Same as, Installer_TC_101, tags=orchestration",Orchestration should be installed
+,Uninstall orchestration role,Installer_TC_112,"Same as, Installer_TC_111","Same as, Installer_TC_02",Orchestration should be uninstalled
+osdsdb role,Install osdsdb role,Installer_TC_113,"Update ansible variables as in Installer_TC_01 and,
+enable_orchestration: true","Same as, Installer_TC_101, tags=osdsdb",Database should be installed
+,Uninstall osdsdb role,Installer_TC_114,"Same as, Installer_TC_111","Same as, Installer_TC_02",Database should be uninstalled
+osdsdock role,Install osdsdock role,Installer_TC_115,"Update ansible variables as in Installer_TC_01 and,
+enable_orchestration: true","Same as, Installer_TC_101, tags=osdsdock",Dock should be installed
+,Uninstall osdsdock role,Installer_TC_116,"Same as, Installer_TC_111","Same as, Installer_TC_02",Docks should be uninstalled
+sushi installer role,Install sushi role,Installer_TC_117,"Update ansible variables as in Installer_TC_01 and,
+enable_orchestration: true","Same as, Installer_TC_101, tags=sushi",Sushi should be installed
+,Uninstall sushi role,Installer_TC_118,"Same as, Installer_TC_111","Same as, Installer_TC_02",Sushi should be uninstalled
+telemetry installer role,Install telemetry role,Installer_TC_119,"Update ansible variables as in Installer_TC_01 and,
+enable_orchestration: true","Same as, Installer_TC_101, tags=telemetry",Telemetry should be installed
+telemetry uninstaller role,Uninstall telemetry role,Installer_TC_120,"Same as, Installer_TC_111","Same as, Installer_TC_02",Telemetry should be uninstalled
+cleaner role,UnInstall using cleaner role,Installer_TC_121,Update ansible variables as in Installer_TC_01,"Same as, Installer_TC_101, sudo -E ansible-playbook clean.yml -i local.hosts",All modules and docker instances should be clean
+,Install with source_purge false,Installer_TC_122,"Same as, Installer_TC_121, 
+source_purge = false","Same as, Installer_TC_121",Source should be available for reinstallation without download
+,Install with database_purge false,Installer_TC_123,"Same as, Installer_TC_121, 
+database_purge = false","Same as, Installer_TC_121",Database should be available for reinstallation
+,Install with both source_purge & database_purge false,Installer_TC_124,"Same as, Installer_TC_121, 
+source_purge = false
+database_purge = false","Same as, Installer_TC_121",Both Sources and Databases should be available on reinstall
+Local Cluster Install default config,Install OpenSDS Components,Installer_TC_200,"Runs opensds installer script,
+./install/devsds/install.sh","Runs opensds installer script,
+./install/devsds/install.sh",Opensds should be installed with noauth
+Local Cluster Uninstall default config,Uninstall OpenSDS Components,Installer_TC_201,"Runs opensds installer script,
+./install/devsds/uninstall.sh","Runs opensds installer script,
+./install/devsds/uninstall.sh",OpensdsShould be uninstalled
+Local Cluster Install,"Install OpenSDS Components
+OPENSDS_AUTH_STRATEGY=keystone",Installer_TC_202,"Same as, Installer_TC_200
+OPENSDS_AUTH_STRATEGY=keystone","Runs opensds installer script,
+./install/devsds/install.sh",Opensds should be installed with keystone auth
+Local Cluster Uninstall,Uninstall OpenSDS Components,Installer_TC_203,Same as Installer_TC_201,"Runs opensds installer script,
+./install/devsds/uninstall.sh",Opensds should be uninstalled
