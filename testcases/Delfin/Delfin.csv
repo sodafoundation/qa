@@ -1,0 +1,1410 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+Register Storage,Successfully register a storage device with right credentials,SIM_RM_0001,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Check whether the storage is registered successfully.
+3. Obtain basic device information(GET /v1/storages/<id> and check whether the information is correct.","1. In step 2, the storage device is successfully added with normal state. The status code of return is 200.
+2. In step 3, the basic information about the storage device is obtained successfully and the information is correct."
+Register Storage ,Failed to register a storage device with invalid username or password,SIM_RM_0002,"1. SIM project installed
+2. Storage device Available
+","1. Call POST /v1/storages with invalid credentials body(username or password) to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Check whether the storage is registered successfully.","1. In step 2, the storage device is unsuccessfully added. The status code of return is 400.
+"
+Register Storage ,Failed to register a storage device with invalid vendor or model,SIM_RM_0003,"1. SIM project installed
+2. Storage device Available
+","1. Call POST /v1/storages with invalid credentials body(vendor or model) to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “invalid vendor”,
+""model"": ""invalid model""
+}
+2. Check whether the storage is registered successfully.","1. In step 2, the storage device is unsuccessfully added. The status code of return is 400.
+"
+Register Storage ,Failed to register a storage device with invalid host or port,SIM_RM_0004,"1. SIM project installed
+2. Storage device Available
+","1. Call POST /v1/storages with invalid credentials body(host or port) to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Check whether the storage is registered successfully.","1. In step 2, the storage device is unsuccessfully added. The status code of return is 400.
+"
+Register Storage ,Failed to register a storage device which already exists in the system. ,SIM_RM_0005,"1. SIM project installed
+2. Storage device Available
+","1. Call POST /v1/storages with correct credentials body to register a an existing storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Check whether the storage is registered successfully.","1. In step 2, the storage device is unsuccessfully added. The status code of return is 400.
+"
+Remove Storage,Successfully remove an existing storage ,SIM_RM_0006,"1. SIM project installed
+2. Storage device has been registered
+","1. Call DELETE /v1/storages/<id> to remove storage.
+2. Check whether all storage resources are automatically removed from system, storage resources include: device, storage storage, volume and so forth.","1. The storage device is successfully removed.
+2. The storage resources(storage storage/volume/...) are automatically removed from system."
+Remove Storage,Successfully remove a  storage that is being synchronized,SIM_RM_0007,"1. SIM project installed
+2.  Storage device has been registered
+","1. Call DELETE /v1/storages/<id> to remove storage.
+2. Check whether all storage resources are automatically removed from system, storage resources include: device, storage storage, volume and so forth.","1. The storage device is successfully removed.
+2. The storage resources(storage storage/volume/...) are automatically removed from system."
+Remove Storage,Failed to remove a storage that does not exist,SIM_RM_0008,"1. SIM project installed
+2.  Storage device has been registered(Optional)
+","1. Call DELETE /v1/storages/<id> to remove storage which does not exit.
+2. Check whether storage is removed unsuccessfully.",1. Failed to remove storage device.
+List Storages,Successfully list all storages  registered,SIM_RM_0009,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/storages
+2. Verify the result from storage for following fields
+-vendor
+-model
+-firmware-version
+-status
+-capacity values
+-serial number","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List Storages,Succesfully list all storages by applying filter,SIM_RM_0010,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/storages ?<query_params>
+try allowed query options and different combination of query params
+2. Verify the result from storage following fields
+-vendor
+-model
+-firmware-version
+-status
+-capacity values
+-serial number","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List Storages,Get empty List of  storages with wrong filter,SIM_RM_0011,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/storages ?<query_params>
+try wrong query options and different combination of query params
+2. Verify the result","1.In step2,  the code returned is 200 OK
+2.empty list is returned"
+List Storages,Get empty List of storages,SIM_RM_0012,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd[optional]","1. Call GET /v1/storages when No storage is registered
+2.Repeat 1 when All storages are deleted
+3. Verify the result","1.In step3,  the code returned is 200 OK
+2.empty list is returned"
+List pools,Successfully list all pools discovered,SIM_RM_0013,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/storage-pools
+2. Verify the  result and validate below parameters
+-status
+- original pool id 
+-capacity values","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List pools,"Succesfully list all pools by applying filter
+",SIM_RM_0014,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/storage-pools ?<query_params>
+try allowed query options and different combination of query params] 
+2. Verify the result and validate below parameters
+-status
+- original pool id 
+-capacity values","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List pools,Empty List of  storages with wrong filter,SIM_RM_0015,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/pools ?<query_params>
+try wrong query options and different combination of query params] 
+2. Verify the result","1.In step2,  the code returned is 200 OK
+empty list is returned"
+List pools,Empty List of pools ,SIM_RM_0016,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd[optional]","1. Call GET /v1/pools when No storage is registered
+2.repeate step 1 when all l storages are deleted
+3. Verify the result
+","1.In step3,  the code returned is 200 OK
+empty list is returned"
+List volumes,Successfully list all volumes discovered,SIM_RM_0017,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/volumes
+2. Verify the result and validate following fields from storage
+-status
+- original volume id 
+- original storage id
+-capacity values
+","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List volumes,Succesfully list all volumes  by applying filter,SIM_RM_0018,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/volumes ?<query_params>
+try allowed query options and different combination of query params
+2. Verify the result and  validate following fields from storage
+-status
+- original volume id 
+- original storage id
+-capacity values","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List volumes,Empty List of  volumes with wrong filter,SIM_RM_0019,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/volumes ?<query_params>
+try wrong query options and different combination of query params
+2. Verify the result","1.In step2,  the code returned is 200 OK
+empty list is returned"
+List volumes,Empty List of volumes ,SIM_RM_0020,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd[optional]","1. Call GET /v1/volumes when No storage is registered
+2.Repeate step 1 when All storages are deleted
+3. Verify the result
+","1.In step3,  the code returned is 200 OK
+empty list is returned"
+List controllers,Successfully list all controllers discovered,SIM_RM_0021,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/controllers
+2. Verify the result and validate following fields from storage
+-status
+- original controllers id 
+- original storage id
+","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List controllers,Succesfully list all controllers  by applying filter,SIM_RM_0022,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/volumes ?<query_params>
+try allowed query options and different combination of query params
+2. Verify the result and  validate following fields from storage
+-status
+- original volume id 
+- original storage id
+-capacity values","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List controllers,Empty List of  controllers with wrong filter,SIM_RM_0023,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/controllers ?<query_params>
+try wrong query options and different combination of query params
+2. Verify the result","1.In step2,  the code returned is 200 OK
+empty list is returned"
+List controllers,Empty List of controllers ,SIM_RM_0024,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd[optional]","1. Call GET /v1/controllers when No storage is registered
+2.Repeate step 1 when All storages are deleted
+3. Verify the result
+","1.In step3,  the code returned is 200 OK
+empty list is returned"
+List ports,Successfully list all ports discovered,SIM_RM_0025,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/ports
+2. Verify the result and validate following fields from storage
+-status
+- original ports id 
+- original storage id
+-capacity values
+","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List ports,Succesfully list all ports  by applying filter,SIM_RM_0026,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/ports ?<query_params>
+try allowed query options and different combination of query params
+2. Verify the result and  validate following fields from storage
+-status
+- original ports id 
+- original storage id
+","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List ports,Empty List of  ports with wrong filter,SIM_RM_0027,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/ports ?<query_params>
+try wrong query options and different combination of query params
+2. Verify the result","1.In step2,  the code returned is 200 OK
+empty list is returned"
+List ports,Empty List of ports ,SIM_RM_0028,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd[optional]","1. Call GET /v1/ports when No storage is registered
+2.Repeate step 1 when All storages are deleted
+3. Verify the result
+","1.In step3,  the code returned is 200 OK
+empty list is returned"
+List disks,Successfully list all disks discovered,SIM_RM_0029,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/disks
+2. Verify the result and validate following fields from storage
+-status
+- original disks id 
+- original storage id
+
+","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List disks,Succesfully list all disks  by applying filter,SIM_RM_0030,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/disks ?<query_params>
+try allowed query options and different combination of query params
+2. Verify the result and  validate following fields from storage
+-status
+- original volume id 
+- original storage id
+","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+List disks,Empty List of  disks with wrong filter,SIM_RM_0031,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET /v1/disks ?<query_params>
+try wrong query options and different combination of query params
+2. Verify the result","1.In step2,  the code returned is 200 OK
+empty list is returned"
+List disks,Empty List of disks ,SIM_RM_0032,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd[optional]","1. Call GET /v1/disks when No storage is registered
+2.Repeate step 1 when All storages are deleted
+3. Verify the result
+","1.In step3,  the code returned is 200 OK
+empty list is returned"
+GET storage ,succefully Get storage with righ ID,SIM_RM_0033,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET v1/storages/<storage_id>
+2. Verify the result and validate following fields from storage
+ validate following fields from storage
+-status
+- original volume id 
+- original storage id
+-capacity values","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+GET storage ,Failure to GET storage ,SIM_RM_0034,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered [optional]","1. Call GET v1/storages/<storage_id> with  Wrong storage_id
+2. Call GET v1/storages/<storage_id> with  a deleted storage storage_id
+
+3. Verify the result","1. in setp3, received 404 Not found"
+GET pool ,Successfully Get pool with righ ID,SIM_RM_0035,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET v1/pools/<pool_id>
+2. Verify the result and validate following fields with storage
+ -status
+- original pool id 
+-capacity values","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+GET pool ,Failure to Get pool ,SIM_RM_0036,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered [optional]","1. Call GET v1/pools/<pool_id> with wrong storage id
+2. Call GET v1/pools/<pool_id> with deleted storage id
+2. Verify the result","1. in setp3, received 404 Not found"
+GET volume ,Successfully Get volume with righ ID,SIM_RM_0037,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET v1/volumes/<volume_id>
+2. Verify the result and validate following fields from storage 
+-status
+- original volume id 
+-capacity values","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+GET volume ,Failure to Get volume ,SIM_RM_0038,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered [optional]","1. Call GET v1/volumes/<volume_id> with 
+Wrong volume_id
+2.  Call GET v1/volumes/<volume_id> with 
+deleted volume_id
+3. Verify the result"," 1. in setp3, received 404 Not found"
+GET controller ,Successfully Get controller with righ ID,SIM_RM_0039,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET v1/controller/<controller_id>
+2. Verify the result and validate following fields from storage 
+-status
+- original controller id ","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+GET controller ,Failure to Get controller ,SIM_RM_0040,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered [optional]","1. Call GET v1/controllers/<controller_id> with 
+Wrong controller_id
+2.  Call GET v1/controllers/<controller_id> with 
+deleted controller_id
+3. Verify the result"," 1. in setp3, received 404 Not found"
+GET port ,Successfully Get port with righ ID,SIM_RM_0041,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET v1/ports/<port_id>
+2. Verify the result and validate following fields from storage 
+-status
+- original port id ","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+GET port ,Failure to Get port ,SIM_RM_0042,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered [optional]","1. Call GET v1/ports/<port_id> with 
+Wrong port_id
+2.  Call GET v1/ports/<port_id> with 
+deleted port_id
+3. Verify the result"," 1. in setp3, received 404 Not found"
+GET disk,Successfully Get disk with righ ID,SIM_RM_0043,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd","1. Call GET v1/disks/<disk_id>
+2. Verify the result and validate following fields from storage 
+-status
+- original disk id 
+","1.in step2,  the code returned is 200 OK
+2.Values are matching with storage"
+GET disk ,Failure to Get disk ,SIM_RM_0044,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered [optional]","1. Call GET v1/disks/<disk_id> with 
+Wrong disk_id
+2.  Call GET v1/volumes/<disk_id> with 
+deleted dosk_id
+3. Verify the result"," 1. in setp3, received 404 Not found"
+Update Access-Info ,"Succesfully Update  right storage access info 
+",SIM_RM_0045,"1. SIM project installed
+2. Device Available
+3.Device is already  registerd","1. Call PUT /v1/storages/<storage_id>/access-info{
+ ""host"": ""10.0.0.1"",
+ ""port"": ""1234"",
+ ""username"": ""admin"",
+ ""password"": ""password"",
+ ""extra_attributes"": {
+ ""array_id"": ""string"",
+ }
+}
+2.Call GET  /v1/storages/<storage_id>/access-info","1.In step1,  the code returned is 200 OK
+2.succesfully retrieved updated access-info"
+Update Access-Info ,Failure to  Update  storage access info ,SIM_RM_0046,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registerd[optional]","1. Call PUT /v1/storages/<storage_id>/access-info{
+ ""host"": ""10.0.0.1"",
+ ""port"": ""1234"",
+ ""username"": ""admin"",
+ ""password"": ""password"",
+ ""extra_attributes"": {
+ ""array_id"": ""string"",
+ }
+} repeate this API with 
+
+-. Wrong credentials
+-. Wrong ip/port
+-. array_id
+-. Device unreachable
+-.Already deleted storage
+2.Call GET  /v1/storages/<storage_id>/access-info
+3. Verify Access-info is not modified","1. in step1,400 BAD request
+2.in step3, confirmed the  Access Information is not  modified"
+GET access-info ,Succesfully Get access-info with righ storage ID,SIM_RM_0047,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered","1. Call GET v1/storages/<storage_id>/access-info
+2. Verify the result","1.In step2,  the code returned is 200 OK
+ one access-info returned in reponse. 
+"
+GET access-info ,Failed to  Get access-info ,SIM_RM_0048,"1. SIM project installed
+2. Device Available[optional]
+3.Device is already  registered [optional]","1. Call GET v1/storages/<storage_id>/access-info
+with  Wrong storage_id
+2. Repeatt step 1 for storage_id of  deleted storage","1. in setp1, received 404 Not found"
+Certification Authentication,Failed to get storages In One-Way SSL authentication,SIM_RM_0049,"1. Self-signed ca.crt, and server.crt signed by ca.crt is created.
+2. SIM project installed  with ssl enabled(dolphin_use_ssl is set to be true in dolphin.conf, with set cert_file, key_file, version configured.)
+3.  Did not import ca.crt in browser.
+","1. Call GET /v1/storages with https.
+2. Check whether get successfully.",1. Failed to get storages.
+Certification Authentication,Successfully get storages In One-Way SSL authentication,SIM_RM_0050,"1. Self-signed ca.crt, and server.crt signed by ca.crt is created.
+2. SIM project installed  with ssl enabled(dolphin_use_ssl is set to be true in dolphin.conf, with set cert_file, key_file, version configured. )
+3.  Import ca.crt in browser.
+","1. Call GET /v1/storages with https.
+2. Check whether get successfully.",1. Get storages successfully.
+Certification Authentication,Failed to get storages In Two-Way SSL authentication,SIM_RM_0051,"1. Self-signed ca.crt, and server.crt/client.pfx signed by ca.crt are created.
+2. SIM project installed  with ssl enabled(dolphin_use_ssl is set to be true in dolphin.conf , with cert_file, key_file version, and ca_file configured.)
+3.  Import ca.crt in browser, but not import client.pfx in browser.
+","1. Call GET /v1/storages with http.
+2. Check whether get successfully.",1. Failed to get storages.
+Certification Authentication,Successfully get storages In Two-Way SSL authentication,SIM_RM_0052,"1. Self-signed ca.crt, and server.crt/client.pfx signed by ca.crt are created.
+2. SIM project installed  with ssl enabled(dolphin_use_ssl is set to be true in dolphin.conf , with cert_file, key_file version, and ca_file )
+3.  Import ca.crt/client.pfx in browser.
+","1. Call GET /v1/storages with https.
+2. Check whether get successfully.",1. Get storages successfully.
+Performance Test,Single device synchronization task can finish in 15 minutes.,SIM_RM_0053,"1. SIM project installed
+2. A storage device with 2000 volumes exist
+","1. Call POST /v1/storages with correct credentials body to register the storage device, example as below:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Check whether the storage is registered successfully.
+3. Wait less than 15 minutes, check wether the synchronization status of the device is fnished.",1. Synchronization status is finished.
+Performance Test,100 synchronization tasks  can finish in 6 hours.,SIM_RM_0054,"1. SIM project installed
+2. 100 storage devices, each with 2000 volumes exist
+","1. For each device, do the follow steps:
+    1). Call POST /v1/storages with correct credentials body to   register the storage device, example as below:
+    { 
+        ""username"":""admin"",
+        ""password"": ""password"",
+        ""port"":1234,
+        ""host"" :10.0.0.1,
+        ""vendor"" : “vendor”,
+        ""model"": ""model""
+    }
+    2). Check whether the storage is registered successfully.
+ 
+2. Wait less than 6 hours, check ",1. Synchronization status of all devices are finished.
+Configure Alert Trap Information,Successful alert source configuration with  snmp v2 version,SIM_AM_001,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with snmp v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+
+3. Check whether the alert source is registered successfully.
+4. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 3, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 4, the basic information about the alert source is obtained successfully and the information is correct. Ensure that host and version and community_string are filled with correct values"
+Configure Alert Trap Information,Failed alert source configuration without host ,SIM_AM_002,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  without host attribute:
+{
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+host' is a required property"
+Configure Alert Trap Information,Failed alert source configuration without version ,SIM_AM_003,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  without version attribute:
+{
+ ""host"":""127.0.0.1"",
+ ""community_string"":""public""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+'version' is a required property"
+Configure Alert Trap Information,Failed alert source configuration with invalid version ,SIM_AM_004,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with invalid version attribute:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv5"",
+ ""community_string"":""public""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input for field/attribute version. Value: snmpv5. 'snmpv5' is not one of ['SNMPv1', 'SNMPv2c', 'SNMPv3', 'snmpv1', 'snmpv2c', 'snmpv3']"
+Configure Alert Trap Information,Failed alert source configuration without engineid,SIM_AM_005,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  without engineid attribute:
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: If snmp version is SNMPv3, then username, security_level and engine_id are required."
+Configure Alert Trap Information,Failed alert source configuration with invalid engineid,SIM_AM_006,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with invalid engineid attribute:
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""0x800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: engine_id is invalid."
+Configure Alert Trap Information,Failed alert source configuration without username,SIM_AM_007,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  without username attribute:
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: If snmp version is SNMPv3, then username, security_level and engine_id are required."
+Configure Alert Trap Information,Failed alert source configuration without security level,SIM_AM_008,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  without security level attribute:
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: If snmp version is SNMPv3, then username, security_level and engine_id are required."
+Configure Alert Trap Information,Successful alert source configuration with security level NoauthNoPriv,SIM_AM_009,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level NoAuthNoPriv and without
+auth_protocol, auth_key,privacy_protocol,privacy_key
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""NoAuthNoPriv"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.
+4. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 3, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 4, the basic information about the alert source is obtained successfully and the information is correct. "
+Configure Alert Trap Information,Successful alert source configuration with security level NoauthNoPriv with extra parameters,SIM_AM_010,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level NoAuthNoPriv and with
+auth_protocol, auth_key,privacy_protocol,privacy_key
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""NoAuthNoPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.
+4. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 3, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 4, the basic information about the alert source is obtained successfully and the information is correct. "
+Configure Alert Trap Information,"Failed alert source configuration with security level authNoPriv 
+without auth protocol",SIM_AM_011,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level AuthNoPriv and without 
+auth_protocol
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthNoPriv"",
+ ""auth_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: If snmp version is SNMPv3 and security_level is AuthPriv or AuthNoPriv, auth_protocol and auth_key are required."
+Configure Alert Trap Information,"Failed alert source configuration with security level authNoPriv 
+without auth key",SIM_AM_012,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level AuthNoPriv and without 
+auth_key
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: If snmp version is SNMPv3 and security_level is AuthPriv or AuthNoPriv, auth_protocol and auth_key are required."
+Configure Alert Trap Information,Successful alert source configuration with security level AuthNoPriv ,SIM_AM_013,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level AuthNoPriv and with
+auth_protocol, auth_key
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthNoPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.
+4. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 3, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 4, the basic information about the alert source is obtained successfully and the information is correct. "
+Configure Alert Trap Information,"Failed alert source configuration with security level authPriv 
+without privacy protocol",SIM_AM_014,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level AuthPriv and without 
+""privacy_protocol"":
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: If snmp version is SNMPv3 and security_level is AuthPriv or AuthNoPriv, auth_protocol and auth_key are required."
+Configure Alert Trap Information,"Failed alert source configuration with security level authPriv 
+without privacy key",SIM_AM_015,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level AuthPriv and without 
+""privacy_key"":
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.","1. In step 3, the alert source addition is failed with  
+Status code : 400 Bad Request
+Invalid input received: If snmp version is SNMPv3 and security_level is AuthPriv or AuthNoPriv, auth_protocol and auth_key are required."
+Configure Alert Trap Information,Successful alert source configuration with security level AuthPriv ,SIM_AM_016,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  security level AuthPriv and with
+auth_protocol, auth_key, privacy_protocol,privacy_key
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+
+3. Check whether the alert source is registered successfully.
+4. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 3, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 4, the basic information about the alert source is obtained successfully and the information is correct. "
+Configure Alert Trap Information,Failed to get alert source when not configured,SIM_AM_017,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) with valid storage id","1. In step 2, the get alert source is failed with
+Status code : 404 Not Found  
+Alert source for storage .. could not be found"
+Delete Trap source,Successfully delete alert source with v2 config,SIM_AM_018,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  v2 version
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+3. Call  DELETE <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to delete newly added alert source 
+4. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) 
+","1. In step 4, confirm alert souirce deletion with the get alert source output
+Status code : 404 Not Found  
+Alert source for storage .. could not be found"
+Delete Trap source,Successfully delete alert source with v3 config,SIM_AM_019,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with  v3 version
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Call  DELETE <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to delete newly added alert source 
+4. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) 
+","1. In step 4, confirm alert souirce deletion with the get alert source output
+Status code : 404 Not Found  
+Alert source for storage .. could not be found"
+Delete Trap source,Delete non existing  alert source,SIM_AM_020,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call  DELETE <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to without creating alert source ","1. In step 2, the delete alert source is failed with
+Status code : 404 Not Found  
+Alert source for storage .. could not be found"
+Update trap source,"Successful update of  v2 alert source config with v3 NoAuthNoPriv 
+Config",SIM_AM_021,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+
+3. Update same alert source with 
+PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to update alert source  with  security level NoAuthNoPriv 
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""NoAuthNoPriv"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+4. Check whether the alert source is updated successfully.
+5. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 4, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 5, alert source  obtained contains updated v3 configurations"
+Update trap source,"Successful update of  v2 alert source config with v3 AuthNoPriv 
+Config",SIM_AM_022,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+3. Update same alert source with 
+PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to update alert source  with  security level AuthNoPriv 
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthNoPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+4. Check whether the alert source is updated successfully.
+5. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 4, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 5, alert source  obtained contains updated v3 configurations"
+Update trap source,"Successful update of  v2 alert source config with v3 AuthPriv 
+Config",SIM_AM_023,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+3. Update same alert source with 
+PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to update alert source  with  security level AuthPriv 
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+4. Check whether the alert source is updated successfully.
+5. Obtain alert source information(GET <ip-addr>:<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.
+","1. In step 4, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 5, alert source  obtained contains updated v3 configurations"
+Update trap source,Successful update of  v3 alert source config with v2 ,SIM_AM_024,"1. SIM project installed
+2. Storage device Available 
+","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add alert source  with  security level AuthPriv 
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Update to v2 config using
+ PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source :
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+4. Check whether the alert source is updated successfully.
+5. Obtain alert source information(GET <ip-addr>:
+<port>/v1/storages/<storage-id>/alert-source) and check whether the information is correct.","1. In step 4, the alert source is successfully added with normal state. The status code of return is 200.
+2. In step 5, alert source  obtained contains updated v2 configurations"
+Get Alert Notification from storage backend,Successful trap receive with valid v2 alert source,SIM_AM_025,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+3. Send v2 test trap with community string ‘public’
+snmptrap -c public -v 2c 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 
+.1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, log shows the trap receival , check the fields of alert model"
+Get Alert Notification from storage backend,Trap drop with mismatching community string in alert source,SIM_AM_026,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+
+3. Send v2 test trap with community string ‘public2’
+snmptrap -c public2 -v 2c 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 
+.1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, verify no trap receive log"
+Get Alert Notification from storage backend,Trap drop when v2 alert source configured and v3 trap received,SIM_AM_027,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+3. Send v3 test trap 
+snmptrap -e 0x800000d30300000e112245 -v 3 -u test1 -a SHA -A abcd123456 -x DES -X abcd123456 -l authPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, verify no trap receive log"
+Get Alert Notification from storage backend,"Trap receive when 
+Multiple alert sources with v2 config",SIM_AM_028,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with v2 version:
+{
+ ""host"":""127.0.0.1"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public""
+}
+3. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add another  alert source  with v2 version:
+{
+ ""host"":""127.0.0.2"",
+ ""version"":""snmpv2c"",
+ ""community_string"":""public2""
+}
+}
+
+4. Send v2 test trap with community string ‘public’ from first alert source
+snmptrap -c public -v 2c 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 
+.1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+5. Check alert manager log message","1. In step 4, log shows the trap receival , check the fields of alert model"
+Get Alert Notification from storage backend,"Trap receive with alert source having  security 
+Level NoauthNoPriv",SIM_AM_029,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with security_level  NoAuthNoPriv
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""NoAuthNoPriv"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Send v3 test trap with security_level  NoAuthNoPriv
+snmptrap -e 0x800000d30300000e112245 -v 3 -u test1  -l noAuthNoPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, log shows the trap receival , check the fields of alert model"
+Get Alert Notification from storage backend,"Trap receive with alert source having  security 
+Level authNoPriv",SIM_AM_030,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with security_level  AuthNoPriv
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+ ""security_level"": ""AuthNoPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Send v3 test trap with security_level  AuthNoPriv
+snmptrap -e 0x800000d30300000e112245 -v 3 -u test1 -a SHA -A abcd123456  -l authNoPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, log shows the trap receival , check the fields of alert model"
+Get Alert Notification from storage backend,"Trap receive with alert source having  security 
+Level authPriv",SIM_AM_031,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with security_level  AuthPriv
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Send v3 test trap with security_level  AuthNoPriv
+snmptrap -e 0x800000d30300000e112245 -v 3 -u test1 -a SHA -A abcd123456 -x DES -X abcd123456 -l authPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, log shows the trap receival , check the fields of alert model"
+Get Alert Notification from storage backend,Failed to receive trap when mismatch engine id in trap message,SIM_AM_032,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with security_level  AuthPriv
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Send v3 test trap with mismatching engine id
+snmptrap -e 0x800000d30300000e112246 -v 3 -u test1 -a SHA -A abcd123456 -x DES -X abcd123456 -l authPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, verify no trap receive log"
+Get Alert Notification from storage backend,Failed to receive trap when mismatch username in trap message,SIM_AM_033,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with security_level  AuthPriv
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Send v3 test trap with mismatching username
+snmptrap -e 0x800000d30300000e112245 -v 3 -u test2 -a SHA -A abcd123456 -x DES -X abcd123456 -l authPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, verify no trap receive log"
+Get Alert Notification from storage backend,Failed to receive trap when mismatch authentication key  in trap message,SIM_AM_034,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with security_level  AuthPriv
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Send v3 test trap with mismatching auth_key
+snmptrap -e 0x800000d30300000e112245 -v 3 -u test1 -a SHA -A abcd1234567 -x DES -X abcd123456 -l authPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, verify no trap receive log"
+Get Alert Notification from storage backend,Failed to receive trap  when mismatch privacy key  in trap message,SIM_AM_035,"1. SIM project installed
+2. Storage device Available 
+3. Netsnmp is installed","1. Call POST /v1/storages with correct credentials body to register a new storage device:
+{ 
+""username"":""admin"",
+""password"": ""password"",
+""port"":1234,
+""host"" :10.0.0.1,
+""vendor"" : “vendor”,
+""model"": ""model""
+}
+2. Call PUT <ip-addr>:<port>/v1/storages/<storage-id>/alert-source to add a new alert source  with security_level  AuthPriv
+{
+ ""host"": ""127.0.0.1"",
+ ""version"": ""snmpv3"",
+ ""username"": ""test1"",
+""security_level"": ""AuthPriv"",
+ ""auth_protocol"": ""sha"",
+ ""auth_key"": ""abcd123456"",
+ ""privacy_protocol"": ""des"",
+ ""privacy_key"": ""abcd123456"",
+ ""engine_id"": ""800000d30300000e112245""
+}
+3. Send v3 test trap with mismatching privacy_key
+snmptrap -e 0x800000d30300000e112245 -v 3 -u test1 -a SHA -A abcd123456 -x DES -X abcd1234567 -l authPriv 127.0.0.1 """" 1.3.6.1.3.94 1.3.6.1.3.94.1.11.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 79 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s 000192601409 .1.3.6.1.3.94.1.11.1.7.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 5 .1.3.6.1.3.94.1.11.1.9.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 s ""Symmetrix 000192601409 FastSRP SRP_1 : Remote (SRDF) diagnostic event trace triggered."" .1.3.6.1.3.94.1.11.1.6.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0.79 i 6 .1.3.6.1.3.94.1.6.1.20.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 s ""000192601409"" .1.3.6.1.3.94.1.6.1.3.80.6.4.130.222.183.80.64.0.0.0.0.0.0.0.0 i 11 .1.3.6.1.4.1.1139.3.8888.1.0 i 2 .1.3.6.1.4.1.1139.3.8888.2.0 i 1051 .1.3.6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""6.1.4.1.1139.3.8888.3.0 i 1051 .1.3.6.1.4.1.1139.3.8888.4.0 s ""SRP_1""
+4. Check alert manager log message","1. In step 4, verify no trap receive log"
+Sync a single storage,"Successful sync a single storage, with valid storage id",SIM_SYNC_001,"1.SIM project is installed
+2.Atleast One device is registered","1. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id","1. API call Should return 202 on success.
+2. Exceute /v1/volumes to check volumes are updated
+3. Exceute /v1/pools to check pools are updated
+4. Exceute /v1/storages to check storages are updated"
+Sync a single storage,"Fail to sync a single storage, with Invalid storage id",SIM_SYNC_002,"1.SIM project is installed
+2.Atleast One device is registered","1. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the Invalid storage_id","1. API call Should return 404 .
+2. It should return the response message like:
+""Storage {storage_id} could not be found.""   "
+Sync a single storage,"Successful sync, new volume(s) is/are added to DB",SIM_SYNC_003,"1.SIM project is installed
+2.Atleast One device is registered","1. Add new single/multiple volumes in the storage
+2. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id
+","1. API call Should return 202 on success.
+2. Check new volume(s) is/are added in DB. by excuting GET volumes call   "
+Sync a single storage,"Successful sync, single/multiple volume(s) is/are deleted from DB",SIM_SYNC_004,"1.SIM project is installed
+2.Atleast One device is registered","1.delete single/multiple volumes from the storage
+2. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id
+","1. API call Should return 202 on success.
+2. Check volumes are deleted from DB. by excuting GET volumes call   "
+Sync a single storage,"Successful sync, volume parameters are updated in DB",SIM_SYNC_005,"1.SIM project is installed
+2.Atleast One device is registered","1. Let's update size of a volume. You may try updating some other parameteres also.
+2. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id
+","1. API call Should return 202 on success.
+2. Check volume size is updated in DB. by excuting GET volumes call   "
+Sync a single storage,"Successful sync, new pool(s) is/are added to DB",SIM_SYNC_006,"1.SIM project is installed
+2.Atleast One device is registered","1.1. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id
+2. delete single/multiple pool(s) from the storage. ","1. API call Should return 202 on success.
+2. Check new pool(s) is/are added in DB. by excuting GET pools call   "
+Sync a single storage,"Successful sync, pool(s) is/are deleted from DB",SIM_SYNC_007,"1.SIM project is installed
+2.Atleast One device is registered","1. Add new single/multiple pool(s) in the storage
+2. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id
+ ","1. API call Should return 202 on success.
+2. Check pool(s) is/are deleted from DB. by excuting GET pools call   "
+Sync a single storage,"Successful sync, pool(s) parameters are updated in DB",SIM_SYNC_008,"1.SIM project is installed
+2.Atleast One device is registered","1. Let's update the size of a pool. You may try updating some other parameteres also
+2. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id
+","1. API call Should return 202 on success.
+2. Check pool(s) size is updated in DB. by excuting GET pools call   "
+Sync-all the storages,Successful sync all the storages,SIM_SYNC_009,"1.SIM project is installed
+2.Atleast One device is registered","1. Exceute the POST api call , /v1/storages/sync","1. API call Should return 202 on success.
+2. Exceute /v1/volumes to check volumes are updated
+3. Exceute /v1/pools to check pools are updated
+4. Exceute /v1/storages to check storages are updated"
+Sync-all the storages,"Successful sync all the storages, new volume(s) is/are added to DB",SIM_SYNC_010,"1.SIM project is installed
+2.Atleast One device is registered","1. Add new single/multiple volumes in the storage
+2. Exceute the POST api call , /v1/storages/sync","1. API call Should return 202 on success.
+2. Check new volume(s) is/are added to DB. by excuting GET volumes call   "
+Sync-all the storages,"Successful sync all the storages, single/multiple volume(s) is/are deleted from DB",SIM_SYNC_011,,"1. delete single/multiple volumes from the storage
+2. Exceute the POST api call , /v1/storages/sync","1. API call Should return 202 on success.
+2. Check volumes are deleted from DB. by excuting GET volumes call   "
+Sync-all the storages,"Successful sync all the storages, volume(s) parameters is/are updated in DB",SIM_SYNC_012,,"1. Let's update size of a volume. You may try updating some other parameteres also.
+2. Exceute the POST api call , /v1/storages/sync
+ ","1. API call Should return 202 on success.
+2. Check volume size is updated in DB. by excuting GET volumes call   "
+Sync-all the storages,"Successful sync all the storages, new pool(s) is/are added to DB",SIM_SYNC_013,,"1. Add new single/multiple pool(s) in the storage
+2. Exceute the POST api call , /v1/storages/<storage_id>/sync, with the valid storage_id
+","1. API call Should return 202 on success.
+2. Check new pool(s) is/are added in DB. by excuting GET pools call   "
+Sync-all the storages,"Successful sync all the storages, pool(s) is/are deleted from DB",SIM_SYNC_014,,"1. delete single/multiple pool(s) from the storage.
+2. Exceute the POST api call , /v1/storages/sync","1. API call Should return 202 on success.
+2. Check pool(s) is/are deleted from DB. by excuting GET pools call   "
+Sync-all the storages,"Successful sync all the storages, pool(s) parameters are updated in DB",SIM_SYNC_015,,"1. Let's update the size of a pool. You may try updating some other parameteres also
+2. Exceute the POST api call , /v1/storages/sync","1. API call Should return 202 on success.
+2. Check pool(s) size is updated in DB. by excuting GET pools call   "
