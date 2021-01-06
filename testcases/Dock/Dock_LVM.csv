@@ -1,96 +1,81 @@
-Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result,Expected Results
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Results
 List pool when backend is available/reachable,List pool ,DOCK_LVM_01,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",osdsctl pool list,,opensds-volumes should should be available
+2. Block Profile must be created",osdsctl pool list,opensds-volumes should should be available
 Create a volume when backend is available/reachable,Create a volume ,DOCK_LVM_02,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",osdsctl volume create 1 --name=test-001,,"volume should be created in the backend.
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,"volume should be created in the backend.
 Check the backend using: lvs"
 Create a volume when backend is not available/unreachable,Create a volume when backend is not available,DOCK_LVM_03,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created
 Create a volume when backend is available but corrupted,Create a volume when backend is corrupted,DOCK_LVM_04,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created
 create a thick volume when volsize <= free poolsize,create a thick volume when volsize <= free poolsize,DOCK_LVM_05,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",osdsctl volume create 10 --name=test-001,,volume should be created
+2. Block Profile must be created",osdsctl volume create 10 --name=test-001,volume should be created
 create a thick volume when volsize > free poolsize,create a thick volume when volsize > free poolsize,DOCK_LVM_06,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",osdsctl volume create 11 --name=test-001,,volume should not be created
+2. Block Profile must be created",osdsctl volume create 11 --name=test-001,volume should not be created
 create a thick volume when volsize >= free poolsize <= max poolsize,create a thick volume when volsize >= free poolsize <= max poolsize,DOCK_LVM_07,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 11 --name=test-001,volume should not be created
 create a thin volume when volsize <= free poolsize,create a thin volume when volsize <= free poolsize,DOCK_LVM_08,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 11 --name=test-001,volume should be created
 create a thin volume when volsize > free poolsize,create a thin volume when volsize > free poolsize,DOCK_LVM_09,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 11 --name=test-001,volume should not be created
 create a thin volume when volsize >= free poolsize <= max poolsize,create a thin volume when volsize >= free poolsize <= max poolsize,DOCK_LVM_10,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 11 --name=test-001,volume should not be created
 "create a volume of size X Gb, write data on voume of size <= X Gb","create a volume of size X Gb, write data on voume of size <= X Gb",DOCK_LVM_11,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create X --name=test-001,volume should be created and write should happen
 "create a volume of size X Gb, write data on voume of size >= X Gb(low)","create a volume of size X Gb, write data on voume of size >= X Gb(low)",DOCK_LVM_12,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",,write should fail
 create a volume when poolId is given,create a volume when poolId is given,DOCK_LVM_13,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",Use POSTMAN,,Volume should be created
+2. Block Profile must be created",Use POSTMAN,Volume should be created
 create a volume when poolId is not given,create a volume when poolId is not given,DOCK_LVM_14,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",Use POSTMAN,,volume should be created with default profile
+2. Block Profile must be created",Use POSTMAN,volume should be created with default profile
 create a volume when given poolId is from different storageType,create a volume when given poolId is from different storageType,DOCK_LVM_15,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",Use POSTMAN,,volume  creation should fail
-create multiple volumes at a time on same pool [feature not supported],create multiple volumes at a time on same pool,DOCK_LVM_16,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
-create multiple volumes at a time on different pools [feature not supported],create multiple volumes at a time on different pools ,DOCK_LVM_17,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",Use POSTMAN,volume  creation should fail
 Create a volume when it is already there in system with same name,Create a volume when it is already there in system with same name,DOCK_LVM_18,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",osdsctl volume create 1 --name=test-001,,volume should not be created with same name
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created with same name
 Create a volume when it is already there in system with same id,Create a volume when it is already there in system with same id,DOCK_LVM_19,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",Use POSTMAN,,volume should not be created with same Id
+2. Block Profile must be created",Use POSTMAN,volume should not be created with same Id
 Create a volume when it is already there in system with same name and Id,Create a volume when it is already there in system with same name and Id,DOCK_LVM_20,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should be created
 Create a volume when pool is available in OpenSDS but deleted from system[In between the pool discovery time],Create a volume when pool is available in OpenSDS but deleted from system,DOCK_LVM_21,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created
 Create a volume when volsize < poolsize in OpenSDS but in system poolsize < volsize [In between the pool discovery time],Create a volume when volsize < poolsize in OpenSDS but in system poolsize < volsize,DOCK_LVM_22,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
-what happen to available volume if az is deleted/changed,what happen to available volume if az is deleted/changed,DOCK_LVM_23,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
-profile is deleted,profile is deleted,DOCK_LVM_24,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
-pool is deleted,pool is deleted,DOCK_LVM_25,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
-volume group is deleted,volume group is deleted,DOCK_LVM_26,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Block Profile must be created",,,
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created
+Create a volume when profile is deleted,profile is deleted,DOCK_LVM_24,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created
+Create a volume when pool is deleted,pool is deleted,DOCK_LVM_25,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created
+Create a volume when storagegroup is deleted,volume group is deleted,DOCK_LVM_26,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",osdsctl volume create 1 --name=test-001,volume should not be created
 writing file to volume and pool is deleted in between,writing file to volume and pool is deleted in between,DOCK_LVM_27,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created",,,
+2. Pools for the backend must be created",,write operation should fail
 Create a volume from snapshot,Create a volume from snapshot,DOCK_LVM_28,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume snapshot create -n snap1 <snapshot-id>,volume should be created
 Create a volume from corrupted snapshot,Create a volume from corrupted snapshot,DOCK_LVM_29,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume snapshot create -n snap1 <snapshot-id>,volume should not be created
 create a voulme from wrong snapshot(may be storage Type different etc.),create a voulme from wrong snapshot,DOCK_LVM_30,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume snapshot create -n snap1 <snapshot-id>,volume should not be created
 create a volume from compressed volume snapshot (cross check the diff),create a volume from compressed volume snapshot (cross check the diff),DOCK_LVM_31,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",,
 create a volume from deduplicated volume snapshot (cross check the diff),create a volume from deduplicated volume snapshot,DOCK_LVM_32,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",,
 Delete the volume when backend is available/reachable,Delete the volume when backend is available/reachable,DOCK_LVM_33,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume delete <vol-id>,volume should be deleted
 Delete the volume when backend is not available/unreachable,Delete the volume when backend is not available/unreachable,DOCK_LVM_34,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume delete <vol-id>,volume should not be deleted
 "Delete the volume when backend is available but corrupted
 ","Delete the volume with corrupted backend
 ",DOCK_LVM_35,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume delete <vol-id>,volume should not be deleted
 "Delete the volume when it is already deleted in system(may be deleted
         manually)
 ","Delete a deleted volume
 ",DOCK_LVM_36,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume delete <vol-id>,volume should not be deleted
 " Delete the volume when it is busy (may be it has some file)
 "," Delete a busy volume 
 ",DOCK_LVM_37,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume delete <vol-id>,volume should not be deleted
 Delete the volume when it is mounted to some directory,Delete the mounted volume ,DOCK_LVM_38,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume delete <vol-id>,volume should not be deleted
 Delete the volume when it is attached to other host,Delete the attached volume ,DOCK_LVM_39,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created as per constraint",,,
-"Extend a thick volume with size < free pool size
-",Extend a thick volume ,DOCK_LVM_40,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. NO Pools for the backend must be created",,,
-"Extend a thick volume with size > free pool size
-",Extend a thick volume ,DOCK_LVM_41,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created",,,
-" Extend a thick volume with size > free pool size < max pool size
-", Extend a thick volume,DOCK_LVM_42,"1. Opensds (Hotpot) must be Installed and all processes should be running 
-2. Pools for the backend must be created",,,
+2. Pools for the backend must be created as per constraint",osdsctl volume delete <vol-id>,volume should not be deleted
