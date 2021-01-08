@@ -1,0 +1,320 @@
+Feature,Title,Description,TestcaseId,Steps,Expected
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_AWS,OSDS build is installed,DLM_TC_01,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+"
+SSE-CREATE BUCKET_DASHBOARD,SSE_CreateEncryptedBucket_AWS,OSDS build is installed,DLM_TC_02,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+"
+SSE-LIST BUCKET,SSE_ListBucket_AWS,OSDS build is installed,DLM_TC_03,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false"
+SSE-PUT OBJECT,SSE_PutObject_AWS,OSDS build is installed,DLM_TC_04,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_AWS,OSDS build is installed,DLM_TC_05,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-PUT OBJECT,SSE_PutObject_Image_AWS,OSDS build is installed,DLM_TC_06,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console"
+SSE-GET OBJECT,SSE_GetObject_ascii_AWS,OSDS build is installed,DLM_TC_07,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-MULTIPART GET,SSE_GetObject_Large_AWS,OSDS build is installed,DLM_TC_08,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-GET OBJECT,SSE_GetObject_Image_AWS,OSDS build is installed,DLM_TC_09,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted"
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_HOBS,OSDS build is installed,DLM_TC_10,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+"
+SSE-LIST BUCKET,SSE_ListBucket_HOBS,OSDS build is installed,DLM_TC_11,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false"
+SSE-PUT OBJECT,SSE_PutObject_HOBS,OSDS build is installed,DLM_TC_12,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_HOBS,OSDS build is installed,DLM_TC_13,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-PUT OBJECT,SSE_PutObject_Image_HOBS,OSDS build is installed,DLM_TC_14,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console"
+SSE-GET OBJECT,SSE_GetObject_ascii_HOBS,OSDS build is installed,DLM_TC_15,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-MULTIPART GET,SSE_GetObject_Large_HOBS,OSDS build is installed,DLM_TC_16,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-GET OBJECT,SSE_GetObject_Image_HOBS,OSDS build is installed,DLM_TC_17,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted"
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_GCP,OSDS build is installed,DLM_TC_18,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+"
+SSE-LIST BUCKET,SSE_ListBucket_GCP,OSDS build is installed,DLM_TC_19,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false"
+SSE-PUT OBJECT,SSE_PutObject_GCP,OSDS build is installed,DLM_TC_20,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_GCP,OSDS build is installed,DLM_TC_21,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-PUT OBJECT,SSE_PutObject_Image_GCP,OSDS build is installed,DLM_TC_22,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console"
+SSE-GET OBJECT,SSE_GetObject_ascii_GCP,OSDS build is installed,DLM_TC_23,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-MULTIPART GET,SSE_GetObject_Large_GCP,OSDS build is installed,DLM_TC_24,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-GET OBJECT,SSE_GetObject_Image_GCP,OSDS build is installed,DLM_TC_25,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted"
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_Azure,OSDS build is installed,DLM_TC_26,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+"
+SSE-LIST BUCKET,SSE_ListBucket_Azure,OSDS build is installed,DLM_TC_27,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false"
+SSE-PUT OBJECT,SSE_PutObject_Azure,OSDS build is installed,DLM_TC_28,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_Azure,OSDS build is installed,DLM_TC_29,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-PUT OBJECT,SSE_PutObject_Image_Azure,OSDS build is installed,DLM_TC_30,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console"
+SSE-GET OBJECT,SSE_GetObject_ascii_Azure,OSDS build is installed,DLM_TC_31,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-MULTIPART GET,SSE_GetObject_Large_Azure,OSDS build is installed,DLM_TC_32,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-GET OBJECT,SSE_GetObject_Image_Azure,OSDS build is installed,DLM_TC_33,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted"
+SSE-CREATE BUCKET,SSE_CreateEncryptedBucket_YIG-CEPH,OSDS build is installed,DLM_TC_34,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Call list buckets
+","In the response of list buckets, for 'encb', the SSE option is enabled
+"
+SSE-LIST BUCKET,SSE_ListBucket_YIG-CEPH,OSDS build is installed,DLM_TC_35,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Create a bucket 'nonenc' in the backend, with SSE disabled
+4. Call list buckets","1. In the response of list buckets, for 'encb', the SSE option is enabled
+2. For 'nonenc', the SSE option is false"
+SSE-PUT OBJECT,SSE_PutObject_YIG-CEPH,OSDS build is installed,DLM_TC_36,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-MULTIPART PUT,SSE_PutObject_Multipart_YIG-CEPH,OSDS build is installed,DLM_TC_37,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable"
+SSE-PUT OBJECT,SSE_PutObject_Image_YIG-CEPH,OSDS build is installed,DLM_TC_38,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console"
+SSE-GET OBJECT,SSE_GetObject_ascii_YIG-CEPH,OSDS build is installed,DLM_TC_39,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file < 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-MULTIPART GET,SSE_GetObject_Large_YIG-CEPH,OSDS build is installed,DLM_TC_40,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload a text file > 5MB to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by multipart upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT an ascii file, it is encrypted, the contents are not ascii readable
+3. after download, the file is readable, since it has been decrypted"
+SSE-GET OBJECT,SSE_GetObject_Image_YIG-CEPH,OSDS build is installed,DLM_TC_41,"1. Add a backend
+2. Create a bucket 'encb' in the backend, with SSE enabled
+3. Upload an image file (binary) to this bucket, example, a.txt
+4. Check the contents of this uploaded file in the cloud backend
+5. Download this object (GET)","1. File is uploaded successfully to the encrypted bucket, by (multipart) upload (this can be checked from the logs)
+2. in the cloud backend, the file is NOT viewable as an image, it is encrypted, the contents are not viewable in an image viewer after downloading from the cloud console
+3. after download, the image file is viewable, since it has been decrypted"
+"ADD BACKEND
+",Register AWS Backend [Valid],OSDS build is installed,OM_TC_1,"1. Add a backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",Register AWS Backend [InValid],OSDS build is installed,OM_TC_2,"1. Add a backend, giving invalid input for region","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register AWS Backend [InValid],OSDS build is installed,OM_TC_3,"1. Add a backend, giving invalid input for endpoint","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register AWS Backend [InValid],OSDS build is installed,OM_TC_4,"1. Add a backend, giving invalid input for bucket","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register AWS Backend [InValid],OSDS build is installed,OM_TC_5,"1. Add a backend, giving invalid input for AK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register AWS Backend [InValid],OSDS build is installed,OM_TC_6,"1. Add a backend, giving invalid input for SK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register AWS Backend [InValid],OSDS build is installed,OM_TC_7,"1. Add a backend, giving invalid input for Storage Type","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Azure Backend [Valid],OSDS build is installed,OM_TC_8,"1. Add a backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",Register Azure Backend [InValid],OSDS build is installed,OM_TC_9,"1. Add a backend, giving invalid input for region","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Azure Backend [InValid],OSDS build is installed,OM_TC_10,"1. Add a backend, giving invalid input for endpoint","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Azure Backend [InValid],OSDS build is installed,OM_TC_11,"1. Add a backend, giving invalid input for bucket","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Azure Backend [InValid],OSDS build is installed,OM_TC_12,"1. Add a backend, giving invalid input for AK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Azure Backend [InValid],OSDS build is installed,OM_TC_13,"1. Add a backend, giving invalid input for SK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Azure Backend [InValid],OSDS build is installed,OM_TC_14,"1. Add a backend, giving invalid input for Storage Type","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register GCP Backend [Valid],OSDS build is installed,OM_TC_15,"1. Add a backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",Register GCP Backend [InValid],OSDS build is installed,OM_TC_16,"1. Add a backend, giving invalid input for region","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register GCP Backend [InValid],OSDS build is installed,OM_TC_17,"1. Add a backend, giving invalid input for endpoint","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register GCP Backend [InValid],OSDS build is installed,OM_TC_18,"1. Add a backend, giving invalid input for bucket","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register GCP Backend [InValid],OSDS build is installed,OM_TC_19,"1. Add a backend, giving invalid input for AK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register GCP Backend [InValid],OSDS build is installed,OM_TC_20,"1. Add a backend, giving invalid input for SK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register GCP Backend [InValid],OSDS build is installed,OM_TC_21,"1. Add a backend, giving invalid input for Storage Type","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Huawei Backend [Valid],OSDS build is installed,OM_TC_22,"1. Add a backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",Register Huawei Backend [InValid],OSDS build is installed,OM_TC_23,"1. Add a backend, giving invalid input for region","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Huawei Backend [InValid],OSDS build is installed,OM_TC_24,"1. Add a backend, giving invalid input for endpoint","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Huawei Backend [InValid],OSDS build is installed,OM_TC_25,"1. Add a backend, giving invalid input for bucket","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Huawei Backend [InValid],OSDS build is installed,OM_TC_26,"1. Add a backend, giving invalid input for AK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Huawei Backend [InValid],OSDS build is installed,OM_TC_27,"1. Add a backend, giving invalid input for SK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Huawei Backend [InValid],OSDS build is installed,OM_TC_28,"1. Add a backend, giving invalid input for Storage Type","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Alibaba Backend [Valid],OSDS build is installed,OM_TC_29,"1. Add a backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",Register Alibaba Backend [InValid],OSDS build is installed,OM_TC_30,"1. Add a backend, giving invalid input for region","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Alibaba Backend [InValid],OSDS build is installed,OM_TC_31,"1. Add a backend, giving invalid input for endpoint","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Alibaba Backend [InValid],OSDS build is installed,OM_TC_32,"1. Add a backend, giving invalid input for bucket","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Alibaba Backend [InValid],OSDS build is installed,OM_TC_33,"1. Add a backend, giving invalid input for AK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Alibaba Backend [InValid],OSDS build is installed,OM_TC_34,"1. Add a backend, giving invalid input for SK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Alibaba Backend [InValid],OSDS build is installed,OM_TC_35,"1. Add a backend, giving invalid input for Storage Type","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Ceph Backend [Valid],OSDS build is installed,OM_TC_36,"1. Add a backend, giving valid inputs for region, endpoint, bucket, AK-SK","1. Backend is added in OpenSDS, is returned in the call to list backends"
+"ADD BACKEND
+",Register Ceph Backend [InValid],OSDS build is installed,OM_TC_37,"1. Add a backend, giving invalid input for region","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Ceph Backend [InValid],OSDS build is installed,OM_TC_38,"1. Add a  backend, giving invalid input for endpoint","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Ceph Backend [InValid],OSDS build is installed,OM_TC_39,"1. Add a backend, giving invalid input for bucket","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Ceph Backend [InValid],OSDS build is installed,OM_TC_40,"1. Add a backend, giving invalid input for AK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Ceph Backend [InValid],OSDS build is installed,OM_TC_41,"1. Add a backend, giving invalid input for SK","1. backend is not added in OSDS, error message is returned"
+"ADD BACKEND
+",Register Ceph Backend [InValid],OSDS build is installed,OM_TC_42,"1. Add a backend, giving invalid input for Storage Type","1. backend is not added in OSDS, error message is returned"

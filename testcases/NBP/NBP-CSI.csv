@@ -1,0 +1,1618 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+K8S CSI block plugin installation,CSI-BLOCK-PLUGIN-INSTALL,NBP_CSI_BLOCK_001,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Verify that CSI block plugin is installed and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin uninstallation,CSI-BLOCK-PLUGIN-UNINSTALL,NBP_CSI_BLOCK_002,1. lvm and nfs are  used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3.Uninstall csi block plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)","1. Verify that CSI block plugin uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin installation when host does not exist,CSI-BLOCK-PLUGIN-INSTALL-HOST-NOT-FOUND,NBP_CSI_BLOCK_003,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi block plugin and host will be added if not found. Bring down csi plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)
+4. Through dashboard, Delete a host with hostname of current node
+5. Bring up csi block plugin again","1. Verify that CSI block plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin installation when host already exist,CSI-BLOCK-PLUGIN-INSTALL-HOST-ALREADY-EXISTS,NBP_CSI_BLOCK_004,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi block plugin and host will be added if not found. Bring down csi plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)
+4. Bring up csi block plugin again","1. Verify that CSI block plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin installation through helm chart,CSI-BLOCK-PLUGIN-INSTALL-HELM-CHARTS,NBP_CSI_BLOCK_005,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with K8S through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md","1. Verify that CSI block plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin uninstallation through helm chart,CSI-BLOCK-PLUGIN-UNINSTALL-HELM-CHARTS,NBP_CSI_BLOCK_006,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with K8S through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md
+
+3. Uninstall csi block plugin through charts","1. Verify that CSI block plugin is uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+K8S CSI block plugin reinstallation,CSI-BLOCK-PLUGIN-REINSTALL,NBP_CSI_BLOCK_007,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1) Uninstall csi block plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)
+2) Reinstall csi block plugin
+ (kubectl create -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/block)","1. Verify that CSI block plugin uninstalled and below pods are terminated after step 1
+21. Verify that CSI block plugin is re-installed and below pods are up and running
+> csi-attacher-opensdsplugin-block-0
+> csi-nodeplugin-opensdsplugin-block-xxxxxxxx
+> csi-provisioner-opensdsplugin-block-0
+> csi-snapshotter-opensdsplugin-block-0
+
+(kubectl get pods)"
+"K8S workload creation with CSI 
+Block plugin",POD-CREATION-BLOCK-VOLUME,NBP_CSI_BLOCK_008,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload deletion with CSI 
+Block plugin",POD-DELETION-BLOCK-VOLUME,NBP_CSI_BLOCK_009,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that volume is deleted at opensds side (osdsctl volume list)"
+"K8S workload restart with CSI 
+Block plugin",POD-RESTART-BLOCK-VOLUME,NBP_CSI_BLOCK_010,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-block)
+5. Create the pod again
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated after step 4
+2. Verify that volume is still present at opensds side after step 4
+(osdsctl volume list)
+3. Verify that nginx pod is up and running after step 5
+(Kubectl get pods )
+4. Verify that volume present at opensds side after step 4 is
+ reused after step 5
+(osdsctl volume list)"
+"K8S workload persistency check with CSI 
+Block plugin",POD-PERSISTENCY-BLOCK-VOLUME,NBP_CSI_BLOCK_011,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, Write some data/file to the volume
+5. delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-block)
+6. Create the pod again
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","Verify that data written in step 4 is peristed when the pod is
+ Recreated in step 6"
+"K8S workload creation with CSI 
+Block plugin on 
+different storage backend(Ocean store)",POD-CREATION-BLOCK-VOLUME-OCEAN-STORE,NBP_CSI_BLOCK_012,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. Ocean Store is used as backend (enable in osdsdock.yaml)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload deletion with CSI 
+Block plugin  on different 
+storage backend (Ocean store)",POD-DELETION-BLOCK-VOLUME-OCEAN-STORE,NBP_CSI_BLOCK_013,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. Ocean Store is used as backend (enable in osdsdock.yaml)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that volume is deleted at opensds side (osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin without attach mode",POD-CREATION-BLOCK-DEF-ATTACHMODE,NBP_CSI_BLOCK_014,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Do not mention any attachmode in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)
+4. Verify that volume attachment has attachmode as RW
+(osdsctl volume attachment list)"
+"K8S workload creation with CSI 
+Block plugin with RW attach mode",POD-CREATION-BLOCK-RW-ATTACHMODE,NBP_CSI_BLOCK_015,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Update “attachMode” as RW in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)
+4. Verify that volume attachment has attachmode as RW
+(osdsctl volume attachment list)"
+"K8S workload creation with CSI 
+block plugin on host with FC volume driver",POD-CREATION-BLOCK_FC,NBP_CSI_BLOCK_016,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Host used has FC volume driver support","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload deletionCSI 
+block plugin host with FC volume driver",POD-DELETION-BLOCK_FC,NBP_CSI_BLOCK_017,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Host used has FC volume driver support","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload creation CSI 
+block plugin on host with Iscsi volume driver",POD-CREATION-BLOCK_ISCSI,NBP_CSI_BLOCK_018,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Host used has Iscsi volume driver support","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload deletion CSI 
+block plugin on host with Iscsi volume driver",POD-DELETION-BLOCK_ISCSI,NBP_CSI_BLOCK_019,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Host used has Iscsi volume driver support","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload creation CSI 
+block plugin on host with Nvme volume driver",POD-CREATION-BLOCK_NVME,NBP_CSI_BLOCK_020,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Host used has Nvme volume driver support","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload deletion CSI 
+block plugin on host with Nvme volume driver",POD-DELETION-BLOCK_NVME,NBP_CSI_BLOCK_021,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Host used has Nvme volume driver support","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin with thin volume type",POD-CREATION-BLOCK-THIN,NBP_CSI_BLOCK_022,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Update “diskformat” as thin in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)
+4. Verify the volume type created is thin at backend"
+"K8S workload deletion with CSI 
+Block plugin with thin volume type",POD-DELETION-BLOCK-THIN,NBP_CSI_BLOCK_023,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Update “diskformat” as thin in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+5. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that volume is deleted at opensds side (osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin with thick volume type",POD-CREATION-BLOCK-THICK,NBP_CSI_BLOCK_024,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Update “diskformat” as zeroedthick in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)
+4. Verify the volume type created is thick at backend"
+"K8S workload deletion with CSI 
+Block plugin with thick volume type",POD-DELETION-BLOCK-THICK,NBP_CSI_BLOCK_025,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Update “diskformat” as zeroedthick in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+5. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that volume is deleted at opensds side (osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin without any volume type",POD-CREATION-BLOCK-DEF-THIN,NBP_CSI_BLOCK_026,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Do not mention “diskformat” in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)
+4. Verify the volume type created is thin at backend"
+"K8S workload deletion with CSI 
+Block plugin without any volume type",POD-DELETION-BLOCK-DEF-THIN,NBP_CSI_BLOCK_027,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Do not mention “diskformat” in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+5. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that volume is deleted at opensds side (osdsctl volume list)"
+Node side observation with K8S workload creation with CSI Block plugin,POD-CREATION-BLOCK-FSTAB-CHECK,NBP_CSI_BLOCK_028,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1.Verify the etcfstab entries are not altered
+2. Verify that “df -h”, mount commands shows the mounted volume on node"
+Node side observation with K8S workload deletion with CSI Block plugin,POD-DELETION-BLOCK-FSTAB-CHECK,NBP_CSI_BLOCK_029,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/block/nginx.yaml)","1.Verify the etcfstab entries are not altered
+2. Verify that “df -h”, mount commands shows volume unmount on node"
+Multiple instance creation of same K8S workload creation with CSI Block plugin,MULTIPOD-CREATION-BLOCK,NBP_CSI_BLOCK_030,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create pvc/storageclass
+(Refer – csi/examples/kubernetes/block/nginx.yaml)
+3. Create a deployment with kubernetes pod having 4 replicas","1. Verify that all instances of nginx pod is up and running (Kubectl get pods )
+2. Verify the same volume attached to all instances by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+Multiple instance detach of same K8S workload creation with CSI Block plugin,MULTIPOD-DETACH-BLOCK,NBP_CSI_BLOCK_031,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create pvc/storageclass
+(Refer – csi/examples/kubernetes/block/nginx.yaml)
+4. Create a deployment with kubernetes pod having 4 replicas
+5. Once it is Running, delete the all pods by editing deploymnet with replicas=0
+(kubectl edit deployments -------)","1. Verify that all instances of nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that volume/pv/pvc is still present 
+(osdsctl volume list, kubectl get pv, kubectl get pvc)"
+Multiple instance deletion of same K8S workload creation with CSI Block plugin,MULTIPOD-DELETION-BLOCK,NBP_CSI_BLOCK_032,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create pvc/storageclass
+(Refer – csi/examples/kubernetes/block/nginx.yaml)
+4. Create a deployment with kubernetes pod having 4 replicas
+5. Once it is Running, delete the all pods by editing deploymnet with replicas=0
+(kubectl edit deployments -------)
+6. Delete pvc 
+(kubectl delete pvc ...)","1. Verify that all instances of nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that volume/pv/pvc is are all cleared 
+(osdsctl volume list, kubectl get pv, kubectl get pvc)"
+Multiple volume attach to a K8S workload with CSI Block plugin,POD-CREATION-BLOCK-MULTIPVC,NBP_CSI_BLOCK_033,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create storageclass and 2 pvcs
+(Refer – csi/examples/kubernetes/block/nginx.yaml)
+3. Create a kubernetes pod having 2 pvcs used","1. Verify that nginx pod is up and running with 2 pvcs in use (Kubectl describe pods )
+2. Verify the both volumes are inuse state at opensds side
+(osdsctl volume list)"
+Multiple volume detach to a K8S workload with CSI Block plugin,POD-DETACH-BLOCK-MULTIPVC,NBP_CSI_BLOCK_034,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create storageclass and 2 pvcs
+(Refer – csi/examples/kubernetes/block/nginx.yaml)
+3. Create a kubernetes pod having 2 pvcs used
+5. Once it is Running, delete the pod
+(kubectl delete pod -------)","1. Verify that nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that volume/pv/pvc is still present at opensds side 
+(osdsctl volume list, kubectl get pv, kubectl get pvc)"
+Multiple volume detach to a K8S workload with CSI Block plugin,POD-DELETION-BLOCK-MULTIPVC,NBP_CSI_BLOCK_035,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create storageclass and 2 pvcs
+(Refer – csi/examples/kubernetes/block/nginx.yaml)
+3. Create a kubernetes pod having 2 pvcs used
+5. Once it is Running, delete the pod and both pvcs
+(kubectl delete pod -------
+kubectl delete pvc -------
+)","1. Verify that nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that volume/pv/pvc are all cleared
+(osdsctl volume list, kubectl get pv, kubectl get pvc)"
+"K8S workload creation with CSI 
+Block plugin on different nodes",POD-CREATION-BLOCK-DIFF-NODE,NBP_CSI_BLOCK_036,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Cluster is having atelast 2 nodes","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod in node1
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Just delete the pod
+5. Create a pod again so that it gets scheduled on different node node2(Can use nodeselector in yaml to select node)","1. Verify that nginx pod is up and running in node 1 (Kubectl get pods ) after testcase step3
+2. Verify that nginx pod is up and running in node 2 (Kubectl get pods ) after testcase step5
+3. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+4. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload creation along with pvc with CSI 
+Block plugin on different nodes",POD-CREATION-BLOCK-DIFF-NODE-WITH-PVC,NBP_CSI_BLOCK_037,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Cluster is having atelast 2 nodes","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod in node1
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Delete the pod and pvc
+5. Create a pvc and pod again so that it gets scheduled on different node node2(Can use nodeselector in yaml to select node)","1. Verify that nginx pod is up and running in node 1 (Kubectl get pods ) after testcase step3
+2. Verify that nginx pod is up and running in node 2 (Kubectl get pods ) after testcase step5
+3. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-file /bin/bash and execute “df -h”)
+4. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin and offline volume expansion",POD-BLOCK-OFFLINE-VOL-EXPANSION,NBP_CSI_BLOCK_038,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Cluster is having volume expansion feature enabled
+(feature-gates = ExpandCSIVolumes=true,ExpandInUsePersistentVolumes=true)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Just delete the pod
+5. Edit pvc with size more than initial lize
+6. Recreate the pod","1. Verify that nginx pod is up and running 
+ (Kubectl get pods ) after testcase step6
+2. Veify that pv/pvc sizes are expanded
+(kubectl get pv/pvc)
+3. Verify the volume attached in pod by entering inside container has new size
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+4. Verify the volume is expanded at opensds side
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin and offline volume expansion in different node",POD-BLOCK-OFFLINE-VOL-EXPANSION-DIFF-NODE,NBP_CSI_BLOCK_039,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Cluster is having atelast 2 nodes
+
+5. Cluster is having volume expansion feature enabled
+(feature-gates = ExpandCSIVolumes=true,ExpandInUsePersistentVolumes=true)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod in node 1
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Just delete the pod
+5. Edit pvc with size more than initial lize
+6. Recreate the pod such that it gets scheduled on different node node2 (Can use nodeselector in yaml to select node)","1. Verify that nginx pod is up and running in node2
+ (Kubectl get pods ) after testcase step6
+2. Veify that pv/pvc sizes are expanded
+(kubectl get pv/pvc)
+3. Verify the volume attached in pod by entering inside container has new size
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+4. Verify the volume is expanded at opensds side
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin and inuse pvc deletion",POD-BLOCK-INUSE-PVC-DELETION,NBP_CSI_BLOCK_040,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Just delete the pvc which is in use","1. Verify that nginx pod is still running 
+ (Kubectl get pods ) after testcase step4
+2. Veify that pvc in Terminating state after step 4
+(kubectl get pv/pvc)"
+"K8S workload creation with CSI 
+Block plugin and inuse pvc deletion and pod deletion",POD-BLOCK-INUSE-PVC-POD-DELETION,NBP_CSI_BLOCK_041,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Just delete the pvc which is in use
+5. Then delete the pod as well","1. Verify that nginx pod is still running 
+ (Kubectl get pods ) after testcase step4
+2. Veify that pvc in Terminating state after step 4
+(kubectl get pv/pvc)
+3. Verify that nginx pod is deleted
+ (Kubectl get pods ) after testcase step5
+4. Veify that pvc deleted after step 5
+(kubectl get pv/pvc)"
+"K8S workload creation with CSI 
+Block plugin with default profile name",POD-CREATION-BLOCK-DEF-PROFILENAME,NBP_CSI_BLOCK_042,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Do not provide any profile details in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side and uses default block profile
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin with valid profile name",POD-CREATION-BLOCK-VALID-PROFILENAME,NBP_CSI_BLOCK_043,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. update correct profile name in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side and uses input profile
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin with invalid profile name",POD-CREATION-BLOCK-INVALID-PROFILENAME,NBP_CSI_BLOCK_044,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. update nonexisting profile name in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is in pending (Kubectl get pods )
+2. Verify the volume is not created
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+Block plugin with valid profile id",POD-CREATION-BLOCK-VALID-PROFILEID,NBP_CSI_BLOCK_045,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. update correct profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is in pending (Kubectl get pods )
+2. Verify the volume is not created
+(osdsctl volume list)"
+Simulatneous creation of multiple K8S workload with CSI Block plugin,POD-CREATION-BLOCK-MULTIPODS,NBP_CSI_BLOCK_046,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create multiple instances of pod using deployment (replicas=20)
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that all instances of nginx pod are up and running (Kubectl get pods )
+2. Verify the volume attached to these pods by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume state at opensds side
+(osdsctl volume list)"
+Simulatneous deletion of multiple K8S workload with CSI Block plugin,POD-DELETION-BLOCK-MULTIPODS,NBP_CSI_BLOCK_047,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create multiple instances of pod using deployment (replicas=20)
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)
+4. Edit deployment with replicas =0 to delete all pods","1. Verify that all instances of nginx pod are deleted (Kubectl get pods )
+2. Verify that all volume mounts are down
+(execute “df -h”)
+3. Verify the volume state at opensds side
+(osdsctl volume list)"
+Simulatneous creation of multiple K8S workload and multiple volumes with CSI Block plugin,POD-CREATION-BLOCK-MULTIPODS-MULTIPVC,NBP_CSI_BLOCK_048,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create multiple pvcs (20) and Create multiple pods with diffrent pvc","1. Verify that all instances of nginx pod are up and running (Kubectl get pods )
+2. Verify the different volumes attached to these pods by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the all volume’s state at opensds side
+(osdsctl volume list)"
+Simulatneous deletion of multiple K8S workload and multiple volumes with CSI Block plugin,POD-DELETION-BLOCK-MULTIPODS-MULTIPVC,NBP_CSI_BLOCK_049,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “block”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+3. Create multiple pvcs (20) and Create multiple pods with diffrent pvc
+3. Delete all pods and pvc","1. Verify that all instances of nginx pod are deleted (Kubectl get pods )
+2. Verify that all volume mounts are down
+(execute “df -h”)
+3. Verify the volume state at opensds side
+(osdsctl volume list)"
+K8S CSI file plugin installation,CSI-FILE-PLUGIN-INSTALL,NBP_CSI_FILE_001,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Verify that CSI file plugin is installed and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin uninstallation,CSI-FILE-PLUGIN-UNINSTALL,NBP_CSI_FILE_002,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3.Uninstall csi file plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)","1. Verify that CSI file plugin uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin reinstallation,CSI-FILE-PLUGIN-REINSTALL,NBP_CSI_FILE_003,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1) Uninstall csi file plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)
+2) Reinstall csi file plugin
+ (kubectl create -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)","1. Verify that CSI file plugin uninstalled and below pods are terminated after step 1
+21. Verify that CSI file plugin is re-installed and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+"K8S workload creation with CSI 
+file plugin",POD-CREATION-FILESHARE,NBP_CSI_FILE_004,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-file /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+"K8S workload deletion with CSI 
+file plugin",POD-DELETION-FILESHARE,NBP_CSI_FILE_005,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload restart with CSI 
+file plugin",POD-RESTART-FILESHARE,NBP_CSI_FILE_006,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-file)
+5. Create the pod again
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated after step 4
+2. Verify that fileshare is still present at opensds side after step 4
+(osdsctl fileshare list)
+3. Verify that nginx pod is up and running after step 5
+(Kubectl get pods )
+4. Verify that fileshare present at opensds side after step 4 is
+ Reused after step 5
+(osdsctl fileshare list)"
+"K8S workload persistency check with CSI 
+file plugin",POD-PERSISTENCY-FILESHARE,NBP_CSI_FILE_007,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. lvm and nfs are used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, Write some data/file to the volume
+5. delete the just pod keeping pvc/storageclass
+(kubectl delete pods nginx-file)
+6. Create the pod again
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","Verify that data written in step 4 is peristed when the pod is
+ Recreated in step 6"
+K8S CSI file plugin installation when host does not exist,CSI-FILE-PLUGIN-INSTALL-HOST-NOT-FOUND,NBP_CSI_FILE_008,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi file plugin and host will be added if not found. Bring down csi file plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)
+4. Through dashboard, Delete a host with hostname of current node
+5. Bring up csi file plugin again","1. Verify that CSI file plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin installation when host already exist,CSI-FILE-PLUGIN-INSTALL-HOST-ALREADY-EXISTS,NBP_CSI_FILE_009,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+3. This will bring up csi file plugin and host will be added if not found. Bring down csi file plugin
+ (kubectl delete -f /opt/opensds-sushi-linux-amd64/csi/deploy/kubernetes/file)
+4. Bring up csi file plugin again","1. Verify that CSI file plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin installation through helm chart,CSI-FILE-PLUGIN-INSTALL-HELM-CHARTS,NBP_CSI_FILE_010,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with csi file plugin through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md","1. Verify that CSI file plugin is started again and below pods are up and running
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+K8S CSI file plugin uninstallation through helm chart,CSI-FILE-PLUGIN-UNINSTALL-HELM-CHARTS,NBP_CSI_FILE_011,1. lvm and nfs are used as backend (enabled by default in installer),"1) bringup K8S cluster
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+2. Bring up OpenSDS components with K8S through charts
+https://github.com/opensds/opensds-installer/blob/master/charts/OpenSDS%20Installation%20using%20Helm.md
+
+3. Uninstall csi file plugin through charts","1. Verify that CSI file plugin is uninstalled and below pods are terminated
+> csi-attacher-opensdsplugin-file-0
+> csi-nodeplugin-opensdsplugin-file-xxxxxxxx
+> csi-provisioner-opensdsplugin-file-0
+> csi-snapshotter-opensdsplugin-file-0
+
+(kubectl get pods)"
+"K8S workload creation with CSI 
+file plugin on different 
+storage backend (Ocean store)",POD-CREATION-FILESHAREE-OCEAN-STORE,NBP_CSI_FILE_012,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. Ocean Store is used as backend (enable in osdsdock.yaml)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-file /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+"K8S workload deletion with CSI 
+file plugin on different 
+storage backend (Ocean store)",POD-DELETION-FILESHARE-OCEAN-STORE,NBP_CSI_FILE_013,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. Ocean Store is used as backend (enable in osdsdock.yaml)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload creation with CSI 
+file plugin without attach mode",POD-CREATION-FILESHARE-DEF-ATTACHMODE,NBP_CSI_FILE_014,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Do not mention any attachmode in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)
+4. Verify that volume attachment has attachmode as RW
+(osdsctl volume attachment list)"
+"K8S workload creation with CSI 
+file plugin with RW attach mode",POD-CREATION-FILESHARE-RW-ATTACHMODE,NBP_CSI_FILE_015,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Update “attachMode” as RW in storage class (/opt/opensds-sushi-linux-amd64/ 
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)
+4. Verify that volume attachment has attachmode as RW
+(osdsctl volume attachment list)"
+"K8S workload creation with CSI 
+file plugin on host with FC volume driver",POD-CREATION-FILESHARE-FC,NBP_CSI_FILE_016,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+
+4. Host used has FC volume driver support","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+"K8S workload deletion with CSI 
+file plugin on host with FC volume driver",POD-DELETION-FILESHARE-FC,NBP_CSI_FILE_017,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+
+4. Host used has FC volume driver support","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload creation with CSI 
+file plugin on host with Iscsi volume driver",POD-CREATION-FILESHARE-ISCSI,NBP_CSI_FILE_018,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+
+4. Host used has Iscsi volume driver support","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+"K8S workload deletion with CSI 
+file plugin on host with Iscsi volume driver",POD-DELETION-FILESHARE-ISCSI,NBP_CSI_FILE_019,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+
+4. Host used has Iscsi volume driver support","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload creation with CSI 
+file plugin on host with Nvme volume driver",POD-CREATION-FILESHARE-NVME,NBP_CSI_FILE_020,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+
+4. Host used has Nvme volume driver support","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+"K8S workload deletion with CSI 
+file plugin on host with Nvme volume driver",POD-DELETION-FILESHARE-NVME,NBP_CSI_FILE_021,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+
+4. Host used has Nvme volume driver support","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload creation with CSI 
+file plugin with thin volume type",POD-CREATION-FILESHARE-THIN,NBP_CSI_FILE_022,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Update “diskformat” as thin in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)
+4. Verify the volume type created is thin at backend"
+"K8S workload deletion with CSI 
+File plugin with thin volume type",POD-DELETION-FILESHARE-THIN,NBP_CSI_FILE_023,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Update “diskformat” as thin in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+5. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload creation with CSI 
+File plugin with thick volume type",POD-CREATION-FILESHARE-THICK,NBP_CSI_FILE_024,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Update “diskformat” as zeroedthick in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)
+4. Verify the volume type created is thick at backend"
+"K8S workload deletion with CSI 
+File plugin with thick volume type",POD-DELETION-FILESHARE-THICK,NBP_CSI_FILE_025,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Update “diskformat” as zeroedthick in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+5. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+"K8S workload creation with CSI 
+File plugin without any volume type",POD-CREATION-FILESHARE-DEF-THIN,NBP_CSI_FILE_026,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Do not mention “diskformat” in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)
+4. Verify the volume type created is thin at backend"
+"K8S workload deletion with CSI 
+File plugin without any volume type",POD-DELETION-FILESHARE-DEF-THIN,NBP_CSI_FILE_027,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Do not mention “diskformat” in storage class (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/block/nginx.yaml)
+4. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+5. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+Node side observation with K8S workload creation with CSI file plugin,POD-CREATION-FILESHARE-NODE-CHECK,NBP_CSI_FILE_028,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the fileshare attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+Node side observation with K8S workload deletion with CSI file plugin,POD-DELETION-FILESHARE-NODE-CHECK,NBP_CSI_FILE_029,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod along with pvc/storageclass
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Once it is Running, delete the pods along with pvc/storageclass
+(kubectl delete -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that nginx pod is terminated (Kubectl get pods )
+2. Verify that fileshare is deleted at opensds side (osdsctl fileshare list)"
+Multiple instance creation of same K8S workload creation with CSI file plugin,MULTIPOD-CREATION-FILESHARE-VOLUME,NBP_CSI_FILE_030,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create pvc/storageclass
+(Refer – csi/examples/kubernetes/file/nginx.yaml)
+3. Create a deployment with kubernetes pod having 4 replicas","1. Verify that all instances of nginx pod is up and running (Kubectl get pods )
+2. Verify the same fileshare attached to all instances by entering inside container
+(kubectl exec -ti nginx-file /bin/bash and execute “df -h”)
+3. Verify the fileshare is inuse state at opensds side
+(osdsctl fileshare list)"
+Multiple instance detach of same K8S workload creation with CSI file plugin,"MULTIPOD-DETACH-FILESHARE
+",NBP_CSI_FILE_031,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create pvc/storageclass
+(Refer – csi/examples/kubernetes/file/nginx.yaml)
+4. Create a deployment with kubernetes pod having 4 replicas
+5. Once it is Running, delete the all pods by editing deploymnet with replicas=0
+(kubectl edit deployments -------)","1. Verify that all instances of nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that fileshare/pv/pvc is still present 
+(osdsctl fileshare list, kubectl get pv, kubectl get pvc)"
+Multiple instance deletion of same K8S workload creation with CSI file plugin,MULTIPOD-DELETION-FILESHARE,NBP_CSI_FILE_032,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create pvc/storageclass
+(Refer – csi/examples/kubernetes/file/nginx.yaml)
+4. Create a deployment with kubernetes pod having 4 replicas
+5. Once it is Running, delete the all pods by editing deploymnet with replicas=0
+(kubectl edit deployments -------)
+6. Delete pvc 
+(kubectl delete pvc ...)","1. Verify that all instances of nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that fileshare/pv/pvc is are all cleared 
+(osdsctl fileshare list, kubectl get pv, kubectl get pvc)"
+Multiple volume attach to a K8S workload with CSI file plugin,POD-CREATION-FILESHARE-MULTIPVC,NBP_CSI_FILE_033,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create storageclass and 2 pvcs
+(Refer – csi/examples/kubernetes/file/nginx.yaml)
+3. Create a kubernetes pod having 2 pvcs used","1. Verify that nginx pod is up and running with 2 pvcs in use (Kubectl describe pods )
+2. Verify the both fileshares are inuse state at opensds side
+(osdsctl fileshare list)"
+Multiple volume detach to a K8S workload with CSI file plugin,POD-DETACH-FILESHARE-MULTIPVC,NBP_CSI_FILE_034,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create storageclass and 2 pvcs
+(Refer – csi/examples/kubernetes/file/nginx.yaml)
+3. Create a kubernetes pod having 2 pvcs used
+5. Once it is Running, delete the pod
+(kubectl delete pod -------)","1. Verify that nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that fileshare/pv/pvc is still present at opensds side 
+(osdsctl fileshare list, kubectl get pv, kubectl get pvc)"
+Multiple volume detach to a K8S workload with CSI file plugin,POD-DELETION-FILESHARE-MULTIPVC,NBP_CSI_FILE_035,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create storageclass and 2 pvcs
+(Refer – csi/examples/kubernetes/file/nginx.yaml)
+3. Create a kubernetes pod having 2 pvcs used
+5. Once it is Running, delete the pod and both pvcs
+(kubectl delete pod -------
+kubectl delete pvc -------
+)","1. Verify that nginx pod is terminated 
+(Kubectl get pods )
+2. Verify that all mounted paths are unmouted at deployed node
+3. Verify that fileshare/pv/pvc are all cleared
+(osdsctl volume list, kubectl get pv, kubectl get pvc)"
+"K8S workload creation with CSI 
+file plugin on different nodes",POD-CREATION-FILESHARE-DIFF-NODE,NBP_CSI_FILE_036,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Cluster is having atelast 2 nodes","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod in node1
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Just delete the pod
+5. Create a pod again so that it gets scheduled on different node node2 (Can use nodeselector in yaml to select node)","1. Verify that nginx pod is up and running in node 1 (Kubectl get pods ) after testcase step3
+2. Verify that nginx pod is up and running in node 2 (Kubectl get pods ) after testcase step5
+3. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-file /bin/bash and execute “df -h”)
+4. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload creation along with pvc with CSI 
+file plugin on different nodes",POD-CREATION-FILESHARE-DIFF-NODE-WITH-PVC,NBP_CSI_FILE_037,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)
+
+4. Cluster is having atelast 2 nodes","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod in node 1
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Delete the pod and pvc
+5. Create a pvc and pod again so that it gets scheduled on different node node 2(Can use nodeselector in yaml to select node)","1. Verify that nginx pod is up and running in node 1 (Kubectl get pods ) after testcase step3
+2. Verify that nginx pod is up and running in node 2 (Kubectl get pods ) after testcase step5
+3. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+4. Verify the volume is inuse state at opensds side
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+file plugin and inuse pvc deletion",POD-FILESHARE-INUSE-PVC-DELETION,NBP_CSI_FILE_038,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Just delete the pvc which is in use","1. Verify that nginx pod is still running 
+ (Kubectl get pods ) after testcase step4
+2. Veify that pvc in Terminating state after step 4
+(kubectl get pv/pvc)"
+"K8S workload creation with CSI 
+file plugin and inuse pvc deletion and pod deletion",POD-FILESHARE-INUSE-PVC-POD-DELETION,NBP_CSI_FILE_039,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Just delete the pvc which is in use
+5. Then delete the pod as well","1. Verify that nginx pod is still running 
+ (Kubectl get pods ) after testcase step4
+2. Veify that pvc in Terminating state after step 4
+(kubectl get pv/pvc)
+3. Verify that nginx pod is deleted
+ (Kubectl get pods ) after testcase step5
+4. Veify that pvc deleted after step 5
+(kubectl get pv/pvc)"
+"K8S workload creation with CSI 
+file plugin with default profile name",POD-CREATION-FILESHARE-DEF-PROFILENAME,NBP_CSI_FILE_040,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Do not provide any profile details in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side and uses default block profile
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+file plugin with valid profile name",POD-CREATION-FILESHARE-VALID-PROFILENAME,NBP_CSI_FILE_041,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. update correct profile name in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is up and running (Kubectl get pods )
+2. Verify the volume attached in pod by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume is inuse state at opensds side and uses input profile
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+file plugin with invalid profile name",POD-CREATION-FILESHARE-INVALID-PROFILENAME,NBP_CSI_FILE_042,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. update nonexisting profile name in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is in pending (Kubectl get pods )
+2. Verify the volume is not created
+(osdsctl volume list)"
+"K8S workload creation with CSI 
+file plugin with valid profile id",POD-CREATION-FILESHARE-VALID-PROFILEID,NBP_CSI_FILE_043,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. update correct profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create kubernetes pod 
+(kubectl create -f csi/examples/kubernetes/block/nginx.yaml)","1. Verify that nginx pod is in pending (Kubectl get pods )
+2. Verify the volume is not created
+(osdsctl volume list)"
+Simulatneous creation of multiple K8S workload with CSI file plugin,POD-CREATION-FILESHARE-MULTIPODS,NBP_CSI_FILE_044,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create multiple instances of pod using deployment (replicas=20)
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)","1. Verify that all instances of nginx pod are up and running (Kubectl get pods )
+2. Verify the volume attached to these pods by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the volume state at opensds side
+(osdsctl volume list)"
+Simulatneous deletion of multiple K8S workload with CSI file plugin,POD-DELETION-FILESHARE-MULTIPODS,NBP_CSI_FILE_045,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create multiple instances of pod using deployment (replicas=20)
+(kubectl create -f csi/examples/kubernetes/file/nginx.yaml)
+4. Edit deployment with replicas =0 to delete all pods","1. Verify that all instances of nginx pod are deleted (Kubectl get pods )
+2. Verify that all volume mounts are down
+(execute “df -h”)
+3. Verify the volume state at opensds side
+(osdsctl volume list)"
+Simulatneous creation of multiple K8S workload and multiple volumes with CSI file plugin,POD-CREATION-FILESHARE-MULTIPODS-MULTIPVC,NBP_CSI_FILE_046,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create multiple pvcs (20) and Create multiple pods with diffrent pvc","1. Verify that all instances of nginx pod are up and running (Kubectl get pods )
+2. Verify the different volumes attached to these pods by entering inside container
+(kubectl exec -ti nginx-block /bin/bash and execute “df -h”)
+3. Verify the all volume’s state at opensds side
+(osdsctl volume list)"
+Simulatneous deletion of multiple K8S workload and multiple volumes with CSI file plugin,POD-DELETION-FILESHARE-MULTIPODS-MULTIPVC,NBP_CSI_FILE_047,"1. K8S cluster is up and running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Integration-with-Kubernetes-CSI)
+
+2. OpenSDS is deployed & running
+(https://github.com/opensds/opensds/wiki/OpenSDS-Cluster-Installation-through-Ansible)
+
+3. LVM is used as backend (enabled by default in installer)","1. Create profile with stortage type as “file”
+2. Update profile id in pod yaml (/opt/opensds-sushi-linux-amd64/ 
+Csi/examples/kubernetes/file/nginx.yaml)
+3. Create multiple pvcs (20) and Create multiple pods with diffrent pvc
+3. Delete all pods and pvc","1. Verify that all instances of nginx pod are deleted (Kubectl get pods )
+2. Verify that all volume mounts are down
+(execute “df -h”)
+3. Verify the volume state at opensds side
+(osdsctl volume list)"

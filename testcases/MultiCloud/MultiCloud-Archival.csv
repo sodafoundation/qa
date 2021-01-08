@@ -8,9 +8,10 @@ Resource Manager -> Buckets
 2. Select the Bucket in which you want to
 Archive the object
 3. Click on Upload/Archive button
-4. Now select the file to upload and choose the Storage Class
+4. Select Archive obejct? as Yes
+5. Now select the file to upload and choose the Tier
 Ex: GLACIER
-5. Submit the form ","Once the object upload is complete, the Dashboard should show the 
+6. Submit the form ","Once the object upload is complete, the Dashboard should show the 
 object with Storage Class as Glacier/Tier999
 Go to the AWS Console and check the respective bucket.
 The object should have the storage class as GLACIER"
@@ -25,6 +26,97 @@ Archive object in AWS S3 bucket,Archival through API,Archival_TC_02,"1. multi-cl
 Service name as 's3'
 5. Request Body should be binary and the <ObjectNameToBeUploaded> should be selected
 for ""Select File""
+","Once the object upload is complete, the Dashboard should show the 
+object with Storage Class as Glacier/Tier999
+Go to the AWS Console and check the respective bucket.
+The object should have the storage class as GLACIER
+
+
+Return Status: 200"
+Archive object in AWS S3 bucket,Upload Object through Dahsboard,Archival_TC_03,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created 
+
+","1. from SODA Dashboard goto
+Resource Manager -> Buckets
+2. Select the Bucket in which you want to
+Archive the object
+3. Click on Upload/Archive button
+4. Select Archive obejct? as No
+5. Click on Ok","Once the object upload is complete, the Dashboard should show the 
+object with Storage Class as Glacier/Tier_1(STANDARD)
+Go to the AWS Console and check the respective bucket.
+The object should have the storage class as STANDARD"
+Archive object in AWS S3 bucket,Archival through Dashboard without selcting Tier,Archival_TC_04,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created 
+
+","1. from SODA Dashboard goto
+Resource Manager -> Buckets
+2. Select the Bucket in which you want to
+Archive the object
+3. Click on Upload/Archive button
+4. Select Archive obejct? as Yes
+5. Don't select the Tier",The Ok Button should be greyed
+List Archived Objects,Listing of Archived objects through Dahsboard,Archival_TC_05,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created
+4. Object is archived in S3 bucket 
+
+","1. from SODA Dashboard goto Resource Manager -> Buckets 
+2. Select the Bucket in which you have Archived the object
+3. Check the List of objects","Object Listing should show the archived object as ""Tier: Tier_999(GLACIER)
+In Operation column, ""Restore"" selection should be un-greyed"
+Restore object initiation,Restore initiation from Dashboard,Archival_TC_05,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created
+4. Object is archived in S3 bucket 
+
+","1. from SODA Dashboard goto Resource Manager -> Buckets 
+2. Select the Bucket in which you have Archived the object
+3. Click on Restore object
+4. Select Days for which the restored object link should be available
+5. Select the ""Retreival Tier"" (This should be based upon the choice. Check AWS documentation for more details)","The Success message should be displayed ""Object restoration has been initiated successfully. It should be available for download shortly"""
+Download Restoration in progress object,Download Object,Archival_TC_06,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created
+4. Object is archived in S3 bucket 
+5. Object restoration has been initiated
+
+","1. from SODA Dashboard goto Resource Manager -> Buckets 
+2. Select the Bucket in which you have Archived the object
+3. Click on Download object","Restore of object takes time based upon the ""Retrieval Tier"". Please check the AWS documentaion for more details
+If the ""Restoration is progress"" in AWS, the Download object should show error"
+Download Restored object,Download Object,Archival_TC_07,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created
+4. Object is archived in S3 bucket 
+5. Object restoration has been initiated
+
+","1. from SODA Dashboard goto Resource Manager -> Buckets 
+2. Select the Bucket in which you have Archived the object
+3. Click on Download object",Object should be available for download and it should ask to Save the object
+Delete Object,Delet object,Archival_TC_08,"1. multi-cloud with Dashboard is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created
+4. Object is archived in S3 bucket 
+5. Object has been downloaded
+
+","1. from SODA Dashboard goto Resource Manager -> Buckets 
+2. Select the Bucket in which you have Archived the object
+3. Click on Delete object",Object should be deleted and should not show in the Listing
+Restore object in AWS S3 bucket,Restore object through API,Archival_TC_09,"1. multi-cloud is installed
+2. AWS backend is configured
+3. Multi-cloud Bucket is created
+4. Object has been archived
+","1. From Postman execute API http://<Host_IP>:8090/<BucketName>/<UploadedObjectName>?restore
+2. This is POST call
+3. provide the request body as {days: <no of days>, tier: <retrieval tier>}
+4. In the Autorization set the AK/SL , AWS Region as <the region to which the AWS Bucket belongs> and 
+Service name as 's3'
+5. Request Body should be binary and the <ObjectNameToBeUploaded> should be selected
+for ""Select File""
+NOTE:  Retrieval tier can be ""Standarad"", ""Expedited"" or ""Bulk"". Please check AWS documentation for more details
 ","Once the object upload is complete, the Dashboard should show the 
 object with Storage Class as Glacier/Tier999
 Go to the AWS Console and check the respective bucket.
