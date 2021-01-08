@@ -1,0 +1,90 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+Listing pools of the NetApp storage,Listing pools of the NetApp storage,NETAPP_FS_1,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+File profile is created","1. Login to the SODA installation server
+2. Execute command `osdsctl pool list`","It should list the pools
+It should list the pool that was provided in the ontap_nas.yml config file, with corect capactity of the pool.
+To cross verify the Pool capacity as correct, refer the storage backend"
+Listing pools of the NetApp storage without file profile,Listing pools of the NetApp storage without file profile,NETAPP_FS_2,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+File profile is not created","1. Login to the SODA installation server
+2. Execute command `osdsctl pool list`","It should list the pools
+It should list the pool that was provided in the ontap_nas.yml config file, with corect capactity of the pool.
+To cross verify the Pool capacity as correct, refer the storage backend"
+Create Fileshare without File profile,Create Fileshare without File profile,NETAPP_FS_3,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 has passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare create -n <FSNAME>  <FSSIZE>`","It should fail with ERROR:
+ERROR: get profile failed: can't find profile(name: default_file, storageType:file)"
+Create Fileshare with appropriate name and size,Create Fileshare with appropriate name and size,NETAPP_FS_4,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_1 has passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare create -n <FSNAME>  <FSSIZE>`","Fileshare created with the provided name and size.
+List pools should show the available capacity as appropriate
+In the storage backedn the NAS Volume should get created"
+Create Fileshare without name,Create Fileshare without name,NETAPP_FS_5,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_1 has passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare create  <FSSIZE>`","Fileshare creation should error out
+ERROR: Request body has an error: doesn't match the schema: Property 'name' is missing"
+Create Fileshare without size,Create Fileshare without size,NETAPP_FS_6,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_1 has passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare create -n <FSNAME> `","Fileshare creation should fail with inappropriate number of args Error
+It should show the help"
+Create Fileshare with Size exceeding the Pool capacity,Create Fileshare with Size exceeding the Pool capacity,NETAPP_FS_7,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_1 has passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare create -n <FSNAME>  <FSSIZE>`","Fileshare creation should pass as state to be creating
+Fileshare listing should give fileshare as in 'error' state"
+List Fileshare,List Fileshare,NETAPP_FS_8,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare list`","It should list all Fileshares
+Check the list contains all the fileshares created for NetApp FS"
+Get Fileshare with correct FS ID,Get Fileshare with correct FS ID,NETAPP_FS_9,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare show <FSID>`","It should show the details of Fileshare with mountpoint
+"
+Get Fileshare with incorrect FS ID,Get Fileshare with incorrect FS ID,NETAPP_FS_10,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare show <FSID>`","Get Fileshare should error out
+
+ERROR: fileshare <FSID> not found: specified fileshare(<FSID>) can't find"
+Update Fileshare name with given ID,Update Fileshare name with given ID,NETAPP_FS_11,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare update <FS_ID> -n <newName>`","Fileshare name should be updated
+"
+Delete Fileshare with given ID,Delete Fileshare with given ID,NETAPP_FS_12,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare delete <FSID>`","Fileshare is deleted
+List fileshare does not show the Fileshare
+Fileshare should get deletec from actual storage backend"
+Delete Fileshare with given ID (FS was updated),Delete Fileshare with given ID (FS was updated),NETAPP_FS_13,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed
+NETAPP_FS_11 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare delete <FSID>`","Fileshare is deleted
+List fileshare does not show the Fileshare
+Fileshare should get deleted from actual storage backend"
+Delete Fileshare with given incorrect ID,Delete Fileshare with given incorrect ID,NETAPP_FS_14,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare delete <FSID>`",It should throw error of incorrect ID
+List Fileshare to check deleted FS,List Fileshare to check deleted FS,NETAPP_FS_15,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_10 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare list`",List fileshare should not show the deleted fileshare
+Create FS Snapshot with correct FS ID,Create FS Snapshot with correct FS ID,NETAPP_FS_16,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare snapshot create <FS_ID_WHOSE_SNAP_IS_CREATED> -n  <SNAP_NAME> -d ""SNAP_DESCRIPTION>""`","Fileshare snapshot creation should be successfull
+SNAP should be created in actual storage backend"
+Create FS Snapshot with incorrect FS ID,Create FS Snapshot with incorrect FS ID,NETAPP_FS_17,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare snapshot create <INCORRECT_FS_ID_WHOSE_SNAP_IS_CREATED> -n  <SNAP_NAME> -d ""SNAP_DESCRIPTION>""`","Fileshare snapshot creation should fail
+ERROR: fileshare <PROVIDED_FSID> not found: specified fileshare(<PROVIDED_FSID>) can't find
+"
+Create FS Snapshot with missing description,Create FS Snapshot with missing description,NETAPP_FS_18,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare snapshot create <INCORRECT_FS_ID_WHOSE_SNAP_IS_CREATED> -n  <SNAP_NAME> `","Fileshare snapshot creation should fail
+
+"
+List Fileshare snapshot,List Fileshare snapshot,NETAPP_FS_19,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_2 and NETAPP_FS_12  passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare snapshot list>`",Fileshare snapshot should be listed with appropriate reference to original FS from which this was created
+Delete Fileshare Snapshot with correct snapshot ID,Delete Fileshare Snapshot with correct snapshot ID,NETAPP_FS_20,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_12 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare snapshot delete  <SNAPID>`","Fileshare snapshot should be deleted
+Fileshare snapshot is deleted from actual storage backend too"
+Delete Fileshare Snapshit with incorrect snapshot ID,Delete Fileshare Snapshit with incorrect snapshot ID,NETAPP_FS_21,"SODA Installation with netapp_ontap_nas as backend is done successfully.
+NETAPP_FS_12 passed","1. Login to the SODA installation server 
+2. Execute command `osdsctl fileshare snapshot delete  <INCORRECT_SNAPID>`",Fileshare snpshot delete should error out

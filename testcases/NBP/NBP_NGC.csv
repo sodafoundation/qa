@@ -1,0 +1,638 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+Build NGC Package,Build Plugin Package,NBP_VMWARE_STORAGE_0,1.NBP repository cloned/downloaded,"1.Follow OpenSDS_NGC_Compilation_Guide.md
+2. Unpack NGC-Register-1.0.0 and verify below files are present
+app
+bin
+conf
+readme.txt
+Plugin/plugins/Adpate_manager
+Plugin/plugins/ngc_service
+Plugin/plugins/ngc_ui
+Plugin/plugins/vim25
+","1.Build successfull and NGC-Register-1.0.0.zip is created
+2.All files are presnt in the package"
+Validate Plugin Properties,Get Plugin Properties(valid inputs),NBP_VMWARE_STORAGE_1,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Validate Plugin Properties,Get Plugin Properties(invalid inputs),NBP_VMWARE_STORAGE_2,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Validate Plugin Properties,Check Register Parameters (valid inputs),NBP_VMWARE_STORAGE_3,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Validate Plugin Properties,Check Register Parameters (invalid inputs),NBP_VMWARE_STORAGE_4,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Validate PAckage ZIP File,Check ZIP file,NBP_VMWARE_STORAGE_5,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Vcenter Connection,Create extension in Vcenter when opensds extension is not available,NBP_VMWARE_STORAGE_6,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Vcenter Connection,Create Extension in Vcenter when opensds extension is already available,NBP_VMWARE_STORAGE_7,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Vcenter Connection,get event and task extension resource from xml(valid inputs),NBP_VMWARE_STORAGE_8,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Vcenter Connection,get event and task extension resource from xml(invalid inputs),NBP_VMWARE_STORAGE_9,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Vcenter Connection,Connect to Vcenter Server(valid inputs),NBP_VMWARE_STORAGE_10,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Vcenter Connection,Connect to Vcenter Server(invalid inputs),NBP_VMWARE_STORAGE_11,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+File Path,Check Fie paths for required settings and propperties file,NBP_VMWARE_STORAGE_12,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,1. Test Script Return Success
+Register ,Register Storage Plugin fresh( valid inputs),NBP_VMWARE_STORAGE_13,"1.vCenter server is setup and accessible
+2.User is able to login vSphere Web Client
+3.Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in vCenter IP 、 User Name and Password and click the register button in this page.",Registration success message
+Register ,Register Storage Plugin on already registerd vcenter server,NBP_VMWARE_STORAGE_14,"1.vCenter server is setup and accessible
+2.User is able to login vSphere Web Client
+3.Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in vCenter IP 、 User Name and Password and click the register button in this page.",Already registered message
+Register ,Register Storage Plugin on already registerd vcenter server(invalid inputs),NBP_VMWARE_STORAGE_15,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in vCenter IP 、 User Name and Password and click the register button in this page.",Registration failure message message
+Register ,Register Storage Plugin on already registerd vcenter server(invalid inputs),NBP_VMWARE_STORAGE_16,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in vCenter IP 、 User Name and Password and click the register button in this page.",Registration failure message message
+Register ,Register Storage Plugin on a second vcenter server,NBP_VMWARE_STORAGE_17,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in vCenter IP 、 User Name and Password and click the register button in this page.
+Step 5  back from browser / or load https://localhost:8088/homePage again.
+Step 6 Give another vcenter server option
+",Registration success message 
+UnRegister ,UnRegister Storage Plugin fresh( valid inputs),NBP_VMWARE_STORAGE_17,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in vCenter IP 、 User Name and Password and click the register button in this page.",UNRegistration success message
+UnRegister ,UnRegister Storage Plugin on already unregisterd vcenter server,NBP_VMWARE_STORAGE_18,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in vCenter IP 、 User Name and Password and click the register button in this page.",Already unregisterd message
+UnRegister ,UnRegister Storage Plugin on already unregisterd vcenter server(invalid inputs),NBP_VMWARE_STORAGE_19,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+Step 4 Fill in any or all of  the these parameter wrong ,vCenter IP 、 User Name and Password and click the register button in this page.",connect faiure message
+Register ,UnRegister Storage Plugin fresh( Invalid inputs),NBP_VMWARE_STORAGE_20,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Copy the Storage plug-in installation package to a directory on the Windows operating system, such as D:\, and decompress the installation package.
+Step 2 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage or http://localhost:8080/homePage, and the login page is displayed.
+ Step 4 Fill in  any compbination of these parameter wrong, vCenter IP 、 User Name and Password and click the register button in this page.",Registration failure  message
+Web Page Loading,Load Home Page http,NBP_VMWARE_STORAGE_21,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (http://localhost:8088/homePage ",Regstration Home page displayed
+Web Page Loading,Load home page https,NBP_VMWARE_STORAGE_22,"vCenter server is setup and accessible
+User is able to login vSphere Web Client
+Plugin package has been built
+","Step 1 Go to the directory where the Storage plug-in installation package is decompressed, and double-click the run.bat file in bin\ folder.
+Step 3 Open the Chrome, (https://localhost:8088/homePage ",Regstration Home page displayed
+Download Plugin file,Downalod Plugin file ( valid path),NBP_VMWARE_STORAGE_23,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,
+Download Plugin File ,Downalod Plugin file ( in valid path),NBP_VMWARE_STORAGE_24,"1. Plugin package is built
+2. Test environment (eclipse ) is available
+3.. Test Config file updated
+",1. Run Test script/Function ,
+Download Plugin file,Download Plugin files to vCenter server,NBP_VMWARE_STORAGE_25,"Result of NBP_VMWARE_STORAGE_1 is success
+","Step 1 Login to vCenter server using ssh
+Step 2 Restart vSpher client ( service-control --stop vsphere-client )
+ service-control --start vsphere-client
+Step 3 Launch vSphere web client
+",OpenSDS storage plugin icon is visible in home page.
+WebClient (flex),Add storage platform,NBP_VMWARE_STORAGE_218,NBP_VMWARE_STORAGE_2 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 Click Add(+) button 
+Step3 select OpenSDS
+step4 Provide OpenSDS endpoint credentials
+step5 Click Submit","1. Storage Plugin page opens up
+2. Add storage platform opens up and listed openSDS in the platform type 
+3. Succes message box is displayed"
+WebClient (flex),Add storage platform(invalid inputs),NBP_VMWARE_STORAGE_219,NBP_VMWARE_STORAGE_2 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 Click Add(+) button 
+Step3 select OpenSDS
+step4 Provide wrong OpenSDS endpoint credentials
+step5 Click Submit","1. Storage Plugin page opens up
+2. Add storage platform opens up and listed openSDS in the platform type 
+3. failure message box is displayed"
+WebClient (flex),Add duplicate storage platform ,NBP_VMWARE_STORAGE_220,NBP_VMWARE_STORAGE_2 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 Click Add(+) button 
+Step3 select OpenSDS
+step4 Provide same OpenSDS endpoint credentials, which is aleady added
+step5 Click Submit","1. Storage Plugin page opens up
+2. Add storage platform opens up and listed openSDS in the platform type 
+3. Already added message box is displayed"
+WebClient (flex),view storage platform informations,NBP_VMWARE_STORAGE_221,NBP_VMWARE_STORAGE_3 is success,"1.        Click Home in the navigation tree on the left. 
+2.     In Administration, click plugin button.
+3.	In the navigation tree on the left, choose the storage platform that you want to view.
+","1.The Home page is displayed.
+2. The Storage Platforms page is displayed.
+3. The details about the storage platform are displayed.
+"
+WebClient (flex),Modify storage platform credetilas,NBP_VMWARE_STORAGE_222,NBP_VMWARE_STORAGE_3 is success,"1.        In the Administration area, click plugin button.
+2. 1.        Right-click the storage array to be modified and select Config Storage Platforms in the shortcut menu.
+3..        On the Config Storage Platform page, enter the new user/password.
+4.Click submit","1. All storage platforms are diplayed in the plugin page and able to select one
+2. success message displayed"
+WebClient (flex),Add storage platform using non admin user,NBP_VMWARE_STORAGE_222,NBP_VMWARE_STORAGE_3 is success,"1.        In the Administration area, click plugin button.
+2. 1.        Right-click the storage array to be modified and select Config Storage Platforms in the shortcut menu.
+3..        On the Config Storage Platform page, enter a non-admin usr credentials
+4.Click submit","1. All storage platforms are diplayed in the plugin page and able to select one
+2. success message displayed"
+WebClient (flex),Modify storage platform with a storage platform which is already added,NBP_VMWARE_STORAGE_223,NBP_VMWARE_STORAGE_3 is success,"1.        In the Administration area, click plugin button.
+2. 1.        Right-click the storage array to be modified and select Config Storage Platforms in the shortcut menu.
+3..        On the Config Storage Platform page, enter the new user/password.
+4.Click submit","1. All storage platforms are diplayed in the plugin page and able to select one
+2. failure  message displayed"
+WebClient (flex),Delete storage platform,NBP_VMWARE_STORAGE_224,NBP_VMWARE_STORAGE_3 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 select the storage platform you want to delete
+Step3 Click Delete(X) button 
+
+","1. All storage platforms are diplayed in the plugin page and able to select one
+2. success message displayed"
+WebClient (flex),Delete storage platform When Storage is not able to connect,NBP_VMWARE_STORAGE_225,NBP_VMWARE_STORAGE_3 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 select the storage platform you want to delete
+Step3 Click Delete(X) button 
+
+","1. All storage platforms are diplayed in the plugin page and able to select one
+2. success message displayed"
+WebClient (flex),create datastore,NBP_VMWARE_STORAGE_226,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+Step 6 Select a storage pool and click NEXT.
+Step 7 Set parameters for the VOLUME and click NEXT.
+
+Step 8 Confirm the information of the datastore to be created, and click FINISH. And then confirm the createing result informations in VMware Tasks.
+step 9  Confirm volume is created is open sds by execting ""osdsctl volume list "" command 
+
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. Available storage pools in the selected storage platform is listed
+5.dialogue box to enter volume details is populated
+6. summary of the volume to be created is listed
+7. task status shows completed for create volume and attach volume atsks.
+8. volume list  oputput of opensds has new volume created."
+WebClient (flex),create datastore on unreachable storage,NBP_VMWARE_STORAGE_227,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not reachble should pop up"
+WebClient (flex),create datastore when there is no enough storage space available,NBP_VMWARE_STORAGE_228,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not have enough space"
+WebClient (flex),create datastore with same datastore name,NBP_VMWARE_STORAGE_229,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with name conflict"
+WebClient (flex),create and attach volume,NBP_VMWARE_STORAGE_230,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 UnSelect Create Datastore, set the datastore type to Block storage type, and click NEXT.
+Step 6 Select a storage pool and click NEXT.
+Step 7 Set parameters for the VOLUME and click NEXT.
+
+Step 8 Confirm the information of the datastore to be created, and click FINISH. And then confirm the createing result informations in VMware Tasks.
+step 9  Confirm volume is created is open sds by execting ""osdsctl volume list "" command 
+
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. Available storage pools in the selected storage platform is listed
+5.dialogue box to enter volume details is populated
+6. summary of the volume to be created is listed
+7. task status shows completed for create volume and attach volume atsks.
+8. volume list  oputput of opensds has new volume created."
+WebClient (flex),create and attach volume on unreachable storage,NBP_VMWARE_STORAGE_231,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not reachble should pop up"
+WebClient (flex),create and attach volumewhen there is no enough storage space available,NBP_VMWARE_STORAGE_232,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not have enough space"
+WebClient (flex),List Unmounted/Available Volumes,NBP_VMWARE_STORAGE_233,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (flex),List Unmounted/Available Volumes from mutiple OpenSDS,NBP_VMWARE_STORAGE_234,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (flex),Mount Volumes,NBP_VMWARE_STORAGE_235,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mountvolume
+step 4 select a volume and click mount
+step 5 make sure the task is completed
+step 6 confirm the volume is attached by running osdsctl volume attchment list in opensds","1. The Home page is displayed 
+2. esx hosts are listed in the tree panel 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list available volumes details is populated. 
+5. Volume should be mounted. 
+6. task status shows completed for mount volume. 
+7. new device should be added to the ESX host. 
+8. volume attachment list oputput of opensds has new attachment created."
+WebClient (flex),Unmount Volume,NBP_VMWARE_STORAGE_236,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > unmountvolume
+step 4 select a volume and click mount
+step 5 make sure the task is completed
+step 6 confirm the volume is unmounted by running osdsctl volume attchment list in opensds","1. The Home page is displayed. 
+2. esx hosts are listed in the tree panel. 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. mounted volumes are listed
+5.unmount operation shows success message"
+WebClient (flex),Mount Volumes which is unmounted,NBP_VMWARE_STORAGE_237,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mountvolume
+step 4 select a volume which was unmounted before, and click mount
+step 5 make sure the task is completed
+step 6 confirm the volume is attached by running osdsctl volume attchment list in opensds","1. The Home page is displayed 
+2. esx hosts are listed in the tree panel 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list available volumes details is populated. 
+5. Volume should be mounted. 
+6. task status shows completed for mount volume. 
+7. new device should be added to the ESX host. 
+8. volume attachment list oputput of opensds has new attachment created."
+WebClient (flex),List ALL mounted Volumes,NBP_VMWARE_STORAGE_238,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > unmount volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (flex),List ALL mounted Volumes in a muti OpenSDS platform added environemnt,NBP_VMWARE_STORAGE_239,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > unmount volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (flex),Create Volume Snapshot,NBP_VMWARE_STORAGE_240,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > backup /restore 
+step 4 select a volume and click backup
+step 5 make sure the task is completed
+step 6 confirm the volume is backedup  by running osdsctl volume snapshot  list in opensds","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list volume snapshots details is populated.
+5. Volume snapshot should be created.
+6. task status shows completed for volume snapshot.
+7. new device should be added to the ESX host.
+8. volume snapshots list oputput of opensds has new snapshot created."
+WebClient (flex),List Volume Snapshots,NBP_VMWARE_STORAGE_241,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 select the volume whose snapshot to be seen ","1. The Home page is displayed. 
+2. esx hosts are listed in the tree panel. 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list volumes snapshots details is populated."
+WebClient (flex),Create Volume Snapshot on multi openSDS platorm added setup,NBP_VMWARE_STORAGE_242,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > backup /restore 
+step 4 select a volume and click backup
+step 5 make sure the task is completed
+step 6 confirm the volume is backedup  by running osdsctl volume snapshot  list in opensds","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list volume snapshots details is populated.
+5. Volume snapshot should be created.
+6. task status shows completed for volume snapshot.
+7. new device should be added to the ESX host.
+8. volume snapshots list oputput of opensds has new snapshot created."
+WebClient (flex),List Volume Snapshots on multi openSDS platform added setups,NBP_VMWARE_STORAGE_243,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 select the volume whose snapshot to be seen ","1. The Home page is displayed. 
+2. esx hosts are listed in the tree panel. 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list volumes snapshots details is populated."
+WebClient (html5),Add storage platform,NBP_VMWARE_STORAGE_244,NBP_VMWARE_STORAGE_2 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 Click Add(+) button 
+Step3 select OpenSDS
+step4 Provide OpenSDS endpoint credentials
+step5 Click Submit","1. Storage Plugin page opens up
+2. Add storage platform opens up and listed openSDS in the platform type 
+3. Succes message box is displayed"
+WebClient (html5),Add storage platform(invalid inputs),NBP_VMWARE_STORAGE_245,NBP_VMWARE_STORAGE_2 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 Click Add(+) button 
+Step3 select OpenSDS
+step4 Provide wrong OpenSDS endpoint credentials
+step5 Click Submit","1. Storage Plugin page opens up
+2. Add storage platform opens up and listed openSDS in the platform type 
+3. failure message box is displayed"
+WebClient (html5),Add duplicate storage platform,NBP_VMWARE_STORAGE_246,NBP_VMWARE_STORAGE_2 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 Click Add(+) button 
+Step3 select OpenSDS
+step4 Provide same OpenSDS endpoint credentials, which is aleady added
+step5 Click Submit","1. Storage Plugin page opens up
+2. Add storage platform opens up and listed openSDS in the platform type 
+3. Already added message box is displayed"
+WebClient (html5),view storage platform informations,NBP_VMWARE_STORAGE_247,NBP_VMWARE_STORAGE_3 is success,"1.        Click Home in the navigation tree on the left. 
+2.     In Administration, click plugin button.
+3.	In the navigation tree on the left, choose the storage platform that you want to view.
+","1.The Home page is displayed.
+2. The Storage Platforms page is displayed.
+3. The details about the storage platform are displayed.
+"
+WebClient (html5),Modify storage platform credetilas,NBP_VMWARE_STORAGE_248,NBP_VMWARE_STORAGE_3 is success,"1.        In the Administration area, click plugin button.
+2. 1.        Right-click the storage array to be modified and select Config Storage Platforms in the shortcut menu.
+3..        On the Config Storage Platform page, enter the new user/password.
+4.Click submit","1. All storage platforms are diplayed in the plugin page and able to select one
+2. success message displayed"
+WebClient (html5),Modify storage platform with a storage platform which is already added,NBP_VMWARE_STORAGE_249,NBP_VMWARE_STORAGE_3 is success,"1.        In the Administration area, click plugin button.
+2. 1.        Right-click the storage array to be modified and select Config Storage Platforms in the shortcut menu.
+3..        On the Config Storage Platform page, enter the new user/password.
+4.Click submit","1. All storage platforms are diplayed in the plugin page and able to select one
+2. failure  message displayed"
+WebClient (html5),Delete storage platform,NBP_VMWARE_STORAGE_250,NBP_VMWARE_STORAGE_3 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 select the storage platform you want to delete
+Step3 Click Delete(X) button 
+
+","1. All storage platforms are diplayed in the plugin page and able to select one
+2. success message displayed"
+WebClient (html5),Delete storage platform When Storage is not able to connect,NBP_VMWARE_STORAGE_251,NBP_VMWARE_STORAGE_3 is success,"Step1 Open OpenSDS Storgae plugin from Home/administration
+Step2 select the storage platform you want to delete
+Step3 Click Delete(X) button 
+
+","1. All storage platforms are diplayed in the plugin page and able to select one
+2. success message displayed"
+WebClient (html5),create datastore,NBP_VMWARE_STORAGE_252,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+Step 6 Select a storage pool and click NEXT.
+Step 7 Set parameters for the VOLUME and click NEXT.
+
+Step 8 Confirm the information of the datastore to be created, and click FINISH. And then confirm the createing result informations in VMware Tasks.
+step 9  Confirm volume is created is open sds by execting ""osdsctl volume list "" command 
+
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. Available storage pools in the selected storage platform is listed
+5.dialogue box to enter volume details is populated
+6. summary of the volume to be created is listed
+7. task status shows completed for create volume and attach volume atsks.
+8. volume list  oputput of opensds has new volume created."
+WebClient (html5),create datastore on unreachable storage,NBP_VMWARE_STORAGE_253,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not reachble should pop up"
+WebClient (html5),create datastore when there is no enough storage space available,NBP_VMWARE_STORAGE_254,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not have enough space"
+WebClient (html5),create datastore with same datastore name,NBP_VMWARE_STORAGE_255,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with name conflict"
+WebClient (html5),create and attach volume,NBP_VMWARE_STORAGE_256,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 UnSelect Create Datastore, set the datastore type to Block storage type, and click NEXT.
+Step 6 Select a storage pool and click NEXT.
+Step 7 Set parameters for the VOLUME and click NEXT.
+
+Step 8 Confirm the information of the datastore to be created, and click FINISH. And then confirm the createing result informations in VMware Tasks.
+step 9  Confirm volume is created is open sds by execting ""osdsctl volume list "" command 
+
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. Available storage pools in the selected storage platform is listed
+5.dialogue box to enter volume details is populated
+6. summary of the volume to be created is listed
+7. task status shows completed for create volume and attach volume atsks.
+8. volume list  oputput of opensds has new volume created."
+WebClient (html5),create and attach volume on unreachable storage,NBP_VMWARE_STORAGE_257,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not reachble should pop up"
+WebClient (html5),create and attach volumewhen there is no enough storage space available,NBP_VMWARE_STORAGE_258,NBP_VMWARE_STORAGE_3 is success,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which a datastore or VOLUME is to be created. Right-click the host, and choose OpenSDS Storage Plugin > Create Datastore/ Volume from the shortcut menu.
+Step 4 Select the storage pltform  on which the datastore is to be created, and click NEXT.
+Step 5 Select Create Datastore, set the datastore type to Block storage type, and click NEXT.
+","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Create Datastore/ Volume dialog box is displayed.
+4. An error message with storage platfrom not have enough space"
+WebClient (html5),List Unmounted/Available Volumes,NBP_VMWARE_STORAGE_259,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (html5),List Unmounted/Available Volumes from mutiple OpenSDS,NBP_VMWARE_STORAGE_260,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (flex),Mount Volumes,NBP_VMWARE_STORAGE_261,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mountvolume
+step 4 select a volume and click mount
+step 5 make sure the task is completed
+step 6 confirm the volume is attached by running osdsctl volume attchment list in opensds","1. The Home page is displayed 
+2. esx hosts are listed in the tree panel 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list available volumes details is populated. 
+5. Volume should be mounted. 
+6. task status shows completed for mount volume. 
+7. new device should be added to the ESX host. 
+8. volume attachment list oputput of opensds has new attachment created."
+WebClient (flex),Unmount Volume,NBP_VMWARE_STORAGE_262,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > unmountvolume
+step 4 select a volume and click mount
+step 5 make sure the task is completed
+step 6 confirm the volume is unmounted by running osdsctl volume attchment list in opensds","1. The Home page is displayed. 
+2. esx hosts are listed in the tree panel. 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. mounted volumes are listed
+5.unmount operation shows success message"
+WebClient (flex),Mount Volumes which is unmounted,NBP_VMWARE_STORAGE_263,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mountvolume
+step 4 select a volume which was unmounted before, and click mount
+step 5 make sure the task is completed
+step 6 confirm the volume is attached by running osdsctl volume attchment list in opensds","1. The Home page is displayed 
+2. esx hosts are listed in the tree panel 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list available volumes details is populated. 
+5. Volume should be mounted. 
+6. task status shows completed for mount volume. 
+7. new device should be added to the ESX host. 
+8. volume attachment list oputput of opensds has new attachment created."
+WebClient (flex),List ALL mounted Volumes,NBP_VMWARE_STORAGE_264,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > unmount volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (flex),List ALL mounted Volumes in a muti OpenSDS platform added environemnt,NBP_VMWARE_STORAGE_265,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > unmount volume
+step 4 Confirm the list with osdsctlvolume list command
+","1. The Home page is displayed.
+2. esx hosts are listed in the tree panel.
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list available volumes details is populated."
+WebClient (flex),Create Volume Snapshot,NBP_VMWARE_STORAGE_266,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > backup /restore 
+step 4 select a volume and click backup
+step 5 make sure the task is completed
+step 6 confirm the volume is backedup  by running osdsctl volume snapshot  list in opensds","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list volume snapshots details is populated.
+5. Volume snapshot should be created.
+6. task status shows completed for volume snapshot.
+7. new device should be added to the ESX host.
+8. volume snapshots list oputput of opensds has new snapshot created."
+WebClient (flex),List Volume Snapshots,NBP_VMWARE_STORAGE_267,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 select the volume whose snapshot to be seen ","1. The Home page is displayed. 
+2. esx hosts are listed in the tree panel. 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list volumes snapshots details is populated."
+WebClient (flex),Create Volume Snapshot on multi openSDS platorm added setup,NBP_VMWARE_STORAGE_268,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > backup /restore 
+step 4 select a volume and click backup
+step 5 make sure the task is completed
+step 6 confirm the volume is backedup  by running osdsctl volume snapshot  list in opensds","1. The Home page is displayed
+2. esx hosts are listed in the tree panel
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel.
+4. dialogue box to list volume snapshots details is populated.
+5. Volume snapshot should be created.
+6. task status shows completed for volume snapshot.
+7. new device should be added to the ESX host.
+8. volume snapshots list oputput of opensds has new snapshot created."
+WebClient (flex),List Volume Snapshots on multi openSDS platform added setups,NBP_VMWARE_STORAGE_269,,"Step 1 Click Home in the navigation tree on the left.
+Step 2 In the Inventories area, click Hosts and Clusters
+Step 3 In the navigation tree on the left, select the host on which volume to be listed. Right-click the host, and choose OpenSDS Storage Plugin > mount/unmount/backup volume
+step 4 select the volume whose snapshot to be seen ","1. The Home page is displayed. 
+2. esx hosts are listed in the tree panel. 
+3. The Mount/Unmount Backup Volume tab is displayed in the tree panel. 
+4. dialogue box to list volumes snapshots details is populated."

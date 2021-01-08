@@ -1,0 +1,510 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+Build and Depoy VRO Plugin,Build VRO Plugin,NBP_VMWARE_VRO_1,1. Required build setup and lib are available as mentioned in  readme.txt of vro plugin,"1. Clone or Download /opensds/nbp repository in a windows machine
+2. execute  /vmware/vro/plugin/run/run.bat
+3. Verify plugin package is available ","1. Repository is cloned / or package is downloaded
+2. Build Successfull message
+3./vro/plugin/plugin-package folder contains openSDS_Storage_vRO_Plugin_V1.0.0.zip"
+,Deploy VRO Plugin,NBP_VMWARE_VRO_1,"1.vrealize orchestrator is created
+2.User is able to launch <vro_IP>:8283/vco-controlcenter
+3Plugin Package is built and available as zip package in vro/release folder","1.Launch <vro_IP>:8283/vco-controlcenter
+2. Select Plugin Management
+3. unzip /vro/plugin/plugin-package/openSDS_Storage_vRO_Plugin_V1.0.0.zip
+4.Go to Intsall plugin-section and Browse /vro/plugin/plugin-package/vrealize-orchestrator-plugin-opensds.dar
+5.Upload .dar file
+6.Click install","1. VCO Control Center Launched
+2. Plugin-mange page is open
+3. unzip is success and 2 files (1.org.OpenSDS.DataManagement.package and 2.vrealize-orchestrator-plugin-opensds.dar ) are available
+4. Able to locate .dar files
+5.Install Plugin displays OpenSDS.1.0.1 with install button enabled
+6. Plugin 'OpenSDS' (1.0..0 build 1 is installed' message "
+Verify Package and Workflows,Verify Package,NBP_VMWARE_VRO_2,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode
+3. Check existance of Package name org.OpenSDS.Storage ","1. VRO Client Launched
+2.Switched to Design mode 
+3. Package org.OpenSDS.Storage is present"
+,Verify Actions,NBP_VMWARE_VRO_3,,"1. Launch vRealize Orchestrator Client 
+2. Switch to Design Mode
+ 3. switch to actions tab,browse for org.opensds.storage
+4.Check existance of createDatastoreToHost ","1. VRO Client Launched 
+2.Switched to Design mode
+ 3. Actions folder org.OpenSDS.Storage is present
+4.Action createDataStoreToHost is present"
+,Verify Workflows,NBP_VMWARE_VRO_4,,"1. Launch vRealize Orchestrator Client 
+2. Switch to Design Mode
+ 3. switch to workfows tab,browse for OpenSDS folder
+4.Check existance following workflows
+a)OpenSDS DataManagement/Configuration/Register OpenSDS
+b)OpenSDS DataManagement/Configuration/UnRegister OpenSDS
+c)OpenSDS DataManagement/SAN Management/Attach Volume To host
+d)OpenSDS DataManagement/SAN Management/Create Volume
+e)OpenSDS DataManagement/SAN Management/Delete Volume 
+f)OpenSDS DataManagement/SAN Management/Expand Volume
+g)OpenSDS DataManagement/vSpshere Integration/Create Datastore","1. VRO Client Launched 
+2.Switched to Design mode
+3. OpenSDS Workflow folder is present
+4. All workflows (a-g) are present"
+,Export Package,NBP_VMWARE_VRO_5,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Check existance of Package name org.OpenSDS.Storage
+4.right click on org.OpenSDS.Storage and select Export Package
+5. Choose a name and click save
+6. Verify the package is presnt in exported location","1. VRO Client Launched
+2.Switched to Design mode 
+3. Package org.OpenSDS.Storage is present
+4.Save dialogue window with default options pop up
+5. Export success
+6. Package file is present in selected location"
+,Export Package to Folder,NBP_VMWARE_VRO_6,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Check existance of Package name org.OpenSDS.Storage
+4.right click on org.OpenSDS.Storage and select Expand Package to Folder
+5. Choose a name and click save
+6. Verify the package is presnt in exported location","1. VRO Client Launched 
+2.Switched to Design mode 
+3. Package org.OpenSDS.Storage is present 
+4.Save dialogue window with default options pop up 
+5. Export success 
+6. Package folder   is present in selected location"
+,Import Package,NBP_VMWARE_VRO_7,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select Import Package 
+4. Select the Package and click open
+5. verify package org.opensds.stoarge is present in packages tab","1. VRO Client Launched 
+2.Switched to Design mode 
+3.open dialogue opened
+4.package import success
+5. package org.opensds.stoarge is present in packages tab"
+,Import Package from Folder,NBP_VMWARE_VRO_8,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select Import Package from folder
+4. Select the Package folder  and click open
+5. verify package org.opensds.stoarge is present in packages tab","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate Register OpenSDS workflow,NBP_VMWARE_VRO_9,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/Configuration/Register OpenSDS
+4. right clickk on workflow and select validate Workflow","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate UnRegister OpenSDS workflow,NBP_VMWARE_VRO_10,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/Configuration/UnRegister OpenSDS
+4. right clickk on workflow and select validate Workflow","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate CreateVolume workflow,NBP_VMWARE_VRO_11,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Create Volume
+4. right clickk on workflow and select validate Workflow","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate DeleteVolume workflow,NBP_VMWARE_VRO_12,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Delete Volume
+4. right clickk on workflow and select validate Workflow","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate Expand Volume workflow,NBP_VMWARE_VRO_13,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Expand Volume
+4. right clickk on workflow and select validate Workflow","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate Attach Volume workflow,NBP_VMWARE_VRO_14,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Attach Volume To host
+4. right clickk on workflow and select validate Workflow","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate Create datstore workflow,NBP_VMWARE_VRO_15,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/vSpshere Integration/Create Datastore
+4. right clickk on workflow and select validate Workflow","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.validtion success
+5. package org.opensds.stoarge is present in packages tab"
+,Validate Design Mode of   Design Mode of  Register OpenSDS workflow,NBP_VMWARE_VRO_16,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow DataManagement/Configuration/Register OpenSDS
+4. right click and select edit","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.Able to Edit workflow componets"
+,Validate Design Mode of   UnRegister OpenSDS workflow,NBP_VMWARE_VRO_17,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow DataManagement/Configuration/UnRegister OpenSDS
+4. right click and select edit","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.Able to Edit workflow componets"
+,Validate Design Mode of   CreateVolume workflow,NBP_VMWARE_VRO_18,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Create Volume
+4. right click and select edit","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.Able to Edit workflow componets"
+,Validate Design Mode of   DeleteVolume workflow,NBP_VMWARE_VRO_19,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Delete Volume 
+4. right click and select edit","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.Able to Edit workflow componets"
+,Validate Design Mode of   Expand Volume workflow,NBP_VMWARE_VRO_20,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Expand Volume 
+4. right click and select edit","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.Able to Edit workflow componets"
+,Validate Design Mode of   Attach Volume workflow,NBP_VMWARE_VRO_21,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow DataManagement/SAN Management/Attach Volume To host
+4. right click and select edit","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.Able to Edit workflow componets"
+,Validate Design Mode of   Create datstore workflow,NBP_VMWARE_VRO_22,,"1. Launch vRealize Orchestrator Client
+2. Switch to Design Mode 
+3. Select  work flow OpenSDS DataManagement/vSpshere Integration/Create Datastore 
+4. right click and select edit","1. VRO Client Launched 
+2.Switched to Design mode 
+3.work flow is visible
+4.Able to Edit workflow componets"
+Run Workflows,Run Register OpenSDS workflow with all Valid Parameters,NBP_VMWARE_VRO_23,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  work flow OpenSDS DataManagement/vSpshere Integration/Create Datastore 
+4. right click and select Run 
+5. Provide input Parameters and click submit
+6. Check logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Running status is on , and completed successfully
+6.No error in logs"
+,Run UnRegister OpenSDS workflow with all Valid Parameters,NBP_VMWARE_VRO_24,,,
+,Run CreateVolume workflow with all Valid Parameters,NBP_VMWARE_VRO_25,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Create Volume
+4. right click and select Run 
+5. Provide input Parameters and click submit
+6. Check logs
+7. Verify volume created in OpenSDS
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Running status is on , and completed successfully
+6.No error in logs
+7.newly created volume is present 
+9. No error in openSDS logs"
+,Run DeleteVolume workflow with all Valid Parameters,NBP_VMWARE_VRO_26,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Create Volume
+4. right click and select Run 
+5. Provide input Parameters and click submit
+6. Check logs
+7. Verify volume is deleted  in OpenSDS by running osdsctl volume list
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Running status is on , and completed successfully
+6.No error in logs
+7.deleted volume is not available in OpenSDS
+9. No error in openSDS logs"
+,Run Expand Volume workflow with all Valid Parameters,NBP_VMWARE_VRO_27,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Expand  volume
+4. right click and select Run 
+5. Provide input Parameters and click submit
+6. Check logs
+7. Verify volume is expanded  in OpenSDS by running osdsctl volume show <volid>
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Running status is on , and completed successfully
+6.No error in logs
+7.volume is with expanded size is availble 
+9. No error in openSDS logs"
+,Run Attach Volume workflow with all Valid Parameters,NBP_VMWARE_VRO_28,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Create and Attach Volume 
+4. right click and select Run 
+5. Provide input Parameters and click submit
+6. Check logs
+7. Verify volume is crated and attached   in OpenSDS by running osdsctl volume list ans osds volume attachment list
+8. verify OpenSDS logs
+9. Login to Vpshere web client and rescan adapter
+10 . Verify newly created disk  is presnt in ESX host, ","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Running status is on , and completed successfully
+6.No error in logs
+7.volume and attachment is available in OpenSDS 
+8. No error in openSDS logs
+9.new disk is visoble in vsphere web client.
+10. New data store is present and deatils are shown"
+,Run Create datstore workflow with all Valid Parameters,NBP_VMWARE_VRO_29,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  work flow OpenSDS DataManagement/SAN Management/Create Volume
+4. right click and select Run 
+5. Provide input Parameters and click submit
+6. Check logs
+7. Verify volume is deleted  in OpenSDS by running osdsctl volume list
+8. verify OpenSDS logs
+9. Login to Vpshere web client 
+10 . Verify Dnewly created data store is presnt in ESX host, Menu-> host and clusters , switch to datastores tab","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Running status is on , and completed successfully
+6.No error in logs
+7.deleted volume is not available in OpenSDS
+8. No error in openSDS logs
+9.Logged in to Webclient
+10. New data store is present and deatils are shown"
+,Run Register OpenSDS workflow with invalid Parameters,NBP_VMWARE_VRO_30,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Run UnRegister OpenSDS workflow with invalid Parameters,NBP_VMWARE_VRO_31,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Run CreateVolume workflow with invalid Parameters,NBP_VMWARE_VRO_32,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Run DeleteVolume workflow with invalid Parameters,NBP_VMWARE_VRO_33,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Run Expand Volume workflow with invalid Parameters,NBP_VMWARE_VRO_34,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Run Attach Volume workflow with invalid Parameters,NBP_VMWARE_VRO_35,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Run Create datstore workflow with invalid Parameters,NBP_VMWARE_VRO_36,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Create VM on OpenSDS attached Datastore,NBP_VMWARE_VRO_37,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select workflow 
+5. give any invalid value for input parameters , and seletc run.
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Run workflow option is available
+6.error message in  logs
+7.workflow triggered operation is not complted in opensds
+8. error/info messages in openSDS logs"
+,Re run workflow with cached workflow: Register OpenSDS workflow with valid Parameters,NBP_VMWARE_VRO_38,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select already run workflow result from drop down, right click  and select run again
+5. modify input Parameters if required
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Rerun workflow option is available
+6.No error in logs
+7.workflow triggered operation is complted in opensds
+8. No error in openSDS logs"
+,Re run workflow with cached workflow: UnRegister OpenSDS workflow with valid Parameters,NBP_VMWARE_VRO_39,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select already run workflow result from drop down, right click  and select run again
+5. modify input Parameters if required
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Rerun workflow option is available
+6.No error in logs
+7.workflow triggered operation is complted in opensds
+8. No error in openSDS logs"
+,Re run workflow with cached workflow: CreateVolume workflow with valid Parameters,NBP_VMWARE_VRO_40,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select already run workflow result from drop down, right click  and select run again
+5. modify input Parameters if required
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Rerun workflow option is available
+6.No error in logs
+7.workflow triggered operation is complted in opensds
+8. No error in openSDS logs"
+,Re run workflow with cached workflow: DeleteVolume workflow with valid Parameters,NBP_VMWARE_VRO_41,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select already run workflow result from drop down, right click  and select run again
+5. modify input Parameters if required
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Rerun workflow option is available
+6.No error in logs
+7.workflow triggered operation is complted in opensds
+8. No error in openSDS logs"
+,Re run workflow with cached workflow: Expand Volume workflow with valid Parameters,NBP_VMWARE_VRO_42,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select already run workflow result from drop down, right click  and select run again
+5. modify input Parameters if required
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Rerun workflow option is available
+6.No error in logs
+7.workflow triggered operation is complted in opensds
+8. No error in openSDS logs"
+,Re run workflow with cached workflow: Attach Volume workflow with valid Parameters,NBP_VMWARE_VRO_43,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select already run workflow result from drop down, right click  and select run again
+5. modify input Parameters if required
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Rerun workflow option is available
+6.No error in logs
+7.workflow triggered operation is complted in opensds
+8. No error in openSDS logs"
+,Re run workflow with cached workflow: Create datstore workflow with valid Parameters,NBP_VMWARE_VRO_44,,"1. Launch vRealize Orchestrator Client
+2. Switch to Run  Mode 
+3. Select  the work flow
+4. select already run workflow result from drop down, right click  and select run again
+5. modify input Parameters if required
+6. Check logs
+7. Verify operation status in opensds .
+8. verify OpenSDS logs","1. VRO Client Launched 
+2.Switched to Run mode 
+3.work flow is visible
+4.Start workflow page is open
+5.Rerun workflow option is available
+6.No error in logs
+7.workflow triggered operation is complted in opensds
+8. No error in openSDS logs"

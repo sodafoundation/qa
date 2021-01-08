@@ -1,0 +1,25 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+Setup Driver,[Valid Scenario] Initialize the Driver,DOCK_NETAPP_01,"1. Opensds (Hotpot) must be Installed and all processes running 
+2. Block Profile must be created",,Initialize the Driver
+List Pool,[Valid Scenario] List all the pools,DOCK_NETAPP_02,"1. Opensds (Hotpot) must be Installed and all processes running 
+2. Block Profile must be created",[CLI] osdsctl pool list,List all the pools in the OpenSDS
+Create volume,"[Valid Scenario] inputs: name: should follow regrex[a-z,A-Z,0-9,_,-] and length should be less than 255 chars, description: 'The volume test', size: 1, poolId:<valid poolId>
+Example: name:""volume1""
+",DOCK_NETAPP_03,"1. Opensds (Hotpot) must be Installed and all processes running 
+2. Block Profile must be created",[POSTMAN],Volume should be created in OpenSDS and in the simulator
+Resize/Extend Volume,"[Valid Scenario] inputs: , newSize:2, ",DOCK_NETAPP_04,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[POSTMAN],Volume should be extended in OpenSDS and in the simulator
+Create Volume From Snapshot,"[Valid Scenario] inputs: name: 'volume1', size:1, snapshotId:<valid snapshotId>",DOCK_NETAPP_05,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[POSTMAN],Volume should be created in OpenSDS and in the simulator
+Delete Volume,[Valid Scenario] inputs: VolumeId:<valid volumeId>,DOCK_NETAPP_06,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[CLI] osdsctl volume delete <volumeId>,Volume should be deleted in OpenSDS and in the simulator
+Create Volume Attachment,[Valid Scenario] Create volume attachment with inputs: hostId:<valid hostId> and volumeId: <valid volumeId>,DOCK_NETAPP_07,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[POSTMAN],Volume  Attached should be created in OpenSDS and lun should be mapped in the simulator
+Delete Volume Attachment,[Valid Scenario] inputs: attachmentId:<valid attachmentId>,DOCK_NETAPP_08,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[CLI] osdsctl volume attachment delete <attachmentId>,Volume Attachment should be deleted and Volume should be available in OpenSDS 
+Create Volume snapshot,"[Valid Scenario] Create snapshot for volume with valid inputs name: ""vol_snap1"", description:'This is just test', profileId: Valid profileId",DOCK_NETAPP_09,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[POSTMAN],Volume Snapshot should be created in OpenSDS and in the simulator
+Get Volume snapshot,[Valid Scenario] Get snapshot by providing volid snapshotId,DOCK_NETAPP_10,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[CLI] osdsctl volume snapshot show <snapshotId>,VoIume Snapshot Info should be shown
+Delete Volume snapshot,[Valid Scenario] Delete snapshot by providing volid snapshotId,DOCK_NETAPP_11,"1. Opensds (Hotpot) must be Installed and all processes should be running 
+2. Block Profile must be created",[CLI] osdsctl volume snapshot delete <snapshotId>,Volume Snapshot should be deleted in OpenSDS and in the simulator

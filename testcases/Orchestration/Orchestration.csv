@@ -1,0 +1,124 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Precondition,Testcase steps,Expected Result
+"Service Catalog Registration: Admin User can register a service to the service catalog which are consumable for the users
+(w/o Dashboard) [Valid Inputs]",Create a Bucket Migration Service Definition[through POSTMAN],ORCHAUTO_TC_01,"1. Application is installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. POSTMAN client is configured","1. Setup the POSTMAN client
+2. Provide the valid payload
+3. POST call to the REST Endpoint ","1. Service Definition is added to the database
+2. Workflow Definition is created with the associated relationship with the service definition
+3. REST call response: 200OK"
+,"Create a Volume Provisioning Service Definition[through POSTMAN]
+",ORCHAUTO_TC_02,"1. Application is installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. POSTMAN client is configured","1. Setup POSTMAN client
+2. Provide the valid payload
+3. POST call to the REST Endpoint","1. Service Definition is added into the DB
+2. Workflow Definition is created with the associated relationship with the service definition
+3. REST call response: 200OK"
+View Service Definition from service Catalog(w/o Dashboard),View all the Service Definitions,ORCHAUTO_TC_03,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Definitions should be registered","
+1. GET call to the REST Endpoint","1. Service Definitions fetched from sqlite 
+2. REST call response : 200OK
+
+"
+,View Bucket Migration Service Definition,ORCHAUTO_TC_04,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Definition should be registered","
+1. GET call to the REST Endpoint","1. Service Definition fetched from sqlite 
+2. REST call response : 200OK
+
+
+"
+,View Volume Provision Service Definition,ORCHAUTO_TC_05,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Definition should be registered",1. GET call to the REST Endpoint,"1. Service Definition fetched from sqlite 
+2. REST call response : 200OK
+
+
+
+"
+"User can Create Service Instances
+(w/o Dashboard) [Valid Inputs]",Create a Bucket Migration Service Instance (User: Normal User),ORCHAUTO_TC_06,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Instances should be created","1. Provide the valid payload
+2. POST call to the REST Endpoint","1. Service Instance is added into the sqlite
+2. Workflow is created with the associated relationship with the service instance
+3. REST call response: 200OK"
+,Create a Volume Provisioning Service Instance (User: Normal User),ORCHAUTO_TC_07,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Instances should be created","1. Provide the valid payload
+2. POST call to the REST Endpoint","1. Service Instance is added into the sqlite
+2. Workflow is created with the associated relationship with the service instance
+3. REST call response: 200OK"
+"View Service Instances
+(w/o Dashboard)",View all the Service Instances,ORCHAUTO_TC_08,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Definitions should be registered",1. GET call to the REST Endpoint,"1. Service Instances fetched from sqlite 
+2. REST call response : 200OK"
+,View Bucket Migration Definition Service Instance,ORCHAUTO_TC_09,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Definition should be registered","
+1. GET call to the REST Endpoint","1. Service Instance fetched from sqlite 
+2. REST call response : 200OK"
+,View Volume Provision Definition Service Instance,ORCHAUTO_TC_10,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Instances should be created",1. GET call to the REST Endpoint,"1. Service Instance fetched from sqlite 
+2. REST call response : 200OK"
+"Delete Service Instance
+(w/o Dashboard)
+",Delete a Bucket Migration Service Instance,ORCHAUTO_TC_11,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Instances should be created",1. DELETE call to the REST Endpoint,"1. Service Instance is removed from the sqlite
+2. Workflow is deleted and the associated relationship with the service instance also deleted
+3. REST call response: 200OK"
+,Delete a Volume Provisioning Service Instance,ORCHAUTO_TC_12,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm
+4. Service Instances should be created",1. DELETE call to the REST Endpoint,"1. Service Instance is removed from the sqlite
+2. Workflow is deleted and the associated relationship with the service instance also deleted
+3. REST call response: 200OK"
+,View a deleted Service instance,ORCHAUTO_TC_13,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance creation fails with response: 404
+,Create a service instance and check the status,ORCHAUTO_TC_14,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance creation fails with response: 400
+,Get a service instance and check the status,ORCHAUTO_TC_15,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",GET call to REST Endpoint,Listing of instance should fail with response: 404
+,Get a service instance filtered by service definition id,ORCHAUTO_TC_16,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance status should be proper (Runnin/Failed/Success)
+,View a service instance wth incorrect service ID,ORCHAUTO_TC_17,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",GET call to REST Endpoint,Service instance status should be proper (Runnin/Failed/Success)
+User can change the attributes of Service Instances (Valid Inputs),User updates the name of the instance,ORCHAUTO_TC_18,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Swrvice instance should be listed with response: 200
+,User updates the description of the instance,ORCHAUTO_TC_19,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance listing should fail with response: 404
+,User updates name and description of the instance,ORCHAUTO_TC_20,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance listing should fail with response: 404
+User can change the attributes of Service Instances (Invalid Inputs),User changes the name of the instance with invalid characters ,ORCHAUTO_TC_21,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance listing should fail with response: 404
+,User changes the name of the instance with invalid length of the name ,ORCHAUTO_TC_22,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance listing should fail with response: 404
+,User changes the description with invalid characters,ORCHAUTO_TC_23,"1. Application is  Installed & running
+2. OpenSDS is deployed & running
+3. Actions/Workflows are added to the stackstorm",POST call to REST Endpoint,Service instance listing should fail with response: 404

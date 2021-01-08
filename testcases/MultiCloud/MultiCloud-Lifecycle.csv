@@ -1,0 +1,641 @@
+Feature Scenario,Testcase Title,TestcaseId,Testcase Criticality,Testcase Precondition,Testcase steps,Expected Result
+"User can create new  bucket Life Cycle configuration
+
+
+
+
+
+
+
+
+[Valid Inputs]",Create New BucketLife Cycle configuration with Transition Rule,DLM_TC_01,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+","1. Click on Lifecyle Menu
+2. Enter Rule ID 
+3. Select Transition Rule 
+4. Provide Transition rule with days and select backend
+5. Click Submit Button","1. Lifecycle Configuration is added into Database wth Transition Rule
+2. Browser response: 200OK
+3. Dashboard Lists the newly created Configuration showing transition rule"
+,Create New BucketLife Cycle configuration with Expiration Rule,DLM_TC_02,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)","1. Click on Lifecyle Menu
+2. Enter Rule ID 
+3. Select Expiration Rule
+4. Provide days after which bucket should expire
+5. Click Submit Button","1. Lifecycle Configuration is added into Database wth Transition Rule
+2. Browser response: 200OK
+3. Dashboard Lists the newly created Configuration showing expiration rule"
+,Create New BucketLife Cycle configuration with Transition Rule & Expiration Rule,DLM_TC_03,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+","1. Click on Lifecyle Menu
+2. Enter Rule ID 
+3. Select Transition Rule 
+4. Provide Transition rule with days and select backend
+5. Select Expiration Rule
+6. Proide Days after which bucket should expire
+7. Click Submit Button
+","1. Lifecycle Configuration is added into Database with Transition Rule and Expiration Rule
+2. Browser response: 200OK
+3. Dashboard Lists the newly created Configuration showing both transition and Expiration Rules"
+User can create new  bucket Life Cycle configuration[Invalid Inputs],please add test cases with different invalid inputs for lifecycle configuration,DLM_TC_04,,,,
+"View and Update Bucket Lifecycle Configuration
+
+
+
+
+
+
+
+
+
+
+
+
+",View existing Bucket Lifecycle Configuration,DLM_TC_05,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket, all the rules
+
+","1. Lifecycle configuration fetched from Database 
+2. Browser response : 200OK
+3. Dashboard shows the existing lifecycle configuration on specified bucket
+
+"
+,Disable  existing Bucket lifecycle Configuration,DLM_TC_06,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket
+4. Check on the right side options of the rule, click on Disable
+5. There will be a pop up showing that configuration will be disabled, click OK","1. Lifecycle configuration will be updated in Database with updated status
+2. Browse response: 200OK
+3. Dashboard shows status of lifecycle configuration as Disabled
+
+
+"
+,Enable disabled Bucket lifecycle Configuration,DLM_TC_07,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket and status is disabled
+4. Check on the right side options of the rule, click on Enable
+5. There will be a pop up showing that configuration will be enabled, click OK","1. Lifecycle configuration will be updated in Database with updated status
+2. Browse response: 200OK
+3. Dashboard shows status of lifecycle configuration as Enabled and will also list all the transition and expiration rules
+
+
+"
+,Edit existing Bucket lifecycle Configuration,DLM_TC_08,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket
+4. Check on the right side options of the rule, click on Edit
+5. There will be a window which will show existing configuration, make the changes whatever required.
+6. Click Submit Button","1. Lifecycle configuration will be updated in Database with latest changes
+2. Browse response: 200OK
+3. Dashboard shows new updated lifecycle configuration 
+
+"
+Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configuration,DLM_TC_09,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket
+4. Check on the right side options of the rule, click on Delete
+5. There will be a pop up window which will say that existing configuration will be deleted
+6. Click OK Button","1. Lifecycle rule will be deleted from Database
+2. Browse response: 200OK
+3. Dashboard will delete the lifecycle rule"
+,Deleting multiple lifecycle Configuration,DLM_TC_10,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configurations(multple) existing on that bucket
+4. Select all the rules which you want to delete
+5. There will be a pop up window which will say that all the rules will be deleted
+6. Click OK Button","1. Lifecycle rules(all selected)will be deleted from Database
+2. Browse response: 200OK
+3. Dashboard will delete all the lifecycle rules whcih were selected one by one "
+In-Cloud AWS Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_99,DLM_TC_11,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_12,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object should be in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_99 to Tier_999,DLM_TC_13,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object located in STANDARD_IA storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+In-Cloud Azure Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_99,DLM_TC_14,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_15,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object should be in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+In-Cloud Huawei Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_99,DLM_TC_16,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as huawei backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_17,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object should be in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as huawei backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+Cross-Cloud AWS to Azure Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_1,DLM_TC_18,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_99,DLM_TC_19,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_20,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_999 to Tier_999,DLM_TC_30,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+Cross-Cloud GCP to Azure Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_1,DLM_TC_21,,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_22,,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+Cross-Cloud GCP to Aws Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_1,DLM_TC_23,,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD  to STANDARD  storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_24,,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+Cross-Cloud AWS to Huawei Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_1,DLM_TC_25,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD  storage class
+5. Select backend as huawei backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_99,DLM_TC_26,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as huawei backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+Cross-Cloud Azure to AWS Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_1,DLM_TC_27,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD  storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_99,DLM_TC_28,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_29,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_999 to Tier_999,DLM_TC_30,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AZURE backend
+5. Object is uploaded in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+Cross-Cloud Huawei to Azure Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_1,DLM_TC_31,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD  storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_99,DLM_TC_32,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_33,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as Azxure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+Cross-Cloud Huawei to AWS Cloud [Valid Inputs],Transitioning object from Tier_1 to Tier_1,DLM_TC_34,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"
+,Transitioning object from Tier_1 to Tier_999,DLM_TC_35,H,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in Database
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+4. Transition rule will take place after the specified number of days in the lifecycle rule
+5. Check Source and Target Cloud providers to check the buckets
+Note: For cross-cloud transition, there will be new bucket, with the same name that is of source bucket, will be created in target backend. The corresponding object/s will be moved accordingly
+
+
+"

@@ -1,0 +1,1912 @@
+Feature Scenario,Testcase Title,Testcase Id,Testcase Precondition,Testcase steps,Expected Result
+"User can create new  bucket Life Cycle configuration
+
+
+
+
+
+
+
+
+[Valid Inputs]",Create New BucketLife Cycle configuration with Transition Rule,LC_001,"1. Application is  Installed & running
+
+2. Dashboard is deployed and running
+
+3. User logged into dashboard
+
+4. Bucket is created
+
+5. Object is uploaded(optional)
+","1. Click on Lifecyle Menu
+
+2. Enter Rule ID 
+
+3. Select Transition Rule 
+
+4. Provide Transition rule with days and select backend
+
+5. Click Submit Button","1. Lifecycle Configuration is added into MongoDB wth Transition Rule
+
+2. Browser response: 200OK
+
+3. Dashboard Lists the newly created Configuration showing transition rule
+"
+,Create New BucketLife Cycle configuration with Expiration Rule,LC_002,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)","1. Click on Lifecyle Menu
+2. Enter Rule ID 
+3. Select Expiration Rule
+4. Provide days after which bucket should expire
+5. Click Submit Button","1. Lifecycle Configuration is added into MongoDB wth Transition Rule
+2. Browser response: 200OK
+3. Dashboard Lists the newly created Configuration showing expiration rule"
+,Create New BucketLife Cycle configuration with Transition Rule & Expiration Rule,LC_003,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+","1. Click on Lifecyle Menu
+2. Enter Rule ID 
+3. Select Transition Rule 
+4. Provide Transition rule with days and select backend
+5. Select Expiration Rule
+6. Proide Days after which bucket should expire
+7. Click Submit Button
+","1. Lifecycle Configuration is added into MongoDB with Transition Rule and Expiration Rule
+2. Browser response: 200OK
+3. Dashboard Lists the newly created Configuration showing both transition and Expiration Rules"
+"User can create new  bucket Life Cycle configuration
+
+
+
+
+
+
+
+
+[Invalid Inputs]",please add test cases with different invalid inputs for lifecycle configuration,LC_004,,,
+"View and Update Bucket Lifecycle Configuration
+
+
+
+
+
+
+
+
+
+
+
+
+",View existing Bucket Lifecycle Configuration,LC_005,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket, all the rules
+
+","1. Lifecycle configuration fetched from MongoDB 
+2. Browser response : 200OK
+3. Dashboard shows the existing lifecycle configuration on specified bucket
+
+"
+,Disable  existing Bucket lifecycle Configuration,LC_006,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket
+4. Check on the right side options of the rule, click on Disable
+5. There will be a pop up showing that configuration will be disabled, click OK","1. Lifecycle configuration will be updated in MongoDB with updated status
+2. Browse response: 200OK
+3. Dashboard shows status of lifecycle configuration as Disabled
+
+
+"
+,Enable disabled Bucket lifecycle Configuration,LC_007,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket and status is disabled
+4. Check on the right side options of the rule, click on Enable
+5. There will be a pop up showing that configuration will be enabled, click OK","1. Lifecycle configuration will be updated in MongoDB with updated status
+2. Browse response: 200OK
+3. Dashboard shows status of lifecycle configuration as Enabled and will also list all the transition and expiration rules
+
+
+"
+,Edit existing Bucket lifecycle Configuration,LC_008,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket
+4. Check on the right side options of the rule, click on Edit
+5. There will be a window which will show existing configuration, make the changes whatever required.
+6. Click Submit Button","1. Lifecycle configuration will be updated in MongoDB with latest changes
+2. Browse response: 200OK
+3. Dashboard shows new updated lifecycle configuration 
+
+"
+Delete Bucket Lifecycle Configuration,Deleting the existing lifecycle Configuration,LC_009,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configuration existing on that bucket
+4. Check on the right side options of the rule, click on Delete
+5. There will be a pop up window which will say that existing configuration will be deleted
+6. Click OK Button","1. Lifecycle rule will be deleted from MongoDB
+2. Browse response: 200OK
+3. Dashboard will delete the lifecycle rule"
+,Deleting multiple lifecycle Configuration,LC_010,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created
+5. Object is uploaded(optional)
+6. Lifecycle is configured and is visible in Dashboard","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Check the lifecycle configurations(multple) existing on that bucket
+4. Select all the rules which you want to delete
+5. There will be a pop up window which will say that all the rules will be deleted
+6. Click OK Button","1. Lifecycle rules(all selected)will be deleted from MongoDB
+2. Browse response: 200OK
+3. Dashboard will delete all the lifecycle rules whcih were selected one by one "
+"User can do data lifecycle operations within Huawei Cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD to STANDARD_IA within huawei backend,LC_011,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as huawei backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD to GLACIER  within huawei backend,LC_012,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object should be in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as huawei backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA to GLACIER  within huawei backend,LC_013,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object located in STANDARD_IA storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to GLACIER storage class
+5. Select backend as huawei backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations within Huawei Cloud [Invalid Inputs]
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD_IA to STANDARD within huawei backend,LC_014,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object located in STANDARD_IA storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD_IA within huawei backend,LC_015,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition fromGLACIER to  STANDARD_IA storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD within huawei backend,LC_016,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using HUAWEI backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+"User can do data lifecycle operations within AWS Cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD to STANDARD_IA within AWS backend,LC_017,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object is uploaded in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD to GLACIER  within AWS backend,LC_018,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object should be in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA to GLACIER  within AWS backend,LC_019,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object located in STANDARD_IA storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations within AWS Cloud [Invalid Inputs]
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD_IA to STANDARD within AWS backend,LC_020,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object located in STANDARD_IA storage class","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD_IA within AWS backend,LC_021,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition fromGLACIER to  STANDARD_IA storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD within AWS backend,LC_022,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+"User can do data lifecycle operations within AzureCloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD to STANDARD_IA within Azure backend,LC_023,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object is uploaded in STANDARD storage class
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD to GLACIER  within Azure  backend,LC_024,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object should be in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA to GLACIER  within Azure backend,LC_025,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object located in STANDARD_IA storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations within Azure Cloud [Invalid Inputs]
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD_IA to STANDARD within Azure backend,LC_026,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object located in STANDARD_IA storage class","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD_IA within Azure backend,LC_027,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition fromGLACIER to  STANDARD_IA storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD within Azure backend,LC_028,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+"User can do data lifecycle operations within GCP Cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD to STANDARD_IA within GCP backend,LC_029,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object is uploaded in STANDARD storage class
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to STANDARD_IA storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD to GLACIER  within GCP  backend,LC_030,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object should be in STANDARD storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA to GLACIER  within GCP backend,LC_031,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in STANDARD_IA storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations within GCP Cloud [Invalid Inputs]
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD_IA to STANDARD within GCP backend,LC_032,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in STANDARD_IA storage class","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from STANDARD_IA to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD_IA within GCP backend,LC_033,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to  STANDARD_IA storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+,Transitioning object from GLACIER to STANDARD within GCP backend,LC_034,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Object located in GLACIER storage class
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition from GLACIER to STANDARD storage class
+
+","1. Popup showing the transition is not allowed.
+2. Browse response : Error
+
+
+"
+"User can do data lifecycle operations across cloud from OBS Cloud to AWS cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD OBS to STANDARD_IA AWS,LC_035,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in STANDARD storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD OBS to GLACIER AWS,LC_036,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in STANDARD storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA OBS  to GLACIER AWS,LC_037,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in STANDARD_IA storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER OBS  to GLACIER AWS,LC_038,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in GLACIER storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from OBS Cloud to Azure cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD OBS to STANDARD_IA Azure,LC_039,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using Azure  backend
+6. Object is uploaded in STANDARD storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD OBS to GLACIER Azure,LC_040,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in STANDARD storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA OBS  to GLACIER Azure,LC_041,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in STANDARD_IA storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER OBS  to GLACIER Azure,LC_042,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in GLACIER storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from OBS Cloud to GCP cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD OBS to STANDARD_IA GCP,LC_043,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using GCP  backend
+6. Object is uploaded in STANDARD storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD OBS to GLACIER GCP,LC_044,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in STANDARD storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA OBS  to GLACIER GCP,LC_045,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in STANDARD_IA storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER OBS  to GLACIER GCP,LC_046,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using OBS backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in GLACIER storage class of OBS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from AWS Cloud to OBS cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD AWS to STANDARD_IA OBS,LC_047,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using OBS  backend
+6. Object is uploaded in STANDARD storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD AWS to GLACIER OBS,LC_048,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in STANDARD storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA AWS  to GLACIER OBS,LC_049,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in STANDARD_IA storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER AWS  to GLACIER OBS,LC_050,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in GLACIER storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from AWS Cloud to Azure  cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD AWS to STANDARD_IA Azure,LC_051,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using Azure  backend
+6. Object is uploaded in STANDARD storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD AWS to GLACIER Azure,LC_052,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in STANDARD storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA AWS  to GLACIER Azure,LC_053,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in STANDARD_IA storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER AWS  to GLACIER Azure,LC_054,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in GLACIER storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from AWS Cloud to GCP cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD AWS to STANDARD_IA GCP,LC_055,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using GCP  backend
+6. Object is uploaded in STANDARD storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD AWS to GLACIER GCP,LC_056,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in STANDARD storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA AWS  to GLACIER GCP,LC_057,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in STANDARD_IA storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER AWS  to GLACIER GCP,LC_058,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using AWS backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in GLACIER storage class of AWS backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP  backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from Azure Cloud to OBS cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD Azure to STANDARD_IA OBS,LC_059,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using OBS  backend
+6. Object is uploaded in STANDARD storage class of Azure  backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD Azure to GLACIER OBS,LC_060,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in STANDARD storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA Azure  to GLACIER OBS,LC_061,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in STANDARD_IA storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER Azure  to GLACIER OBS,LC_062,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in GLACIER storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS  backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from Azure Cloud to AWS cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD Azure to STANDARD_IA AWS,LC_063,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using AWS  backend
+6. Object is uploaded in STANDARD storage class of Azure  backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD Azure to GLACIER AWS,LC_064,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in STANDARD storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA Azure  to GLACIER AWS,LC_065,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in STANDARD_IA storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER Azure  to GLACIER AWS,LC_066,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in GLACIER storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS  backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from Azure Cloud to GCP cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD Azure to STANDARD_IA GCP,LC_067,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using GCP  backend
+6. Object is uploaded in STANDARD storage class of Azure  backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD Azure to GLACIER GCP,LC_068,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in STANDARD storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA Azure  to GLACIER GCP,LC_069,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in STANDARD_IA storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER Azure  to GLACIER GCP,LC_070,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using Azure backend
+5. Another bucket created using GCP backend
+6. Object is uploaded in GLACIER storage class of Azure backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as GCP  backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from GCP Cloud to OBS cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD GCP to STANDARD_IA OBS,LC_071,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using OBS  backend
+6. Object is uploaded in STANDARD storage class of GCP  backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD GCP to GLACIER OBS,LC_072,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in STANDARD storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA GCP  to GLACIER OBS,LC_073,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in STANDARD_IA storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER GCP  to GLACIER OBS,LC_074,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using OBS backend
+6. Object is uploaded in GLACIER storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as OBS  backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from Azure Cloud to AWS cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD GCP to STANDARD_IA AWS,LC_075,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using AWS  backend
+6. Object is uploaded in STANDARD storage class of GCP  backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD GCP to GLACIER AWS,LC_076,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in STANDARD storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA GCP  to GLACIER AWS,LC_077,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in STANDARD_IA storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER GCP  to GLACIER AWS,LC_078,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using AWS backend
+6. Object is uploaded in GLACIER storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as AWS  backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+"User can do data lifecycle operations across cloud from GCP Cloud to Azure  cloud [Valid Inputs]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+",Transitioning object from STANDARD GCP to STANDARD_IA Azure,LC_079,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using Azure  backend
+6. Object is uploaded in STANDARD storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition to STANDARD_IA storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule across cloud in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD GCP to GLACIER Azure,LC_080,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in STANDARD storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from STANDARD_IA GCP  to GLACIER Azure,LC_081,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in STANDARD_IA storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
+,Transitioning object from GLACIER GCP  to GLACIER Azure,LC_082,"1. Application is  Installed & running
+2. Dashboard is deployed and running
+3. User logged into dashboard
+4. Bucket is created using GCP backend
+5. Another bucket created using Azure backend
+6. Object is uploaded in GLACIER storage class of GCP backend
+
+
+
+","1. Click on Bucket
+2. Click on  Lifecycle Menu
+3. Select transition rule 
+4. Select the transition  to GLACIER storage class
+5. Select backend as Azure backend
+6. Click SUBMIT Button","1. Lifecycle rule will be updated in MongoDB
+2. Browse response: 200OK
+3. Dashboard will list the transition rule in lifecycle configuration of the bucket
+
+
+"
