@@ -6,9 +6,11 @@ This reporter comes with a dashboard style summary landing page and a set of dif
 
 ## Pre-requisites
 ---  
-To run Newman, ensure that you have Node.js >= v10. [Install Node.js via package manager](https://nodejs.org/en/download/package-manager/).  
+- To run Newman, ensure that you have Node.js >= v10. [Install Node.js via package manager](https://nodejs.org/en/download/package-manager/).  
 You can install different versions of NodeJS and maintain different versions using `nvm - Node Version Manager`. Instructions on how to install `nvm` can be found [here](https://github.com/nvm-sh/nvm)  
 
+- A working SODA installation.
+- For Multicloud testing, generate an AK/SK using the SODA Dashboard. Currently the AK/SK can be generated only using the SODA Dashboard. 
 
 ## Installation
 --- 
@@ -21,13 +23,22 @@ You can install different versions of NodeJS and maintain different versions usi
 2. To Install `newman` and the reporter `newman-reporter-htmlextra`  run the following:
 
     ```
-    cd api-testing/automated-e2e-test
+    cd automated-e2e-test
     npm install
     ```
 
 
 
 ## Configuration
+
+- Update the file `./env_vars/SODA.postman_globals.json`
+```json
+{
+    "key": "HOST_IP",
+    "value": "192.168.56.123", // Enter the SODA HOST IP
+    "enabled": true
+}
+```
 ---  
 ### **Configure newman and newman-reporter-html-extra**  
 ---  
@@ -82,7 +93,7 @@ newman.run(optionsObj).on('start', function (err, args) { // on start of run, lo
 });
 ```
 
-### Configure Iteration Data
+### Multicloud testing - Configure Iteration Data
 ---  
 To run the E2E tests with different data we use the `iteration_data.json` file.
 This file contains an array of objects, each of which holds a set of inputs that can be used per iteration.
