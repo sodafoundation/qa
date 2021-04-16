@@ -1,0 +1,53 @@
+[
+    {
+        "name": "backend_aws",
+        "type": "aws-s3",
+        "region": "ap-south-1",
+        "endpoint": "s3.ap-south-1.amazonaws.com",
+        "security": "<valid_secret_key>",
+        "access": "<valid_access_key>",
+        "bucketName": "isabelatestawsbucket",
+        "folderName":"sample_aws_folder"
+    },
+    {
+        "name": "backend_azure",
+        "type": "azure-blob",
+        "region": "East Asia",
+        "endpoint": "<valid_endpoint>",
+        "security": "<valid_secret_key>",
+        "access": "<valid_access_key>",
+        "bucketName": "isabelatestazurebucket",
+        "folderName":"sample_azure_folder"
+    },
+    {
+        "name": "backend_gcp",
+        "type": "gcp-s3",
+        "region": "asia-south1",
+        "endpoint": "https://storage.googleapis.com",
+        "security": "<valid_secret_key>",
+        "access": "<valid_access_key>",
+        "bucketName": "isabelatestgcpbucket",
+        "folderName":"sample_gcp_folder"
+    },
+    {
+        "name": "backend_huawei",
+        "type": "hw-obs",
+        "region": "testregion",
+        "endpoint": "<valid_endpoint>",
+        "security": "<valid_secret_key>",
+        "access": "<valid_access_key>",
+        "bucketName": "isabelatesthwsbucket",
+        "folderName":"sample_hws_folder"
+    },
+    {
+        "name": "backend_alibaba",
+        "type": "alibaba-oss",
+        "region": "oss-ap-south-1",
+        "cloudBucket":"soda-bucket",
+        "endpoint": "https://oss.console.aliyun.com/",
+        "security": "<valid_secret_key>",
+        "access": "<valid_access_key>",
+        "bucketName": "isabelatestalibababucket",
+        "folderName":"sample_alibaba_folder"
+    }
+]
