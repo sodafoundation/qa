@@ -3,12 +3,12 @@
 	"values": [
 		{
 			"key": "authToken",
-			"value": "gAAAAABfVh5ocViaWyubzkDJaVtTWZ0iaL3V0C-h6VQQn_LkrtdQ3f25mbiyJrNDDzlggvTGg0ORcmm5t2iWyKfr9dGPsXeQqktepNBHTK6EALaDGY6xuaix41LiGhHGUdopfwwKT...",
+			"value": "",
 			"enabled": true
 		},
 		{
 			"key": "HOST_IP",
-			"value": "192.168.56.128",
+			"value": "127.0.0.1",
 			"enabled": true
 		},
 		{

@@ -35,7 +35,7 @@ You can install different versions of NodeJS and maintain different versions usi
 ```json
 {
     "key": "HOST_IP",
-    "value": "192.168.56.123", // Enter the SODA HOST IP
+    "value": "<your_host_ip>", // Enter the SODA HOST IP
     "enabled": true
 }
 ```
