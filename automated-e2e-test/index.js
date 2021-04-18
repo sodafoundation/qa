@@ -65,7 +65,7 @@ var questions = [
             {
                 name: 'SODA Multi-cloud',
                 value: 'soda-multicloud'
-            },            
+            },
             new inquirer.Separator(),
             {
                 name: 'SODA Multi-cloud Migration',
