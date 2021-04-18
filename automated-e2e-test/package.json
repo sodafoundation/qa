@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/sodafoundation/qa/issues"
   },
-  "homepage": "https://github.com/sodafoundation/qa/api-testing/automated-e2e-tests#readme",
+  "homepage": "https://github.com/sodafoundation/qa/automated-e2e-tests#readme",
   "dependencies": {
     "inquirer": "^8.0.0",
     "inquirer-file-tree-selection-prompt": "^1.0.7"

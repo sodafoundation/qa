@@ -128,7 +128,7 @@ OR
 node index.js
 ```
 The SODA E2E API Testing app will show you options to select the module for which the API tests have to be run.
-The current options available are `SODA API` and `SODA Multi-cloud`.  
+The current options available are `SODA API`, `SODA Multi-cloud` and `SODA Delfin`.  
 
 The configuration will be set accordingly.  
 

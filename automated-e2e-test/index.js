@@ -66,6 +66,10 @@ var questions = [
                 name: 'SODA Multi-cloud',
                 value: 'soda-multicloud'
             },
+            {
+                name: 'SODA Delfin',
+                value: 'soda-delfin'
+            },            
             new inquirer.Separator(),
             {
                 name: 'SODA Multi-cloud Migration',
@@ -77,10 +81,6 @@ var questions = [
             },
             {
                 name: 'SODA Multi-cloud File',
-                disabled: 'Unavailable at this time',
-            },
-            {
-                name: 'SODA Delfin',
                 disabled: 'Unavailable at this time',
             }          
         ],
@@ -106,6 +106,13 @@ inquirer
             optionsObj.reporter.htmlextra.browserTitle = 'SODA Multicloud E2E Test report';
             optionsObj.reporter.htmlextra.title = 'SODA Multicloud E2E Test report';
             optionsObj['iterationData'] = './iteration_data/multicloud_iteration_data.json';
+            break;
+        case 'soda-delfin' : 
+            collectionSource = 'SODA Delfin';
+            optionsObj.collection = './collections/SODA_Delfin_Automation_Test.postman_collection.json';
+            optionsObj.environment = './env_vars/SODA_DELFIN.postman_environment.json';
+            optionsObj.reporter.htmlextra.browserTitle = 'SODA Delfin E2E Test report';
+            optionsObj.reporter.htmlextra.title = 'SODA Delfin E2E Test report';
             break;
         default: 
             console.log("No Collection selected.");
