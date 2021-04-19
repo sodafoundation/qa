@@ -32,12 +32,12 @@ You can install different versions of NodeJS and maintain different versions usi
 ## Configuration
 
 - Update the file `./env_vars/SODA.postman_globals.json`
-```json
-{
-    "key": "HOST_IP",
-    "value": "<your_host_ip>", // Enter the SODA HOST IP
-    "enabled": true
-}
+```
+    {
+        "key": "HOST_IP",
+        "value": "<your_host_ip>", //Enter the SODA HOST IP
+        "enabled": true
+    }
 ```
 ---  
 ### **Configure newman and newman-reporter-html-extra**  
