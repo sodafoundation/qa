@@ -31,7 +31,7 @@ You can install different versions of NodeJS and maintain different versions usi
 
 ## Configuration
 
-- Update the file `./env_vars/SODA.postman_globals.json`
+- Update the file `./env_vars/SODA_Globals.postman_globals.json`
 ```
     {
         "key": "HOST_IP",
@@ -46,6 +46,7 @@ We use Newman as a library to run the collection.
 
 The options are configured in the `optionsObj`
 
+#### **Note:** **_You do not have to make any changes to this object if you use the App as shown in the usage section below._**
 
 ```JavaScript
 var optionsObj = {
