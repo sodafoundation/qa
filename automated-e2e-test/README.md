@@ -17,7 +17,7 @@ You can install different versions of NodeJS and maintain different versions usi
 1. Clone the repository  
 
     ```
-    git clone https://github.com/sodafoundation/qa/.git
+    git clone https://github.com/sodafoundation/qa.git
     ```
 
 2. To Install `newman` and the reporter `newman-reporter-htmlextra`  run the following:
