@@ -1,0 +1,2810 @@
+{
+	"info": {
+		"_postman_id": "74c658d9-7760-40da-8be8-72ca770d000a",
+		"name": "SODA_Multicloud_Automation_Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login - Invalid Credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Unauthorized Access. Status code is 401\", function () { pm.response.to.have.status(401); });",
+							"",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"password\"\n      ],\n      \"password\": {\n        \"user\": {\n          \"name\": \"user\",\n          \"domain\": {\n            \"name\": \"Default\"\n          },\n          \"password\": \"opensds@123\"\n        }\n      }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}/identity/v3/auth/tokens",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"path": [
+						"identity",
+						"v3",
+						"auth",
+						"tokens"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"password\"\n      ],\n      \"password\": {\n        \"user\": {\n          \"name\": \"admin\",\n          \"domain\": {\n            \"name\": \"Default\"\n          },\n          \"password\": \"opensds@123\"\n        }\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}/identity/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"path": [
+								"identity",
+								"v3",
+								"auth",
+								"tokens"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:43:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Ubuntu)"
+						},
+						{
+							"key": "X-Subject-Token",
+							"value": "gAAAAABgGAVwYoJhpauqpn7oPd9LIcZqWv2qlZTlm-EaCy6e8VHBP-CCPpRBCRNZNZpU3vuLvM-xoLcylXX7M1xupluYx_LPJB50pzSA5DscMI6p_d1-LytL3CbtbxLyxjzeE63Oe9f8C2Y-xnAgrgzbUhhC8WjtMg"
+						},
+						{
+							"key": "Vary",
+							"value": "X-Auth-Token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "312"
+						},
+						{
+							"key": "x-openstack-request-id",
+							"value": "req-802077c2-5856-408c-b0d6-190f6d74526c"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": {\n        \"issued_at\": \"2021-02-01T13:43:12.000000Z\",\n        \"audit_ids\": [\n            \"dI1n39GcTd6WApOH-K3Aow\"\n        ],\n        \"methods\": [\n            \"password\"\n        ],\n        \"expires_at\": \"2021-02-01T14:43:12.000000Z\",\n        \"user\": {\n            \"password_expires_at\": null,\n            \"domain\": {\n                \"id\": \"default\",\n                \"name\": \"Default\"\n            },\n            \"id\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"admin\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Login - Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });",
+							"pm.test(\"Token is generated\", function () { pm.expect(pm.response.json().token).to.exist; });",
+							"let respHeaders = pm.response.headers.all();",
+							"respHeaders.forEach((element)=>{",
+							"    if(element.key == 'X-Subject-Token'){",
+							"        pm.environment.set(\"x-auth-token\", element.value);        ",
+							"        pm.globals.set(\"authToken\", element.value);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"password\"\n      ],\n      \"password\": {\n        \"user\": {\n          \"name\": \"admin\",\n          \"domain\": {\n            \"name\": \"Default\"\n          },\n          \"password\": \"opensds@123\"\n        }\n      }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}/identity/v3/auth/tokens",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"path": [
+						"identity",
+						"v3",
+						"auth",
+						"tokens"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Token",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"password\"\n      ],\n      \"password\": {\n        \"user\": {\n          \"name\": \"admin\",\n          \"domain\": {\n            \"name\": \"Default\"\n          },\n          \"password\": \"opensds@123\"\n        }\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}/identity/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"path": [
+								"identity",
+								"v3",
+								"auth",
+								"tokens"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:43:12 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Ubuntu)"
+						},
+						{
+							"key": "X-Subject-Token",
+							"value": "gAAAAABgGAVwYoJhpauqpn7oPd9LIcZqWv2qlZTlm-EaCy6e8VHBP-CCPpRBCRNZNZpU3vuLvM-xoLcylXX7M1xupluYx_LPJB50pzSA5DscMI6p_d1-LytL3CbtbxLyxjzeE63Oe9f8C2Y-xnAgrgzbUhhC8WjtMg"
+						},
+						{
+							"key": "Vary",
+							"value": "X-Auth-Token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "312"
+						},
+						{
+							"key": "x-openstack-request-id",
+							"value": "req-802077c2-5856-408c-b0d6-190f6d74526c"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": {\n        \"issued_at\": \"2021-02-01T13:43:12.000000Z\",\n        \"audit_ids\": [\n            \"dI1n39GcTd6WApOH-K3Aow\"\n        ],\n        \"methods\": [\n            \"password\"\n        ],\n        \"expires_at\": \"2021-02-01T14:43:12.000000Z\",\n        \"user\": {\n            \"password_expires_at\": null,\n            \"domain\": {\n                \"id\": \"default\",\n                \"name\": \"Default\"\n            },\n            \"id\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"admin\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Scoped Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () { pm.response.to.have.status(201); });",
+							"pm.test(\"Scoped token is generated\", function () { pm.expect(pm.response.json().token).to.exist; });",
+							"pm.test(\"Roles are generated\", function () { pm.expect(pm.response.json().token.roles).to.exist; });",
+							"pm.test(\"Projects are generated\", function () { pm.expect(pm.response.json().token.project).to.exist; });",
+							"pm.test(\"Catalogs are generated\", function () { pm.expect(pm.response.json().token.catalog).to.exist; });",
+							"pm.test(\"Users are generated\", function () { pm.expect(pm.response.json().token.user).to.exist; });",
+							"",
+							"let respHeaders = pm.response.headers.all();",
+							"respHeaders.forEach((element)=>{",
+							"    if(element.key == 'X-Subject-Token'){",
+							"        pm.environment.set(\"x-auth-token\", element.value);        ",
+							"        pm.globals.set(\"authToken\", element.value);",
+							"    }",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{authToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"token\"\n      ],\n      \"token\": {\n        \"id\": \"{{authToken}}\"\n      }\n    },\n    \"scope\": {\n      \"project\": {\n        \"name\": \"admin\",\n        \"domain\": {\n          \"id\": \"default\"\n        }\n      }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}/identity/v3/auth/tokens",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"path": [
+						"identity",
+						"v3",
+						"auth",
+						"tokens"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Scoped Token ",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"auth\": {\n    \"identity\": {\n      \"methods\": [\n        \"token\"\n      ],\n      \"token\": {\n        \"id\": \"{{authToken}}\"\n      }\n    },\n    \"scope\": {\n      \"project\": {\n        \"name\": \"admin\",\n        \"domain\": {\n          \"id\": \"default\"\n        }\n      }\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}/identity/v3/auth/tokens",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"path": [
+								"identity",
+								"v3",
+								"auth",
+								"tokens"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 06:45:51 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Ubuntu)"
+						},
+						{
+							"key": "X-Subject-Token",
+							"value": "gAAAAABgF6OhDCTMNKKlVY_aiqsifLgi81mjVR0waNMql6LoM9gjI38ZQyZBy2uoEd47fyVCAkiLvKMSnsaBXKMcY0j6JxKcA3vfR8bWQk-kyT_ub-IrthClvgqicIy8HlN7uOMkwZG5elpJq6JB0r2x3tLBV4BdQr9Tyz0BkaXcvfIjPx3mVUL2CVS4pNJtA25Sf-hSJ6R2"
+						},
+						{
+							"key": "Vary",
+							"value": "X-Auth-Token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2363"
+						},
+						{
+							"key": "x-openstack-request-id",
+							"value": "req-b4ef1aec-93aa-4d05-bbaf-fe9f3c1535f2"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": {\n        \"is_domain\": false,\n        \"methods\": [\n            \"token\",\n            \"password\"\n        ],\n        \"roles\": [\n            {\n                \"id\": \"89b7dcf5d68f41f8b4b9d96d72050684\",\n                \"name\": \"admin\"\n            }\n        ],\n        \"expires_at\": \"2021-02-01T07:45:47.000000Z\",\n        \"project\": {\n            \"domain\": {\n                \"id\": \"default\",\n                \"name\": \"Default\"\n            },\n            \"id\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"name\": \"admin\"\n        },\n        \"catalog\": [\n            {\n                \"endpoints\": [\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119/identity\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"public\",\n                        \"id\": \"a9e52d89acfe42beab0ccbed8661c650\"\n                    },\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119/identity\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"admin\",\n                        \"id\": \"c56422cc365945a4b47ed14172469f80\"\n                    }\n                ],\n                \"type\": \"identity\",\n                \"id\": \"e32de23cda494463b53167523d71d385\",\n                \"name\": \"keystone\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119:50040/v1beta/94b280022d0c4401bcf3b0ea85870519\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"admin\",\n                        \"id\": \"01774b4006234efa97bb7732b33d808d\"\n                    },\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119:50040/v1beta/94b280022d0c4401bcf3b0ea85870519\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"internal\",\n                        \"id\": \"e56d0141939e437aad7150fec39e6f13\"\n                    },\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119:50040/v1beta/94b280022d0c4401bcf3b0ea85870519\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"public\",\n                        \"id\": \"9784d6349a754c1a97e791159bebdcb1\"\n                    }\n                ],\n                \"type\": \"opensdsv1beta\",\n                \"id\": \"aa49d156d90643aa889452a81782014a\",\n                \"name\": \"opensdsv1beta\"\n            },\n            {\n                \"endpoints\": [\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119:8089/v1beta/94b280022d0c4401bcf3b0ea85870519\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"admin\",\n                        \"id\": \"acdd2e68b7694fb990c2b28da94bdb6d\"\n                    },\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119:8089/v1beta/94b280022d0c4401bcf3b0ea85870519\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"internal\",\n                        \"id\": \"918f52f8817f43f581ea6f6471f7bb5e\"\n                    },\n                    {\n                        \"region_id\": \"RegionOne\",\n                        \"url\": \"http://192.168.56.119:8089/v1beta/94b280022d0c4401bcf3b0ea85870519\",\n                        \"region\": \"RegionOne\",\n                        \"interface\": \"public\",\n                        \"id\": \"f18bc1aaffa04b9399621e09f418675c\"\n                    }\n                ],\n                \"type\": \"multicloudv1\",\n                \"id\": \"65dccfab31ab4bd4a6af3928a61d06ff\",\n                \"name\": \"multicloudv1\"\n            }\n        ],\n        \"user\": {\n            \"password_expires_at\": null,\n            \"domain\": {\n                \"id\": \"default\",\n                \"name\": \"Default\"\n            },\n            \"id\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"admin\"\n        },\n        \"audit_ids\": [\n            \"o6P7QfJYTOOBqgP1DphmOg\",\n            \"w-tLiqsiRcSVRaTJfYUsMA\"\n        ],\n        \"issued_at\": \"2021-02-01T06:45:53.000000Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+							"pm.test(\"Credentials are fetched\", function () { pm.expect(pm.response.json().credentials).to.exist; });",
+							"pm.test(\"Project ID is generated\", function () { pm.expect(pm.response.json().credentials[0].project_id).to.exist; });",
+							"",
+							"let resp = pm.response.json();",
+							"pm.environment.set(\"AK\", JSON.parse(resp.credentials[0].blob).access);",
+							"pm.environment.set(\"SK\", JSON.parse(resp.credentials[0].blob).secret);",
+							"pm.environment.set(\"PROJECT_ID\", resp.credentials[0].project_id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}/identity/v3/credentials",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"path": [
+						"identity",
+						"v3",
+						"credentials"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Credentials",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}/identity/v3/credentials",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"path": [
+								"identity",
+								"v3",
+								"credentials"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 06:46:46 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.18 (Ubuntu)"
+						},
+						{
+							"key": "Vary",
+							"value": "X-Auth-Token"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "521"
+						},
+						{
+							"key": "x-openstack-request-id",
+							"value": "req-89c8fcf2-b43b-4553-99bc-c8d8c73f7ef6"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"credentials\": [\n        {\n            \"user_id\": \"558057c4256545bd8a307c37464003c9\",\n            \"links\": {\n                \"self\": \"http://10.0.2.15/identity/v3/credentials/eb1600e0c9a255ba651d4c7b0e0e9a2f58c7c25ae6c113e7c3a7aed5dc14fb8b\"\n            },\n            \"blob\": \"{\\\"access\\\":\\\"B3m7yRo8h973j6DS\\\",\\\"secret\\\":\\\"Iisy4RdmrBdFIP3CmSF8pf3EOV34v7qT\\\"}\",\n            \"project_id\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"type\": \"ec2\",\n            \"id\": \"eb1600e0c9a255ba651d4c7b0e0e9a2f58c7c25ae6c113e7c3a7aed5dc14fb8b\"\n        }\n    ],\n    \"links\": {\n        \"self\": \"http://10.0.2.15/identity/v3/credentials\",\n        \"previous\": null,\n        \"next\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Register Backend Invalid Credentials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"backend registration with Invalid credentials failed. Status code is 400\", function () { pm.response.to.have.status(400); });",
+							"if(pm.response.code==200){",
+							"    pm.environment.set('invalid_backend_id', JSON.parse(responseBody).id)",
+							"    postman.setNextRequest(\"Delete Backend\");",
+							"}",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"{{name}}\",\n  \"type\": \"{{type}}\",\n  \"region\": \"{{region}}\",\n  \"endpoint\": \"endpoint\",\n  \"security\": \"security\",\n  \"access\": \"access\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/{{PROJECT_ID}}/backends",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{GELATO_PORT}}",
+					"path": [
+						"v1",
+						"{{PROJECT_ID}}",
+						"backends"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Backends",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/94b280022d0c4401bcf3b0ea85870519/backends",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{GELATO_PORT}}",
+							"path": [
+								"v1",
+								"94b280022d0c4401bcf3b0ea85870519",
+								"backends"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Sep 2020 15:56:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1855"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"backends\": [\n        {\n            \"id\": \"5f744820a32c82000103f263\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_aws\",\n            \"type\": \"aws-s3\",\n            \"region\": \"ap-south-1\",\n            \"endpoint\": \"s3.amazonaws.com\",\n            \"bucketName\": \"soda-greenland-test\"\n        },\n        {\n            \"id\": \"5f744847a32c82000103f264\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_obs\",\n            \"type\": \"hw-obs\",\n            \"region\": \"testregion\",\n            \"endpoint\": \"obs.cn-north-1.myhwclouds.com\",\n            \"bucketName\": \"obs-wbtest\"\n        },\n        {\n            \"id\": \"5f744870a32c82000103f265\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_azure\",\n            \"type\": \"azure-blob\",\n            \"region\": \"East Asia\",\n            \"endpoint\": \"https://zsftest.blob.core.windows.net/container\",\n            \"bucketName\": \"container\"\n        },\n        {\n            \"id\": \"5f744ebda32c82000103f267\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"aws-backend-file\",\n            \"type\": \"aws-file\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f744ed6a32c82000103f268\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"azure-backend-file\",\n            \"type\": \"azure-file\",\n            \"region\": \"East Asia\"\n        },\n        {\n            \"id\": \"5f7481eba32c82000103f269\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"awsblock\",\n            \"type\": \"aws-block\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f74884aa32c82000103f26a\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"gcp-backend-file\",\n            \"type\": \"gcp-file\",\n            \"region\": \"cogent-calling-288407\"\n        }\n    ],\n    \"next\": 7\n}"
+				}
+			]
+		},
+		{
+			"name": "Register Backend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+							"",
+							"pm.test(\"Backend Registered\", function () { pm.expect(pm.response.json().id).to.exist; });",
+							"",
+							"let resp = pm.response.json();",
+							"pm.environment.set(\"backend_id\", resp.id);",
+							"pm.environment.set(\"backend_name\", resp.name);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let name = pm.iterationData.get(\"name\");",
+							"let type = pm.iterationData.get(\"type\");",
+							"let region = pm.iterationData.get(\"region\");",
+							"let endpoint = pm.iterationData.get(\"endpoint\");",
+							"let security = pm.iterationData.get(\"security\");",
+							"let access = pm.iterationData.get(\"access\");",
+							"let cloudBucket = pm.iterationData.get(\"cloudBucket\");",
+							"if(pm.iterationData.get(\"type\")!='alibaba-oss'){",
+							"    let data = {",
+							"        \"name\": name,",
+							"        \"type\": type,",
+							"        \"region\": region,",
+							"        \"endpoint\": endpoint,",
+							"        \"security\": security,",
+							"        \"access\": access",
+							"    };",
+							"    pm.environment.set('registerBackendBody', JSON.stringify(data));",
+							"} else if(pm.iterationData.get(\"type\")=='alibaba-oss'){",
+							"    let data = {",
+							"        \"name\": name,",
+							"        \"type\": type,",
+							"        \"bucket\" : cloudBucket,",
+							"        \"region\": region,",
+							"        \"endpoint\": endpoint,",
+							"        \"security\": security,",
+							"        \"access\": access",
+							"    };",
+							"    pm.environment.set('registerBackendBody', JSON.stringify(data));",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{registerBackendBody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/{{PROJECT_ID}}/backends",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{GELATO_PORT}}",
+					"path": [
+						"v1",
+						"{{PROJECT_ID}}",
+						"backends"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Backends",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/94b280022d0c4401bcf3b0ea85870519/backends",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{GELATO_PORT}}",
+							"path": [
+								"v1",
+								"94b280022d0c4401bcf3b0ea85870519",
+								"backends"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Sep 2020 15:56:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1855"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"backends\": [\n        {\n            \"id\": \"5f744820a32c82000103f263\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_aws\",\n            \"type\": \"aws-s3\",\n            \"region\": \"ap-south-1\",\n            \"endpoint\": \"s3.amazonaws.com\",\n            \"bucketName\": \"soda-greenland-test\"\n        },\n        {\n            \"id\": \"5f744847a32c82000103f264\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_obs\",\n            \"type\": \"hw-obs\",\n            \"region\": \"testregion\",\n            \"endpoint\": \"obs.cn-north-1.myhwclouds.com\",\n            \"bucketName\": \"obs-wbtest\"\n        },\n        {\n            \"id\": \"5f744870a32c82000103f265\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_azure\",\n            \"type\": \"azure-blob\",\n            \"region\": \"East Asia\",\n            \"endpoint\": \"https://zsftest.blob.core.windows.net/container\",\n            \"bucketName\": \"container\"\n        },\n        {\n            \"id\": \"5f744ebda32c82000103f267\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"aws-backend-file\",\n            \"type\": \"aws-file\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f744ed6a32c82000103f268\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"azure-backend-file\",\n            \"type\": \"azure-file\",\n            \"region\": \"East Asia\"\n        },\n        {\n            \"id\": \"5f7481eba32c82000103f269\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"awsblock\",\n            \"type\": \"aws-block\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f74884aa32c82000103f26a\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"gcp-backend-file\",\n            \"type\": \"gcp-file\",\n            \"region\": \"cogent-calling-288407\"\n        }\n    ],\n    \"next\": 7\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Backends",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });",
+							"pm.test(\"Backends are fetched\", function () { pm.expect(pm.response.json().backends).to.exist && pm.expect(pm.response.json().backends).length; });",
+							"",
+							"let backends = pm.response.json().backends;",
+							"backends.forEach((item)=>{",
+							"    switch(item.name){",
+							"        case 'backend_aws' :   pm.environment.set(\"BACKEND_AWS\", item.name);",
+							"            break;",
+							"        case 'backend_azure' :   pm.environment.set(\"BACKEND_AZURE\", item.name);",
+							"            break;",
+							"        case 'backend_gcp' :   pm.environment.set(\"BACKEND_GCP\", item.name);",
+							"            break;",
+							"        case 'backend_obs' :   pm.environment.set(\"BACKEND_HUAWEI\", item.name);",
+							"            break;",
+							"    }",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/{{PROJECT_ID}}/backends",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{GELATO_PORT}}",
+					"path": [
+						"v1",
+						"{{PROJECT_ID}}",
+						"backends"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Backends",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/94b280022d0c4401bcf3b0ea85870519/backends",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{GELATO_PORT}}",
+							"path": [
+								"v1",
+								"94b280022d0c4401bcf3b0ea85870519",
+								"backends"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Sep 2020 15:56:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1855"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"backends\": [\n        {\n            \"id\": \"5f744820a32c82000103f263\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_aws\",\n            \"type\": \"aws-s3\",\n            \"region\": \"ap-south-1\",\n            \"endpoint\": \"s3.amazonaws.com\",\n            \"bucketName\": \"soda-greenland-test\"\n        },\n        {\n            \"id\": \"5f744847a32c82000103f264\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_obs\",\n            \"type\": \"hw-obs\",\n            \"region\": \"testregion\",\n            \"endpoint\": \"obs.cn-north-1.myhwclouds.com\",\n            \"bucketName\": \"obs-wbtest\"\n        },\n        {\n            \"id\": \"5f744870a32c82000103f265\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_azure\",\n            \"type\": \"azure-blob\",\n            \"region\": \"East Asia\",\n            \"endpoint\": \"https://zsftest.blob.core.windows.net/container\",\n            \"bucketName\": \"container\"\n        },\n        {\n            \"id\": \"5f744ebda32c82000103f267\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"aws-backend-file\",\n            \"type\": \"aws-file\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f744ed6a32c82000103f268\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"azure-backend-file\",\n            \"type\": \"azure-file\",\n            \"region\": \"East Asia\"\n        },\n        {\n            \"id\": \"5f7481eba32c82000103f269\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"awsblock\",\n            \"type\": \"aws-block\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f74884aa32c82000103f26a\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"gcp-backend-file\",\n            \"type\": \"gcp-file\",\n            \"region\": \"cogent-calling-288407\"\n        }\n    ],\n    \"next\": 7\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Bucket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Bucket is Created.\", function () { pm.response.to.have.status(200); });",
+							"let respHeaders = pm.response.headers.all();",
+							"respHeaders.forEach((element)=>{",
+							"    if(element.key == 'Location'){",
+							"        let bucketName = element.value.split('/')[1];",
+							"        pm.environment.set(\"bucket_name\", bucketName);",
+							"    }",
+							"});",
+							"if(pm.response.code==500){",
+							"    ",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set('iterationBucketName', pm.iterationData.get('bucketName'));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<CreateBucketConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n    <LocationConstraint>{{backend_name}}</LocationConstraint>\n</CreateBucketConfiguration>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{iterationBucketName}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{iterationBucketName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Buckets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200.\", function () { pm.response.to.have.status(200); });",
+							"let resp = xml2Json(responseBody);",
+							"let buckets = resp.ListAllMyBucketsResult.Buckets.Bucket;",
+							"pm.test(\"All Buckets are fetched\", function () { pm.expect(buckets).to.exist && pm.expect(buckets).length>0; });",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Buckets",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "995"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Sep 2020 16:08:01 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/xml; charset=utf-8"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListAllMyBucketsResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">\n    <Owner>\n        <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n        <DisplayName></DisplayName>\n    </Owner>\n    <Buckets>\n        <Bucket>\n            <Name>testawsbucket</Name>\n            <CreationDate>2020-09-30T21:13:17.000Z</CreationDate>\n            <LocationConstraint>backend_aws</LocationConstraint>\n            <VersioningConfiguration>\n                <Status>Disabled</Status>\n            </VersioningConfiguration>\n            <SSEConfiguration>\n                <SSE>\n                    <enabled>false</enabled>\n                </SSE>\n                <SSE-KMS>\n                    <enabled></enabled>\n                    <DefaultKMSMasterKey></DefaultKMSMasterKey>\n                </SSE-KMS>\n            </SSEConfiguration>\n        </Bucket>\n        <Bucket>\n            <Name>testawsbucket002</Name>\n            <CreationDate>2020-09-30T21:17:01.000Z</CreationDate>\n            <LocationConstraint>backend_aws</LocationConstraint>\n            <VersioningConfiguration>\n                <Status>Disabled</Status>\n            </VersioningConfiguration>\n            <SSEConfiguration>\n                <SSE>\n                    <enabled>false</enabled>\n                </SSE>\n                <SSE-KMS>\n                    <enabled></enabled>\n                    <DefaultKMSMasterKey></DefaultKMSMasterKey>\n                </SSE-KMS>\n            </SSEConfiguration>\n        </Bucket>\n    </Buckets>\n</ListAllMyBucketsResult>"
+				}
+			]
+		},
+		{
+			"name": "Upload Object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Object is uploaded.\", function () { pm.response.to.have.status(200); });"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "./sample.pdf"
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/sample.pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"sample.pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Upload Object ",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/home/root1/PROJECTS/SODA/Dashboard/SODA CSI Integration/nginx-block.yml"
+							},
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws/nginx-block.yml",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws",
+								"nginx-block.yml"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Etag",
+							"value": "\"fe67fdcf0d89de8e884d2af38a12aa3b\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:34:11 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Upload Object",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/home/root1/Downloads/Issues/modify-cloud-vol-docker.png"
+							},
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}:8090/testawsbucket002/modify-cloud-vol-docker.png",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "8090",
+							"path": [
+								"testawsbucket002",
+								"modify-cloud-vol-docker.png"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Etag",
+							"value": "\"b5a09ab85c028467d22fe8238be37dd0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Sep 2020 15:49:04 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get Bucket Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200.\", function () { pm.response.to.have.status(200); });",
+							"let resp = xml2Json(responseBody);",
+							"let bucket = resp.ListBucketResult;",
+							"pm.test(\"Bucket details fetched\", function () { pm.expect(bucket).to.exist && pm.expect(bucket.Name).to.exist; });",
+							"pm.test(\"Bucket Contents Exist\", function () { pm.expect(bucket.Contents).to.exist && pm.expect(bucket.Contents).length > 0; });",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Bucket Details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/xml"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:47:15 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1488"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListBucketResult>\n    <IsTruncated>false</IsTruncated>\n    <MaxKeys>1000</MaxKeys>\n    <Prefix></Prefix>\n    <Name>testnewbktaws</Name>\n    <Marker></Marker>\n    <Contents>\n        <Key>k8s-soda-dashboard-arch-v2.png</Key>\n        <LastModified>2021-02-01T13:31:52.000Z</LastModified>\n        <ETag>&#34;f48acf3cb87e563c63f6f58bcaddad85&#34;</ETag>\n        <Size>10733</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>GLACIER</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>999</Tier>\n    </Contents>\n    <Contents>\n        <Key>nginx-block.yml</Key>\n        <LastModified>2021-02-01T13:34:11.000Z</LastModified>\n        <ETag>&#34;fe67fdcf0d89de8e884d2af38a12aa3b&#34;</ETag>\n        <Size>1112</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>STANDARD</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>1</Tier>\n    </Contents>\n    <Contents>\n        <Key>testfolder002/</Key>\n        <LastModified>2021-02-01T13:46:40.000Z</LastModified>\n        <ETag>&#34;d41d8cd98f00b204e9800998ecf8427e&#34;</ETag>\n        <Size>0</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>STANDARD</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>1</Tier>\n    </Contents>\n</ListBucketResult>"
+				}
+			]
+		},
+		{
+			"name": "Download Object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Object Download successful.\", function () { pm.response.to.have.status(200); });",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/sample.pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"sample.pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Download Object",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws/nginx-block.yml",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws",
+								"nginx-block.yml"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "yaml",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1112"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/yaml"
+						},
+						{
+							"key": "ETag",
+							"value": "\"fe67fdcf0d89de8e884d2af38a12aa3b\""
+						},
+						{
+							"key": "Last-Modified",
+							"value": "Mon, 01 Feb 2021 13:34:11 GMT"
+						},
+						{
+							"key": "Md5sum",
+							"value": ""
+						},
+						{
+							"key": "X-Amz-Object-Type",
+							"value": "Normal"
+						},
+						{
+							"key": "X-Amz-Storage-Class",
+							"value": "STANDARD"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:48:53 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "# This YAML file contains nginx & csi opensds driver objects,\n# which are necessary to run nginx with csi opensds block driver.\n\napiVersion: storage.k8s.io/v1\nkind: StorageClass\nmetadata:\n  name: csi-sc-opensdsplugin-block\nprovisioner: csi-opensdsplugin-block\nparameters:\n  attachMode: rw\n  profile: f063883c-6429-4592-addb-9834f9b61a3f\nallowedTopologies:\n- matchLabelExpressions:\n  - key: topology.csi-opensdsplugin-block/zone\n    values:\n    - default\n---\napiVersion: v1\nkind: PersistentVolumeClaim\nmetadata:\n  name: csi-pvc-opensdsplugin-block\nspec:\n  accessModes:\n  - ReadWriteMany\n  resources:\n    requests:\n      storage: 1Gi\n  storageClassName: csi-sc-opensdsplugin-block\n\n---\napiVersion: v1\nkind: Pod\nmetadata:\n  name: nginx-block \nspec:\n  containers:\n  - image: nginx\n    imagePullPolicy: IfNotPresent\n    name: nginx\n    ports:\n    - containerPort: 80\n      protocol: TCP\n    volumeMounts:\n      - mountPath: /var/lib/www/html\n        name: csi-data-opensdsplugin \n  volumes:\n  - name: csi-data-opensdsplugin\n    persistentVolumeClaim:\n      claimName: csi-pvc-opensdsplugin-block\n      readOnly: false"
+				}
+			]
+		},
+		{
+			"name": "Delete Object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204. Object is deleted successfully.\", function () { pm.response.to.have.status(204);});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/sample.pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"sample.pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Download Object",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testawsbucket002/modify-backend-aksk-secret-key.png",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testawsbucket002",
+								"modify-backend-aksk-secret-key.png"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Create Folder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Folder is created.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.environment.set(\"folder_name\", pm.iterationData.get('folderName'));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set('iterationFolderName', pm.iterationData.get('folderName'));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/{{iterationFolderName}}/",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"{{iterationFolderName}}",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Folder",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws/testfolder002/",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws",
+								"testfolder002",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Etag",
+							"value": "\"d41d8cd98f00b204e9800998ecf8427e\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:46:40 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Upload Object to Folder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Upload object to folder success.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "./sample.pdf"
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/{{folder_name}}/sample.pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"{{folder_name}}",
+						"sample.pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Upload Object",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/home/root1/Downloads/Issues/modify-cloud-vol-docker.png"
+							},
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}:8090/testawsbucket002/modify-cloud-vol-docker.png",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "8090",
+							"path": [
+								"testawsbucket002",
+								"modify-cloud-vol-docker.png"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Etag",
+							"value": "\"b5a09ab85c028467d22fe8238be37dd0\""
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Sep 2020 15:49:04 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Upload Object ",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/home/root1/PROJECTS/SODA/Dashboard/SODA CSI Integration/nginx-block.yml"
+							},
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws/nginx-block.yml",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws",
+								"nginx-block.yml"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Etag",
+							"value": "\"fe67fdcf0d89de8e884d2af38a12aa3b\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:34:11 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get Folder Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Get Folder details successful.\", function () {",
+							"    let resp = xml2Json(responseBody);",
+							"    let bucket = resp.ListBucketResult;",
+							"    bucket.Contents.forEach((item)=>{",
+							"        if(item.Key==pm.environment.get(\"folder_name\")){",
+							"            pm.response.to.have.status(200);        ",
+							"        }",
+							"    })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "{{authToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Bucket Details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/xml"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:47:15 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1488"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListBucketResult>\n    <IsTruncated>false</IsTruncated>\n    <MaxKeys>1000</MaxKeys>\n    <Prefix></Prefix>\n    <Name>testnewbktaws</Name>\n    <Marker></Marker>\n    <Contents>\n        <Key>k8s-soda-dashboard-arch-v2.png</Key>\n        <LastModified>2021-02-01T13:31:52.000Z</LastModified>\n        <ETag>&#34;f48acf3cb87e563c63f6f58bcaddad85&#34;</ETag>\n        <Size>10733</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>GLACIER</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>999</Tier>\n    </Contents>\n    <Contents>\n        <Key>nginx-block.yml</Key>\n        <LastModified>2021-02-01T13:34:11.000Z</LastModified>\n        <ETag>&#34;fe67fdcf0d89de8e884d2af38a12aa3b&#34;</ETag>\n        <Size>1112</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>STANDARD</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>1</Tier>\n    </Contents>\n    <Contents>\n        <Key>testfolder002/</Key>\n        <LastModified>2021-02-01T13:46:40.000Z</LastModified>\n        <ETag>&#34;d41d8cd98f00b204e9800998ecf8427e&#34;</ETag>\n        <Size>0</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>STANDARD</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>1</Tier>\n    </Contents>\n</ListBucketResult>"
+				}
+			]
+		},
+		{
+			"name": "Delete Object Inside Folder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204. Object inside folder delete success.\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/{{folder_name}}/sample.pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"{{folder_name}}",
+						"sample.pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Download Object",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testawsbucket002/modify-backend-aksk-secret-key.png",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testawsbucket002",
+								"modify-backend-aksk-secret-key.png"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Delete Folder",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204. Folder delete successful.\", function () {",
+							"    pm.response.to.have.status(204);",
+							"    pm.environment.set('folder_name', '');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/{{folder_name}}/",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"{{folder_name}}",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Download Object",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testawsbucket002/modify-backend-aksk-secret-key.png",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testawsbucket002",
+								"modify-backend-aksk-secret-key.png"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Archive Object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Archive object success.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if(pm.iterationData.get(\"type\")=='aws-s3'){",
+							"   pm.environment.set('archiveClass', 'GLACIER');",
+							"} else if(pm.iterationData.get(\"type\")=='azure-blob' || pm.iterationData.get(\"type\")=='gcp-s3'){",
+							"    pm.environment.set('archiveClass', 'Archive');",
+							"} else{",
+							"    postman.setNextRequest(\"Delete Archived Object\")",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					},
+					{
+						"key": "X-Amz-Storage-Class",
+						"value": "{{archiveClass}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "./sample.pdf"
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/sample.pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"sample.pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Archive Object",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							},
+							{
+								"key": "X-Amz-Storage-Class",
+								"value": "GLACIER",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "file",
+							"file": {
+								"src": "/home/root1/PROJECTS/SODA/Dashboard/SODA CSI Integration/k8s-soda-dashboard-arch-v2.png"
+							},
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws/k8s-soda-dashboard-arch-v2.png",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws",
+								"k8s-soda-dashboard-arch-v2.png"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Etag",
+							"value": "\"f48acf3cb87e563c63f6f58bcaddad85\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:31:52 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Get Bucket Details after Archive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200.\", function () { pm.response.to.have.status(200); });",
+							"let resp = xml2Json(responseBody);",
+							"let bucket = resp.ListBucketResult;",
+							"pm.test(\"Bucket details fetched\", function () { pm.expect(bucket).to.exist && pm.expect(bucket.Name).to.exist; });",
+							"pm.test(\"Bucket Contents Exist\", function () { pm.expect(bucket.Contents).to.exist && pm.expect(bucket.Contents).length > 0; });",
+							"if (pm.iterationData.get('type')!='gcp-s3'){",
+							"    postman.setNextRequest('RESTORE Object')",
+							"}else{",
+							"    postman.setNextRequest('Download Object')",
+							"    postman.setNextRequest('Delete Archived Object')",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Bucket Details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "xml",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/xml"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:47:15 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1488"
+						}
+					],
+					"cookie": [],
+					"body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListBucketResult>\n    <IsTruncated>false</IsTruncated>\n    <MaxKeys>1000</MaxKeys>\n    <Prefix></Prefix>\n    <Name>testnewbktaws</Name>\n    <Marker></Marker>\n    <Contents>\n        <Key>k8s-soda-dashboard-arch-v2.png</Key>\n        <LastModified>2021-02-01T13:31:52.000Z</LastModified>\n        <ETag>&#34;f48acf3cb87e563c63f6f58bcaddad85&#34;</ETag>\n        <Size>10733</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>GLACIER</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>999</Tier>\n    </Contents>\n    <Contents>\n        <Key>nginx-block.yml</Key>\n        <LastModified>2021-02-01T13:34:11.000Z</LastModified>\n        <ETag>&#34;fe67fdcf0d89de8e884d2af38a12aa3b&#34;</ETag>\n        <Size>1112</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>STANDARD</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>1</Tier>\n    </Contents>\n    <Contents>\n        <Key>testfolder002/</Key>\n        <LastModified>2021-02-01T13:46:40.000Z</LastModified>\n        <ETag>&#34;d41d8cd98f00b204e9800998ecf8427e&#34;</ETag>\n        <Size>0</Size>\n        <Owner>\n            <ID>94b280022d0c4401bcf3b0ea85870519</ID>\n            <DisplayName>94b280022d0c4401bcf3b0ea85870519</DisplayName>\n        </Owner>\n        <StorageClass>STANDARD</StorageClass>\n        <Location>backend_aws</Location>\n        <Tier>1</Tier>\n    </Contents>\n</ListBucketResult>"
+				}
+			]
+		},
+		{
+			"name": "RESTORE Object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Restore object success.\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"if(pm.iterationData.get(\"type\")=='aws-s3'){",
+							"    let data = {",
+							"        \"days\": 5,",
+							"        \"tier\": \"Expedited\"",
+							"    };",
+							"    pm.environment.set('iterationRequestBody', JSON.stringify(data));",
+							"} else if(pm.iterationData.get(\"type\")=='azure-blob'){",
+							"    let data = {",
+							"        \"storageClass\": \"Hot\"",
+							"    };",
+							"    pm.environment.set('iterationRequestBody', JSON.stringify(data));",
+							"}",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					},
+					{
+						"key": "X-Amz-Storage-Class",
+						"type": "text",
+						"value": "GLACIER",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{iterationRequestBody}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/sample.pdf?restore",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"sample.pdf"
+					],
+					"query": [
+						{
+							"key": "restore",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "RESTORE Object",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							},
+							{
+								"key": "X-Amz-Storage-Class",
+								"value": "GLACIER",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"days\": 5,\n    \"tier\": \"Expedited\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testnewbktaws/k8s-soda-dashboard-arch-v2.png/?restore",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testnewbktaws",
+								"k8s-soda-dashboard-arch-v2.png",
+								""
+							],
+							"query": [
+								{
+									"key": "restore",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Mon, 01 Feb 2021 13:33:16 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Delete Archived Object",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204. Archvied Object is deleted successfully.\", function () { pm.response.to.have.status(204);});",
+							"pm.environment.set('iterationRequestBody', '');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}/sample.pdf",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}",
+						"sample.pdf"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Download Object",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"type": "text",
+								"value": "{{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{S3_PORT}}/testawsbucket002/modify-backend-aksk-secret-key.png",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{S3_PORT}}",
+							"path": [
+								"testawsbucket002",
+								"modify-backend-aksk-secret-key.png"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Delete Bucket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204. Bucket delete successful.\", ",
+							"function () { ",
+							"    pm.environment.set('bucket_name', '');",
+							"    pm.response.to.have.status(204); ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "awsv4",
+					"awsv4": [
+						{
+							"key": "secretKey",
+							"value": "{{SK}}",
+							"type": "string"
+						},
+						{
+							"key": "accessKey",
+							"value": "{{AK}}",
+							"type": "string"
+						},
+						{
+							"key": "service",
+							"value": "s3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{S3_PORT}}/{{bucket_name}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{S3_PORT}}",
+					"path": [
+						"{{bucket_name}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Backend",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200. Backend delete successfull.\", function () { ",
+							"    pm.environment.set('backend_id', '');",
+							"    pm.environment.set('backend_name', '');",
+							"    pm.environment.set('BACKEND_AWS', '');",
+							"    pm.environment.set('BACKEND_AZURE', '');",
+							"    pm.environment.set('BACKEND_GCP', '');",
+							"    pm.environment.set('BACKEND_HUAWEI', '');",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"if(pm.environment.get('invalid_backend_id')){",
+							"    pm.environment.set('invalid_backend_id', '');",
+							"    postman.setNextRequest('Register Backend');",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let invalidBack = pm.environment.get('invalid_backend_id');",
+							"if(invalidBack){",
+							"    pm.environment.set('backend_id', invalidBack);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"type": "text",
+						"value": "{{authToken}}"
+					}
+				],
+				"url": {
+					"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/{{PROJECT_ID}}/backends/{{backend_id}}",
+					"protocol": "http",
+					"host": [
+						"{{HOST_IP}}"
+					],
+					"port": "{{GELATO_PORT}}",
+					"path": [
+						"v1",
+						"{{PROJECT_ID}}",
+						"backends",
+						"{{backend_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Backends",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Auth-Token",
+								"value": "{{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://{{HOST_IP}}:{{GELATO_PORT}}/v1/94b280022d0c4401bcf3b0ea85870519/backends",
+							"protocol": "http",
+							"host": [
+								"{{HOST_IP}}"
+							],
+							"port": "{{GELATO_PORT}}",
+							"path": [
+								"v1",
+								"94b280022d0c4401bcf3b0ea85870519",
+								"backends"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Sep 2020 15:56:08 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1855"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"backends\": [\n        {\n            \"id\": \"5f744820a32c82000103f263\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_aws\",\n            \"type\": \"aws-s3\",\n            \"region\": \"ap-south-1\",\n            \"endpoint\": \"s3.amazonaws.com\",\n            \"bucketName\": \"soda-greenland-test\"\n        },\n        {\n            \"id\": \"5f744847a32c82000103f264\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_obs\",\n            \"type\": \"hw-obs\",\n            \"region\": \"testregion\",\n            \"endpoint\": \"obs.cn-north-1.myhwclouds.com\",\n            \"bucketName\": \"obs-wbtest\"\n        },\n        {\n            \"id\": \"5f744870a32c82000103f265\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"backend_azure\",\n            \"type\": \"azure-blob\",\n            \"region\": \"East Asia\",\n            \"endpoint\": \"https://zsftest.blob.core.windows.net/container\",\n            \"bucketName\": \"container\"\n        },\n        {\n            \"id\": \"5f744ebda32c82000103f267\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"aws-backend-file\",\n            \"type\": \"aws-file\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f744ed6a32c82000103f268\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"azure-backend-file\",\n            \"type\": \"azure-file\",\n            \"region\": \"East Asia\"\n        },\n        {\n            \"id\": \"5f7481eba32c82000103f269\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"awsblock\",\n            \"type\": \"aws-block\",\n            \"region\": \"ap-south-1\"\n        },\n        {\n            \"id\": \"5f74884aa32c82000103f26a\",\n            \"tenantId\": \"94b280022d0c4401bcf3b0ea85870519\",\n            \"userId\": \"558057c4256545bd8a307c37464003c9\",\n            \"name\": \"gcp-backend-file\",\n            \"type\": \"gcp-file\",\n            \"region\": \"cogent-calling-288407\"\n        }\n    ],\n    \"next\": 7\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "awsv4",
+		"awsv4": [
+			{
+				"key": "secretKey",
+				"value": "{{SK}}",
+				"type": "string"
+			},
+			{
+				"key": "accessKey",
+				"value": "{{AK}}",
+				"type": "string"
+			},
+			{
+				"key": "service",
+				"value": "s3",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
